@@ -48,22 +48,36 @@
       opacity: 0.9;
     }
 
-    /* 📸 CARROSSEL */
+    /* 📸 FOTO QUADRADA COM TRANSIÇÃO SUAVE */
     .photo-wrapper {
-      width: 180px;
-      height: 180px;
-      margin: 0 auto 20px;
-      border-radius: 50%;
+      width: 250px;           
+      height: 250px;          
+      margin: 0 auto 25px;    
+      border-radius: 16px;    
       overflow: hidden;
-      border: 4px solid #ff4d4d;
-      box-shadow: 0 0 30px rgba(255, 77, 77, 0.6);
+      border: 5px solid #ff4d4d; 
+      box-shadow: 0 0 40px rgba(255, 77, 77, 0.7); 
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
     }
 
     .photo-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: opacity 1s ease-in-out;
+      transition: transform 0.5s ease, opacity 1s ease-in-out;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 1;
+    }
+
+    .photo-wrapper:hover img {
+      transform: scale(1.05);
+    }
+
+    .photo-wrapper:hover {
+      box-shadow: 0 0 50px rgba(255, 77, 77, 0.85);
     }
 
     /* 🎵 MÚSICA */
@@ -157,26 +171,23 @@
   <div class="message-box">
     <h2>Psiu, olha aqui rsrs</h2>
     <div class="fixed-message">
-
         <h2>Carta Número 1.1</h2>
+        <strong>De:</strong> Victor Manoel Alves da Silva Fernandes
+        <strong>Para:</strong> Karla Mariana Alves Fernandes da Silva
 
-<strong>De:</strong> Victor Manoel Alves da Silva Fernandes
-<strong>Para:</strong> Karla Mariana Alves Fernandes da Silva
+        Meu bem, apesar da cartinha de amor escrita a mão, quero também deixar isso guardado do meu jeito, como um bom garoto de TI kkkk
 
-        
-Meu bem, apesar da cartinha de amor escrita a mão, quero também deixar isso guardado do meu jeito, como um bom garoto de TI kkkk
+        Você esta sendo uma melhores coisas que me aconteceram neste ano, que presentão Deus, junto da nossa Mãezinha, poderia me dar nesse final de ano… te colocar na minha vida justamente num momento em que eu jamais imaginaria. Acho que palavras não conseguem definir tudo o que estou sentindo nesses 1 mês (Olha o contador la em cima cronometrando certinho kkk)
 
-Você esta sendo uma melhores coisas que me aconteceram neste ano, que presentão Deus, junto da nossa Mãezinha, poderia me dar nesse final de ano… te colocar na minha vida justamente num momento em que eu jamais imaginaria. Acho que palavras não conseguem definir tudo o que estou sentindo nesses 1 mês (Olha o contador la em cima cronometrando certinho kkk)
+        Seu abraço, seu cheiro, sua mão na minha, seu beijo na minha bochecha... fico com o coração quentinho kkkk , a forma como você expressa o que sente por mim… tudo isso me toca de um jeito especial, que faz sempre querer estar junto de você em qualquer momento (Aqui vc vai mandar um "Bobinho" ou "Sem vergonha" kkkk)
 
-Seu abraço, seu cheiro, sua mão na minha, seu beijo na minha bochecha... fico com o coração quentinho kkkk , a forma como você expressa o que sente por mim… tudo isso me toca de um jeito especial, que faz sempre querer estar junto de você em qualquer momento (Aqui vc vai mandar um "Bobinho" ou "Sem vergonha" kkkk)
+        Isso é apenas o começo da nossa história, novamente lhe dizendo, que possamos caminhar juntos com muito carinho, paciência e oração, sempre ajudando um ao outro a se fortalecer, que Deus, ao lado da nossa Mãezinha, seja a base de tudo e nos guie em cada caminho que formos construindo
 
-Isso é apenas o começo da nossa história, novamente lhe dizendo, que possamos caminhar juntos com muito carinho, paciência e oração, sempre ajudando um ao outro a se fortalecer, que Deus, ao lado da nossa Mãezinha, seja a base de tudo e nos guie em cada caminho que formos construindo
+        Quero demonstrar sempre, do jeito que eu conseguir, tudo o que sinto por você, lembrando que continuo sendo tímido (Vamos concordar kkk)
 
-Quero demonstrar sempre, do jeito que eu conseguir, tudo o que sinto por você, lembrando que continuo sendo tímido (Vamos concordar kkk)
+        <p><em>1 Coríntios 13:4-7 🙏</em></p>
 
-<p><em>1 Coríntios 13:4-7 🙏</em></p>
-
-(Espero que você goste meu bem rsrs, tive que respirar bastante novamente kkkk)
+        (Espero que você goste meu bem rsrs, tive que respirar bastante novamente kkkk)
     </div>
   </div>
 
@@ -184,47 +195,83 @@ Quero demonstrar sempre, do jeito que eu conseguir, tudo o que sinto por você, 
 </div>
 
 <script>
-/* ⏱ CONTADOR */
-const startDate = new Date('2025-11-15T00:00:00');
-const days = document.getElementById("days");
-const hours = document.getElementById("hours");
-const minutes = document.getElementById("minutes");
-const seconds = document.getElementById("seconds");
+document.addEventListener("DOMContentLoaded", () => {
 
-setInterval(() => {
-  const diff = Math.abs(new Date() - startDate);
-  days.textContent = Math.floor(diff / 86400000);
-  hours.textContent = Math.floor(diff / 3600000) % 24;
-  minutes.textContent = Math.floor(diff / 60000) % 60;
-  seconds.textContent = Math.floor(diff / 1000) % 60;
-}, 1000);
+  /* ⏱ CONTADOR */
+  const startDate = new Date('2025-11-15T00:00:00');
+  const days = document.getElementById("days");
+  const hours = document.getElementById("hours");
+  const minutes = document.getElementById("minutes");
+  const seconds = document.getElementById("seconds");
 
-/* 🎶 MÚSICA */
-const playlist = ["midia/music.mp3","midia/music2.mp3","midia/music3.mp3"];
-let track = 0;
-music.src = playlist[track];
-
-musicBtn.onclick = () => {
-  music.paused ? (music.play(), musicBtn.textContent="⏸") : (music.pause(), musicBtn.textContent="▶");
-};
-
-music.onended = () => {
-  track = (track + 1) % playlist.length;
-  music.src = playlist[track];
-  music.play();
-};
-
-/* 📸 CARROSSEL */
-const photos = ["img/Foto1.jpeg","img/foto2.jpeg"];
-let i = 0;
-setInterval(() => {
-  carouselPhoto.style.opacity = 0;
-  setTimeout(() => {
-    i = (i + 1) % photos.length;
-    carouselPhoto.src = photos[i];
-    carouselPhoto.style.opacity = 1;
+  setInterval(() => {
+    const diff = Math.abs(new Date() - startDate);
+    days.textContent = Math.floor(diff / 86400000);
+    hours.textContent = Math.floor(diff / 3600000) % 24;
+    minutes.textContent = Math.floor(diff / 60000) % 60;
+    seconds.textContent = Math.floor(diff / 1000) % 60;
   }, 1000);
-}, 4000);
+
+  /* 🎶 MÚSICA */
+  const music = document.getElementById("music");
+  const musicBtn = document.getElementById("musicBtn");
+  const playlist = ["midia/music.mp3","midia/music2.mp3","midia/music3.mp3"];
+  let track = 0;
+  music.src = playlist[track];
+
+  musicBtn.onclick = () => {
+    if(music.paused){
+      music.play();
+      musicBtn.textContent = "⏸";
+    } else {
+      music.pause();
+      musicBtn.textContent = "▶";
+    }
+  };
+
+  music.onended = () => {
+    track = (track + 1) % playlist.length;
+    music.src = playlist[track];
+    music.play();
+  };
+
+  /* 📸 CARROSSEL COM FADE SUAVE */
+  const carouselPhoto = document.getElementById("carouselPhoto");
+  const photos = ["img/Foto1.jpeg","img/foto2.jpeg"];
+  let i = 0;
+
+  setInterval(() => {
+    const nextIndex = (i + 1) % photos.length;
+
+    // criar imagem temporária para o fade
+    const tempImg = document.createElement("img");
+    tempImg.src = photos[nextIndex];
+    tempImg.style.position = "absolute";
+    tempImg.style.top = 0;
+    tempImg.style.left = 0;
+    tempImg.style.width = "100%";
+    tempImg.style.height = "100%";
+    tempImg.style.objectFit = "cover";
+    tempImg.style.opacity = 0;
+    tempImg.style.transition = "opacity 1s ease-in-out";
+
+    carouselPhoto.parentElement.appendChild(tempImg);
+
+    setTimeout(() => {
+      tempImg.style.opacity = 1;
+      carouselPhoto.style.opacity = 0;
+    }, 50);
+
+    setTimeout(() => {
+      carouselPhoto.src = photos[nextIndex];
+      carouselPhoto.style.opacity = 1;
+      tempImg.remove();
+      i = nextIndex;
+    }, 1050);
+
+  }, 4000);
+
+});
 </script>
 </body>
 </html>
