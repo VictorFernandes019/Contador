@@ -59,7 +59,7 @@ header {
 .brand span { color: var(--netflix-red); }
 .brand i { font-family: 'Dancing Script', cursive; color: #fff; font-style: normal; margin-left: 5px; }
 
-/* --- HERO (DESIGN ORIGINAL RESTAURADO) --- */
+/* --- HERO --- */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -71,7 +71,7 @@ header {
 
 .hero-carousel {
   width: 100%;
-  height: 60vh; /* Ajuste para as fotos aparecerem bem */
+  height: 60vh;
   position: relative;
   z-index: 1;
 }
@@ -115,18 +115,11 @@ header {
   display: block;
 }
 
-.hero-overlay {
-  position: absolute;
-  bottom: 0; left: 0; width: 100%; height: 60%;
-  background: linear-gradient(to top, var(--dark) 20%, transparent);
-  z-index: 10;
-}
-
 .hero-content {
   position: relative;
   z-index: 20;
   max-width: 550px;
-  margin-top: 30px; /* Coloca o texto abaixo das fotos */
+  margin-top: 30px;
   text-align: center;
 }
 
@@ -144,7 +137,6 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
 
 .desc { font-size: 1.15rem; color: #e5e5e5; margin-bottom: 35px; line-height: 1.6; }
 
-/* --- BOTÕES PREMIUM (ESTILO ORIGINAL) --- */
 .btn-group { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
 
 .btn {
@@ -162,36 +154,17 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
   letter-spacing: 0.5px;
 }
 
-.btn-white { 
-  background: white; 
-  color: black; 
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
-}
+.btn-white { background: white; color: black; box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15); }
+.btn-white:hover { background: #e6e6e6; transform: translateY(-2px); }
+.btn-outline { background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); }
+.btn-outline:hover { background: rgba(255, 255, 255, 0.2); border-color: white; transform: translateY(-2px); }
 
-.btn-white:hover { 
-  background: #e6e6e6; 
-  transform: translateY(-2px); 
-}
-
-.btn-outline { 
-  background: rgba(255, 255, 255, 0.1); 
-  color: white; 
-  border: 1px solid rgba(255, 255, 255, 0.3); 
-  backdrop-filter: blur(10px);
-}
-
-.btn-outline:hover { 
-  background: rgba(255, 255, 255, 0.2); 
-  border-color: white;
-  transform: translateY(-2px);
-}
-
-/* --- SEÇÃO DE CARTAS & CONTADOR --- */
+/* --- STATS & LETTERS --- */
 .stats-shelf {
-  padding: 60px 5% 120px;
+  padding: 60px 5% 40px;
   position: relative;
   z-index: 30;
-  background: var(--dark);
+  background: transparent;
 }
 
 .shelf-title { font-size: 1.5rem; margin-bottom: 25px; color: #fff; font-weight: 700; }
@@ -234,7 +207,158 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
 
 .letter-card:hover { transform: scale(1.02); border-color: var(--gold); }
 .letter-card h4 { color: var(--gold); margin-bottom: 5px; }
-.letter-card p { font-size: 0.8rem; color: #ccc; }
+
+/* --- LINHA DO TEMPO --- */
+.timeline-section {
+    padding: 80px 5%;
+    position: relative;
+    z-index: 30;
+    overflow: hidden;
+}
+
+.timeline-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--netflix-red), var(--gold), transparent);
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    margin-bottom: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.timeline-item.show { opacity: 1; transform: translateY(0); }
+
+.timeline-content {
+    width: 45%;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.timeline-item:nth-child(even) { flex-direction: row-reverse; }
+
+.timeline-dot {
+    width: 15px; height: 15px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 15px var(--gold);
+}
+
+.timeline-date { color: var(--gold); font-weight: bold; font-size: 0.9rem; margin-bottom: 5px; display: block; }
+.timeline-text { font-size: 0.85rem; line-height: 1.4; color: #eee; }
+
+/* --- SEÇÕES EXISTENTES --- */
+.top-picks { padding: 40px 5%; z-index: 30; position: relative; text-align: center; }
+.picks-container { 
+    display: flex; 
+    gap: 20px; 
+    justify-content: center; 
+    flex-wrap: wrap; 
+    padding: 20px 0; 
+}
+.pick-card {
+    width: 180px; height: 260px;
+    background: #1c2235; border-radius: 8px;
+    position: relative; cursor: pointer;
+    transition: 0.4s; overflow: hidden;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.pick-card:hover { transform: scale(1.05); border-color: var(--netflix-red); }
+.pick-card i { font-size: 2.5rem; margin-bottom: 15px; }
+.pick-card span { font-size: 0.85rem; font-weight: bold; text-align: center; }
+.pick-card .hover-text {
+    position: absolute; bottom: -100%; left: 0; width: 100%; height: 100%;
+    background: rgba(229, 9, 20, 0.95); display: flex; align-items: center;
+    justify-content: center; padding: 15px; text-align: center; transition: 0.4s; font-size: 0.85rem;
+}
+.pick-card:hover .hover-text { bottom: 0; }
+
+.quiz-section { 
+    padding: 80px 5%; text-align: center; z-index: 30; position: relative;
+    background: rgba(0,0,0,0.3); margin: 40px 0; border-radius: 20px;
+}
+.quiz-card {
+    max-width: 500px; margin: 0 auto; background: #151926;
+    padding: 30px; border-radius: 15px; border: 1px solid var(--gold);
+}
+.quiz-options { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.opt { 
+    padding: 12px; background: rgba(255,255,255,0.05); border-radius: 8px;
+    cursor: pointer; transition: 0.3s; border: 1px solid transparent;
+}
+.opt:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); }
+
+/* --- NOVAS SEÇÕES CRIATIVAS --- */
+.creative-section { padding: 40px 5%; z-index: 30; position: relative; }
+
+/* Estilo para o Mural de Mensagens */
+.mood-board {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+.mood-note {
+    background: var(--gold);
+    color: #333;
+    padding: 20px;
+    width: 180px;
+    min-height: 180px;
+    border-radius: 2px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+    transform: rotate(-2deg);
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2rem;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+}
+.mood-note:nth-child(even) { transform: rotate(3deg); background: #fff; }
+
+/* 1. Em Breve (Próximos Lançamentos) */
+.coming-soon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+.preview-card {
+    background: #151926; border-radius: 5px; overflow: hidden;
+    position: relative; height: 120px; border-left: 4px solid var(--netflix-red);
+    display: flex; flex-direction: column; justify-content: center; padding: 20px;
+}
+.preview-card small { color: var(--netflix-red); font-weight: 700; font-size: 0.7rem; }
+.preview-card h5 { margin: 5px 0; font-size: 1rem; }
+
+/* 2. Bento de Amor (Easter Egg) */
+.bento-box {
+    background: linear-gradient(45deg, #151926, #021945);
+    padding: 30px; border-radius: 15px; text-align: center;
+    cursor: pointer; border: 2px dashed var(--gold); transition: 0.5s;
+    margin-bottom: 40px;
+}
+.bento-box:active { transform: scale(0.98); }
+#bento-message { opacity: 0; transition: 0.5s; font-style: italic; color: var(--gold); margin-top: 15px; }
 
 /* --- MODAL --- */
 .letter-modal {
@@ -242,52 +366,60 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
     top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0,0,0,0.95);
     z-index: 2000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    backdrop-filter: blur(10px);
+    display: none; align-items: center; justify-content: center;
+    padding: 20px; backdrop-filter: blur(10px);
 }
 
 .modal-content {
-    background: #191d29;
-    max-width: 600px;
-    width: 100%;
-    max-height: 80vh;
-    overflow-y: auto;
-    padding: 40px;
-    border-radius: 15px;
-    position: relative;
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    background: #191d29; max-width: 600px; width: 100%;
+    max-height: 80vh; overflow-y: auto; padding: 40px;
+    border-radius: 15px; position: relative; border: 1px solid rgba(255,255,255,0.1);
 }
 
 .modal-content h2 { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: var(--gold); margin-bottom: 20px; }
 .modal-content p { line-height: 1.8; color: #e0e0e0; white-space: pre-wrap; margin-bottom: 20px; }
 .close-modal { position: absolute; top: 20px; right: 20px; font-size: 1.5rem; cursor: pointer; color: white; }
 
-/* --- MINI PLAYER --- */
+/* --- MINI PLAYER AJUSTADO --- */
 .magic-player {
-    position: fixed;
-    bottom: 25px; right: 25px;
-    background: rgba(0,0,0,0.8);
-    backdrop-filter: blur(20px);
-    padding: 12px 20px;
-    border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.1);
-    display: flex; align-items: center; gap: 15px;
-    z-index: 1000;
+    position: fixed; bottom: 25px; right: 25px;
+    background: rgba(0,0,0,0.8); backdrop-filter: blur(20px);
+    padding: 12px 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; gap: 15px; z-index: 1000;
 }
+
+.player-controls-mini {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mini-nav-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+.mini-nav-btn:hover { opacity: 1; color: var(--gold); }
 
 #musicBtn {
     width: 35px; height: 35px; border-radius: 50%;
     background: var(--netflix-red); color: white;
     border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
 }
 
 @media (max-width: 768px) {
     .hero-carousel { height: 45vh; }
-    .photo-card { height: 100%; }
+    .timeline-line { left: 20px; }
+    .timeline-content { width: 85%; }
+    .timeline-dot { left: 20px; }
+    .timeline-item { flex-direction: row !important; padding-left: 40px; }
+    .picks-container { justify-content: center; }
 }
 </style>
 </head>
@@ -301,12 +433,10 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
 
 <section class="hero">
   <div class="hero-carousel" id="carousel"></div>
-
   <div class="hero-content">
     <span class="tagline">✦ Estrelado por Vitinho & Karlinha ✦</span>
     <h1>Rogai por Nós</h1>
     <p class="desc" id="photo-desc">Tudo se inicia em 15 de Novembro.</p>
-    
     <div class="btn-group">
       <button class="btn btn-white" id="musicBtnTop">▶ ASSISTIR</button>
       <button class="btn btn-outline" id="prevBtn">ANTERIOR</button>
@@ -337,6 +467,123 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
   </div>
 </main>
 
+<section class="timeline-section">
+    <h3 class="shelf-title" style="text-align: center; margin-bottom: 50px;">Nossos Capítulos Inesquecíveis</h3>
+    <div class="timeline-container">
+        <div class="timeline-line"></div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">15 Nov 2025</span>
+                <p class="timeline-text">Onde tudo começou. O dia em que Deus cruzou nossos caminhos de forma inesperada.</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">O Primeiro "Beijo" (Eitchaaa)</span>
+                <p class="timeline-text">Uma momento inesquecivel, onde não sabiamos oque reagir... Pancremo, Pancremo hehe.</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">Atualmente</span>
+                <p class="timeline-text">Construindo nosso caminho dia após dia, sob a proteção de Maria e o amor de Jesus.</p>
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">O Futuro</span>
+                <p class="timeline-text">Spoiler: Muitos capítulos ainda serão escritos, com muita fé e cumplicidade. ❤️</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="top-picks">
+    <h3 class="shelf-title">Porque você é Minha Escolha nº 1</h3>
+    <div class="picks-container">
+        <div class="pick-card">
+            <i>😊</i><span>Seu Sorriso</span>
+            <div class="hover-text">Ele ilumina até o meu dia mais difícil e me faz sorrir junto sem perceber.</div>
+        </div>
+        <div class="pick-card">
+            <i>🙏</i><span>Sua Fé</span>
+            <div class="hover-text">A forma como você ama a Deus e Maria me inspira a ser um homem melhor.</div>
+        </div>
+        <div class="pick-card">
+            <i>🤝</i><span>Seu Cuidado</span>
+            <div class="hover-text">Como você se preocupa comigo e me apoia em cada pequeno detalhe.</div>
+        </div>
+        <div class="pick-card">
+            <i>✨</i><span>Sua Essência</span>
+            <div class="hover-text">Você é única, autêntica e tem o coração mais lindo que já conheci.</div>
+        </div>
+    </div>
+</section>
+
+<section class="quiz-section">
+    <h3 class="shelf-title">Teste de Match Loveflix</h3>
+    <p style="margin-bottom: 20px; color: #ccc;">Responda corretamente para liberar um bônus!</p>
+    <div class="quiz-card" id="quizCard">
+        <h4 id="questionText">Qual a data oficial do nosso início?</h4>
+        <div class="quiz-options" id="options">
+            <div class="opt" onclick="checkQuiz(this, true)">15 de Novembro 2025</div>
+            <div class="opt" onclick="checkQuiz(this, false)">17 de Outubro 2025</div>
+            <div class="opt" onclick="checkQuiz(this, false)">30 de Maio 2025</div>
+        </div>
+    </div>
+</section>
+
+<section class="creative-section">
+    <h3 class="shelf-title">Próximos Lançamentos (Spoiler!)</h3>
+    <div class="coming-soon-grid">
+        <div class="preview-card">
+            <small>EM EXIBIÇÃO</small>
+            <h5>Momentos em 2026</h5>
+            <p style="font-size: 0.75rem; color: #aaa;">Muitas coisas para vivenciarmos juntos.</p>
+        </div>
+        <div class="preview-card">
+            <small>ESTREIA EM BREVE</small>
+            <h5>O Pedido</h5>
+            <p style="font-size: 0.75rem; color: #aaa;">Mas oque será hein...</p>
+        </div>
+        <div class="preview-card">
+            <small>EM PRODUÇÃO</small>
+            <h5>Nosso Futuro</h5>
+            <p style="font-size: 0.75rem; color: #aaa;">Com muita oração caminharemos juntos para construirmos nosso futuro.</p>
+        </div>
+    </div>
+</section>
+
+<section class="creative-section">
+    <div class="bento-box" onclick="revealBento()">
+        <span style="font-size: 3rem;">🎁</span>
+        <h4>Clique para abrir o "Bento de Amor"</h4>
+        <div id="bento-message">
+            "Você é a prova de que Deus ouve minhas orações em silêncio. Meu presente mais bonito, minha base e para sempre meu amor."
+        </div>
+    </div>
+</section>
+
+<section class="creative-section">
+    <h3 class="shelf-title">Mural de Post-its Espirituais</h3>
+    <div class="mood-board">
+        <div class="mood-note">Deus é a base!</div>
+        <div class="mood-note">Maria passa na frente ❤️</div>
+        <div class="mood-note">O amor tudo suporta.</div>
+        <div class="mood-note">Nossa oração tem poder.</div>
+    </div>
+</section>
+
+<section class="creative-section" style="text-align: center; padding-bottom: 100px;">
+    <h3 class="shelf-title">Créditos Finais</h3>
+    <p style="color: #888; font-style: italic;">Produzido com amor por Vitinho</p>
+    <p style="color: #888; font-size: 0.8rem; margin-top: 10px;">Copyright © 2026 - Nossa História Sem Fim</p>
+</section>
+
 <div class="letter-modal" id="letterModal">
     <div class="modal-content">
         <span class="close-modal" onclick="closeLetter()">&times;</span>
@@ -347,7 +594,11 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
 </div>
 
 <div class="magic-player">
-    <button id="musicBtn">▶</button>
+    <div class="player-controls-mini">
+        <button class="mini-nav-btn" id="prevTrackMini">⏮</button>
+        <button id="musicBtn">▶</button>
+        <button class="mini-nav-btn" id="nextTrackMini">⏭</button>
+    </div>
     <div>
         <p id="trackTitle" style="font-size: 0.75rem; font-weight: 700; color: #fff;">S01E01: O Início</p>
         <div style="width: 80px; height: 3px; background: rgba(255,255,255,0.2); margin-top: 5px;">
@@ -375,43 +626,33 @@ const content = [
 ];
 
 const playlist = [
-  { src: "midia/music.mp3", name: "S01E01: O Início" },
-  { src: "midia/music2.mp3", name: "S01E02: Melodia" },
-  { src: "midia/music3.mp3", name: "S01E03: Eternidade" },
-  { src: "midia/music4.mp3", name: "S01E04: Para Sempre" },
-  { src: "midia/music5.mp3", name: "S01E05: Escrito nas Estrelas" },
+  { src: "midia/music.mp3", name: "S01E01: Pupila" },
+  { src: "midia/music2.mp3", name: "S01E02: Lisboa" },
+  { src: "midia/music3.mp3", name: "S01E03: Univ que Desconheço" },
+  { src: "midia/music4.mp3", name: "S01E04: Rosa e o Beija-Flor" },
+  { src: "midia/music5.mp3", name: "S01E05: 2 Much" },
   { src: "midia/music6.mp3", name: "S01E06: Que sorte a nossa..." },
-  { src: "midia/music7.mp3", name: "S01E07: Doce Mistério" },
-  { src: "midia/music8.mp3", name: "S01E08: Além do Olhar" },
-  { src: "midia/music9.mp3", name: "S01E09: Nossa Melhor Versão" },
-  { src: "midia/music10.mp3", name: "S01E10: Onde o Coração Habita" }
+  { src: "midia/music7.mp3", name: "S01E07: Heaven" },
+  { src: "midia/music8.mp3", name: "S01E08: Bed Of Roses" },
+  { src: "midia/music9.mp3", name: "S01E09: Careless" },
+  { src: "midia/music10.mp3", name: "S01E10: Apologize" }
 ];
 
 const letters = {
-    1: {
-        title: "Carta 1.1: O Presentão de Deus",
-        body: `Meu bem, apesar da cartinha de amor escrita a mão, quero também deixar isso guardado do meu jeito, como um bom garoto de TI kkkk.\n\nVocê está sendo uma das melhores coisas que me aconteceram neste ano. Que presentão Deus, junto da nossa Mãezinha, poderia me dar nesse final de ano… te colocar na minha vida justamente num momento em que eu jamais imaginaria. Acho que palavras não conseguem definir tudo o que estou sentindo nesse primeiro mês (Olha o contador lá em cima cronometrando certinho kkk).\n\nSeu abraço, seu cheiro, sua mão na minha, seu beijo na minha bochecha... fico com o coração quentinho kkkk. A forma como você expressa o que sente por mim… tudo isso me toca de um jeito especial, que faz sempre querer estar junto de você in qualquer momento.\n\nIsso é apenas o começo da nossa história meu bem. Que possamos caminhar juntos com muito carinho, paciência e oração, sempre ajudando um ao outro a se fortalecer. Que Deus, ao lado da nossa Mãezinha, seja a base de tudo e nos guie em cada caminho que formos construindo.\n\nQuero demonstrar sempre, do jeito que eu conseguir, tudo o que sinto por você, lembrando que continuo sendo tímido (Vamos concordar kkk).\n\n"O amor é paciente, o amor é bondoso..." - 1 Coríntios 13:4-7 🙏`
-    },
-    2: {
-        title: "Carta 2.1: Minha Pitanguinha",
-        body: `Minha pitanguinha,\n\nDois meses se passaram… e hoje eu posso dizer, com o coração transbordando de alegria, que você é minha namorada. Ufaa, ufaa kkkk. Pode até parecer simples dizer isso, mas o peso e a felicidade que essas palavras carregam são enormes pra mim.\n\nObrigado por esse tempo, por cada conversa, cada risada, cada cuidado e por tudo o que estamos vivendo juntos. A verdade é que estamos compartilhando momentos incríveis, coisas que eu jamais imaginei viver com alguém, e isso só reforça o quanto você é especial pra mim.\n\nHoje você é minha melhor amiga, minha parceira, minha namorada, meu porto seguro, meu tudo. E não posso deixar de dizer que, quando penso no futuro, é impossível não te imaginar caminhando ao meu lado, construindo uma vida juntos, sendo minha esposa e, se Deus permitir, a mãe dos meus filhos (rsrs).\n\nEu acredito de verdade que, se Deus nos uniu, não foi por acaso. Existe um propósito maior nos esperando, e eu quero seguir esse caminho com você. Continuarei rezando por nós, pedindo a Deus, junto da nossa Mãezinha, que nos guie e nos mantenha sempre na vontade d’Eles.\n\nEu escolho você hoje, amanhã e para sempre. 🤍\n\nObs: A fabrica entrou em contato cmg...`
-    }
+    1: { title: "Carta 1.1: O Presentão de Deus", body: "" },
+    2: { title: "Carta 2.1: Minha Pitanguinha", body: "" }
 };
+
+letters[1].body = `Meu bem, apesar da cartinha de amor escrita a mão, quero também deixar isso guardado do meu jeito, como um bom garoto de TI kkkk.\n\nVocê está sendo uma das melhores coisas que me aconteceram neste ano. Que presentão Deus, junto da nossa Mãezinha, poderia me dar nesse final de ano… te colocar na minha vida justamente num momento em que eu jamais imaginaria. Acho que palavras não conseguem definir tudo o que estou sentindo nesse primeiro mês (Olha o contador lá em cima cronometrando certinho kkk).\n\nSeu abraço, seu cheiro, sua mão na minha, seu beijo na minha bochecha... fico com o coração quentinho kkkk. A forma como você expressa o que sente por mim… tudo isso me toca de um jeito especial, que faz sempre querer estar junto de você in qualquer momento.\n\nIsso é apenas o começo da nossa história meu bem. Que possamos caminhar juntos com muito carinho, paciência e oração, sempre ajudando um ao outro a se fortalecer. Que Deus, ao lado da nossa Mãezinha, seja a base de tudo e nos guie em cada caminho que formos construindo.\n\nQuero demonstrar sempre, do jeito que eu conseguir, tudo o que sinto por você, lembrando que continuo sendo tímido (Vamos concordar kkk).\n\n"O amor é paciente, o amor é bondoso..." - 1 Coríntios 13:4-7 🙏`;
+letters[2].body = `Minha pitanguinha,\n\nDois meses se passaram… e hoje eu posso dizer, com o coração transbordando de alegria, que você é minha namorada. Ufaa, ufaa kkkk. Pode até parecer simples dizer isso, mas o peso e a felicidade que essas palavras carregam são enormes pra mim.\n\nObrigado por esse tempo, por cada conversa, cada risada, cada cuidado e por tudo o que estamos vivendo juntos. A verdade é que estamos compartilhando momentos incríveis, coisas que eu jamais imaginei viver com alguém, e isso só reforça o quanto você é especial pra mim.\n\nHoje você é minha melhor amiga, minha parceira, minha namorada, meu porto seguro, meu tudo. E não posso deixar de dizer que, quando penso no futuro, é impossível não te imaginar caminhando ao meu lado, construindo uma vida juntos, sendo minha esposa e, se Deus permitir, a mãe dos meus filhos (rsrs).\n\nEu acredito de verdade que, se Deus nos uniu, não foi por acaso. Existe um propósito maior nos esperando, e eu quero seguir esse caminho com você. Continuarei rezando por nós, pedindo a Deus, junto da nossa Mãezinha, que nos guie e nos mantenha sempre na vontade d’Eles.\n\nEu escolho você hoje, amanhã e para sempre. 🤍`;
 
 function openLetter(id) {
     document.getElementById('modalTitle').innerText = letters[id].title;
     document.getElementById('modalBody').innerText = letters[id].body;
     document.getElementById('letterModal').style.display = 'flex';
 }
-
-function closeLetter() {
-    document.getElementById('letterModal').style.display = 'none';
-}
-
-window.onclick = function(event) {
-    let modal = document.getElementById('letterModal');
-    if (event.target == modal) closeLetter();
-}
+function closeLetter() { document.getElementById('letterModal').style.display = 'none'; }
+window.onclick = (e) => { if (e.target == document.getElementById('letterModal')) closeLetter(); }
 
 const carousel = document.getElementById('carousel');
 content.forEach((item, idx) => {
@@ -421,15 +662,67 @@ content.forEach((item, idx) => {
   carousel.appendChild(slide);
 });
 
-let current = 0;
-function changeSlide() {
+let currentPhotoIdx = 0;
+function changeSlideAuto() {
   const slides = document.querySelectorAll('.slide');
-  slides[current].classList.remove('active');
-  current = (current + 1) % content.length;
-  slides[current].classList.add('active');
-  document.getElementById('photo-desc').innerText = content[current].desc;
+  if(!slides.length) return;
+  slides[currentPhotoIdx].classList.remove('active');
+  currentPhotoIdx = (currentPhotoIdx + 1) % content.length;
+  slides[currentPhotoIdx].classList.add('active');
+  document.getElementById('photo-desc').innerText = content[currentPhotoIdx].desc;
 }
-setInterval(changeSlide, 6000);
+setInterval(changeSlideAuto, 6000);
+
+const music = document.getElementById('music');
+const mBtn = document.getElementById('musicBtn');
+const mBtnTop = document.getElementById('musicBtnTop');
+let tIdx = 0;
+
+function loadTrack(i) { 
+    music.src = playlist[i].src; 
+    document.getElementById('trackTitle').innerText = playlist[i].name; 
+}
+
+function togglePlay() {
+    if(music.paused) { 
+        music.play(); 
+        mBtn.innerText = "⏸"; 
+        mBtnTop.innerText = "⏸ PAUSAR"; 
+    } else { 
+        music.pause(); 
+        mBtn.innerText = "▶"; 
+        mBtnTop.innerText = "▶ ASSISTIR"; 
+    }
+}
+
+function nextTrack() {
+    tIdx = (tIdx + 1) % playlist.length;
+    loadTrack(tIdx);
+    music.play();
+    mBtn.innerText = "⏸";
+    mBtnTop.innerText = "⏸ PAUSAR";
+}
+
+function prevTrack() {
+    tIdx = (tIdx - 1 + playlist.length) % playlist.length;
+    loadTrack(tIdx);
+    music.play();
+    mBtn.innerText = "⏸";
+    mBtnTop.innerText = "⏸ PAUSAR";
+}
+
+loadTrack(tIdx);
+document.getElementById('nextBtn').onclick = nextTrack;
+document.getElementById('prevBtn').onclick = prevTrack;
+document.getElementById('nextTrackMini').onclick = nextTrack;
+document.getElementById('prevTrackMini').onclick = prevTrack;
+mBtn.onclick = togglePlay; 
+mBtnTop.onclick = togglePlay;
+
+music.onended = nextTrack;
+music.ontimeupdate = () => { 
+    document.getElementById('progress').style.width = (music.currentTime / music.duration) * 100 + "%"; 
+};
 
 function createStar() {
   const field = document.getElementById('magic-stars');
@@ -454,50 +747,48 @@ setInterval(() => {
   document.getElementById('seconds').innerText = Math.floor(diff / 1000) % 60;
 }, 1000);
 
-const music = document.getElementById('music');
-const mBtn = document.getElementById('musicBtn');
-const mBtnTop = document.getElementById('musicBtnTop');
-const nBtn = document.getElementById('nextBtn');
-const pBtn = document.getElementById('prevBtn');
-let tIdx = 0;
+window.addEventListener('scroll', () => {
+    const items = document.querySelectorAll('.timeline-item');
+    items.forEach(item => {
+        const rect = item.getBoundingClientRect();
+        if(rect.top < window.innerHeight * 0.8) item.classList.add('show');
+    });
+});
 
-function loadTrack(i) {
-    music.src = playlist[i].src;
-    document.getElementById('trackTitle').innerText = playlist[i].name;
-}
-loadTrack(tIdx);
-
-function togglePlay() {
-    if(music.paused) { music.play(); mBtn.innerText = "⏸"; mBtnTop.innerText = "⏸ PAUSAR"; }
-    else { music.pause(); mBtn.innerText = "▶"; mBtnTop.innerText = "▶ ASSISTIR"; }
-}
-
-mBtn.onclick = togglePlay;
-mBtnTop.onclick = togglePlay;
-
-function nextTrack() {
-    tIdx = (tIdx + 1) % playlist.length; 
-    loadTrack(tIdx); 
-    music.play(); 
-    mBtn.innerText = "⏸";
-    mBtnTop.innerText = "⏸ PAUSAR";
+function checkQuiz(el, isCorrect) {
+    if(isCorrect) {
+        el.style.background = "#2ecc71";
+        document.getElementById('quizCard').innerHTML = `
+            <h2 style="color: var(--gold); font-family: 'Dancing Script'; font-size: 2rem;">Match 100% Confirmado!</h2>
+            <p style="margin-top:15px;">Você desbloqueou um: <b>"Vale-Abraço Para Sempre (Junto com beijinhos tbm rsrs)"</b></p>
+            <p style="font-size:0.8rem; color:#888;">Tire um print e me cobre! ❤️</p>
+        `;
+        for(let i=0; i<25; i++) setTimeout(createHeart, i*150);
+    } else {
+        el.style.background = "#e74c3c";
+        setTimeout(() => el.style.background = "rgba(255,255,255,0.05)", 500);
+    }
 }
 
-nBtn.onclick = nextTrack;
-music.onended = nextTrack;
+function createHeart() {
+    const heart = document.createElement('div');
+    heart.innerHTML = '❤️';
+    heart.style.position = 'fixed';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.top = '100vh';
+    heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+    heart.style.zIndex = '3000';
+    heart.style.transition = 'all 3s linear';
+    document.body.appendChild(heart);
+    setTimeout(() => { heart.style.top = '-10vh'; heart.style.opacity = '0'; }, 100);
+    setTimeout(() => heart.remove(), 3000);
+}
 
-pBtn.onclick = () => { 
-    tIdx = (tIdx - 1 + playlist.length) % playlist.length; 
-    loadTrack(tIdx); 
-    music.play(); 
-    mBtn.innerText = "⏸";
-    mBtnTop.innerText = "⏸ PAUSAR";
-};
-
-music.ontimeupdate = () => {
-    const pct = (music.currentTime / music.duration) * 100;
-    document.getElementById('progress').style.width = pct + "%";
-};
+function revealBento() {
+    const msg = document.getElementById('bento-message');
+    msg.style.opacity = (msg.style.opacity == '1') ? '0' : '1';
+    for(let i=0; i<5; i++) setTimeout(createHeart, i*100);
+}
 </script>
 </body>
 </html>
