@@ -13,6 +13,7 @@
   --netflix-red: #E50914;
   --gold: #f9d71c;
   --dark: #040714;
+  --success: #2ecc71;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
@@ -190,6 +191,54 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
 .stat-box span { font-size: 2.2rem; font-weight: 900; color: white; display: block; }
 .stat-box label { color: #8a8d9b; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
 
+/* NOVA SEÇÃO DO PEDIDO */
+.special-episode {
+    padding: 60px 5%;
+    background: rgba(229, 9, 20, 0.05);
+    border-radius: 20px;
+    margin: 40px 5%;
+    z-index: 30;
+    position: relative;
+}
+
+.proposal-layout {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.proposal-photos {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    min-width: 300px;
+}
+
+.proposal-photos img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid rgba(255,255,255,0.1);
+    transition: 0.3s;
+}
+
+.proposal-photos img:hover { transform: scale(1.03); border-color: var(--gold); }
+
+.proposal-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.proposal-text h2 { 
+    font-family: 'Dancing Script', cursive; 
+    color: var(--gold); 
+    font-size: 2.5rem; 
+    margin-bottom: 15px;
+}
+
 .letters-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -237,12 +286,8 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
     display: flex;
     justify-content: space-between;
     align-items: center;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
+    opacity: 1;
 }
-
-.timeline-item.show { opacity: 1; transform: translateY(0); }
 
 .timeline-content {
     width: 45%;
@@ -310,6 +355,7 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
     cursor: pointer; transition: 0.3s; border: 1px solid transparent;
 }
 .opt:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); }
+#quiz-feedback { margin-top: 20px; font-weight: bold; min-height: 24px; transition: 0.3s; }
 
 /* --- NOVAS SEÇÕES CRIATIVAS --- */
 .creative-section { padding: 40px 5%; z-index: 30; position: relative; }
@@ -436,7 +482,7 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
   <div class="hero-content">
     <span class="tagline">✦ Estrelado por Vitinho & Karlinha ✦</span>
     <h1>Rogai por Nós</h1>
-    <p class="desc" id="photo-desc">Tudo se inicia em 15 de Novembro.</p>
+    <p class="desc" id="photo-desc">Nossa história oficial começou em 25 de Janeiro!</p>
     <div class="btn-group">
       <button class="btn btn-white" id="musicBtnTop">▶ ASSISTIR</button>
       <button class="btn btn-outline" id="prevBtn">ANTERIOR</button>
@@ -446,13 +492,41 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
 </section>
 
 <main class="stats-shelf">
-  <h3 class="shelf-title">Minha série favorita</h3>
+  <h3 class="shelf-title">Tempo que Nos Conhecemos (15/11/2025)</h3>
+  <div class="grid-stats" style="margin-bottom: 60px;">
+    <div class="stat-box"><span id="daysMet">0</span><label>Dias</label></div>
+    <div class="stat-box"><span id="hoursMet">0</span><label>Horas</label></div>
+    <div class="stat-box"><span id="minutesMet">0</span><label>Minutos</label></div>
+    <div class="stat-box"><span id="secondsMet">0</span><label>Segundos</label></div>
+  </div>
+
+  <h3 class="shelf-title">Tempo de Namoro Oficial (25/01/2026)</h3>
   <div class="grid-stats">
-    <div class="stat-box"><span id="days">0</span><label>Dias Juntos</label></div>
+    <div class="stat-box"><span id="days">0</span><label>Dias</label></div>
     <div class="stat-box"><span id="hours">0</span><label>Horas</label></div>
     <div class="stat-box"><span id="minutes">0</span><label>Minutos</label></div>
     <div class="stat-box"><span id="seconds">0</span><label>Segundos</label></div>
   </div>
+
+  <section class="special-episode">
+    <div class="proposal-layout">
+        <div class="proposal-photos">
+            <img src="img/foto13.jpeg" alt="Foto do Pedido 1">
+            <img src="img/foto14.jpeg" alt="Foto do Pedido 2">
+            <img src="img/foto15.jpeg" alt="Foto do Pedido 3">
+            <img src="img/foto16.jpeg" alt="Foto do Pedido 4">
+        </div>
+        <div class="proposal-text">
+            <h2>Nós 🤍 </h2>
+            <p style="font-size: 1rem; color: #ddd; line-height: 1.6;">
+                Dia 25/01/2026 não foi apenas uma data no calendário, foi o dia em que o "eu" e o "você" se transformaram em <b>nós</b> oficialmente. 
+                Olhar nos seus olhos e ouvir o seu "sim" foi sentir o cuidado de Deus e o carinho de Nossa Senhora confirmando que nossos caminhos foram feitos para se cruzar. 
+                Que essas fotos registrem apenas o início de uma eternidade ao seu lado.
+            </p>
+            <p style="margin-top: 15px; color: var(--gold); font-weight: bold;">#OficialmenteNamorados ❤️</p>
+        </div>
+    </div>
+  </section>
 
   <h3 class="shelf-title">Cartas Selecionadas para Você</h3>
   <div class="letters-grid">
@@ -463,6 +537,10 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
     <div class="letter-card" onclick="openLetter(2)">
         <h4>Carta 2.1: Minha Pitanguinha</h4>
         <p>Dois meses se passaram e o coração transborda...</p>
+    </div>
+    <div class="letter-card" onclick="openLetter(3)">
+        <h4>Carta 3.0: Meu Amore Mio 🤍</h4>
+        <p>3 meses de uma história escrita por Deus...</p>
     </div>
   </div>
 </main>
@@ -482,14 +560,14 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
             <div class="timeline-dot"></div>
             <div class="timeline-content">
                 <span class="timeline-date">O Primeiro "Beijo" (Eitchaaa)</span>
-                <p class="timeline-text">Uma momento inesquecivel, onde não sabiamos oque reagir... Pancremo, Pancremo hehe.</p>
+                <p class="timeline-text">Um momento inesquecível... Pancremo, Pancremo hehe.</p>
             </div>
         </div>
         <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
-                <span class="timeline-date">Atualmente</span>
-                <p class="timeline-text">Construindo nosso caminho dia após dia, sob a proteção de Maria e o amor de Jesus.</p>
+                <span class="timeline-date">25 Jan 2026</span>
+                <p class="timeline-text"><strong>O Pedido Oficial!</strong> O dia em que decidimos caminhar de mãos dadas perante o mundo e perante Deus. ❤️</p>
             </div>
         </div>
         <div class="timeline-item">
@@ -526,14 +604,12 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
 
 <section class="quiz-section">
     <h3 class="shelf-title">Teste de Match Loveflix</h3>
-    <p style="margin-bottom: 20px; color: #ccc;">Responda corretamente para liberar um bônus!</p>
+    <p style="margin-bottom: 20px; color: #ccc;">Prove que você presta atenção nos detalhes!</p>
     <div class="quiz-card" id="quizCard">
-        <h4 id="questionText">Qual a data oficial do nosso início?</h4>
+        <h4 id="questionText">Qual foi o dia em que nossos caminhos se cruzaram pela primeira vez?</h4>
         <div class="quiz-options" id="options">
-            <div class="opt" onclick="checkQuiz(this, true)">15 de Novembro 2025</div>
-            <div class="opt" onclick="checkQuiz(this, false)">17 de Outubro 2025</div>
-            <div class="opt" onclick="checkQuiz(this, false)">30 de Maio 2025</div>
-        </div>
+            </div>
+        <div id="quiz-feedback"></div>
     </div>
 </section>
 
@@ -543,17 +619,17 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
         <div class="preview-card">
             <small>EM EXIBIÇÃO</small>
             <h5>Momentos em 2026</h5>
-            <p style="font-size: 0.75rem; color: #aaa;">Muitas coisas para vivenciarmos juntos.</p>
+            <p style="font-size: 0.75rem; color: #aaa;">Nossa jornada como namorados oficiais!</p>
         </div>
-        <div class="preview-card">
-            <small>ESTREIA EM BREVE</small>
-            <h5>O Pedido</h5>
-            <p style="font-size: 0.75rem; color: #aaa;">Mas oque será hein...</p>
+        <div class="preview-card" style="border-left-color: #2ecc71;">
+            <small style="color: #2ecc71;">ESTREIA CONCLUÍDA</small>
+            <h5>O Pedido Oficial</h5>
+            <p style="font-size: 0.75rem; color: #aaa;">Foi perfeito! 25/01/2026 ❤️</p>
         </div>
         <div class="preview-card">
             <small>EM PRODUÇÃO</small>
             <h5>Nosso Futuro</h5>
-            <p style="font-size: 0.75rem; color: #aaa;">Com muita oração caminharemos juntos para construirmos nosso futuro.</p>
+            <p style="font-size: 0.75rem; color: #aaa;">Construindo nossa casa sobre a rocha (Mateus 7:24).</p>
         </div>
     </div>
 </section>
@@ -563,7 +639,7 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
         <span style="font-size: 3rem;">🎁</span>
         <h4>Clique para abrir o "Bento de Amor"</h4>
         <div id="bento-message">
-            "Você é a prova de que Deus ouve minhas orações em silêncio. Meu presente mais bonito, minha base e para sempre meu amor."
+            "Você é a prova de que Deus ouve minhas orações em silêncio. Meu presente mais bonito, minha base e agora, oficialmente, minha namorada. Te amo!"
         </div>
     </div>
 </section>
@@ -578,11 +654,11 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
     </div>
 </section>
 
-<section class="creative-section" style="text-align: center; padding-bottom: 100px;">
+<footer style="text-align: center; padding-bottom: 120px;">
     <h3 class="shelf-title">Créditos Finais</h3>
     <p style="color: #888; font-style: italic;">Produzido com amor por Vitinho</p>
     <p style="color: #888; font-size: 0.8rem; margin-top: 10px;">Copyright © 2026 - Nossa História Sem Fim</p>
-</section>
+</footer>
 
 <div class="letter-modal" id="letterModal">
     <div class="modal-content">
@@ -600,7 +676,7 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
         <button class="mini-nav-btn" id="nextTrackMini">⏭</button>
     </div>
     <div>
-        <p id="trackTitle" style="font-size: 0.75rem; font-weight: 700; color: #fff;">S01E01: O Início</p>
+        <p id="trackTitle" style="font-size: 0.75rem; font-weight: 700; color: #fff;">S01E01: Pupila</p>
         <div style="width: 80px; height: 3px; background: rgba(255,255,255,0.2); margin-top: 5px;">
             <div id="progress" style="width: 0%; height: 100%; background: var(--netflix-red);"></div>
         </div>
@@ -620,9 +696,12 @@ const content = [
   { img: "img/foto7.jpeg", desc: "O brilho das estrelas inveja o seu sorriso." },
   { img: "img/foto8.jpeg", desc: "Te amo mil milhões" },
   { img: "img/foto9.jpeg", desc: "Nossa história está apenas no primeiro capítulo." },
-  { img: "img/foto10.jpeg", desc:"Voçê é a resposta das minhas orações."},
+  { img: "img/foto10.jpeg", desc:"Você é a resposta das minhas orações."},
   { img: "img/foto11.jpeg", desc:"Spoiler: Eu vou te amar ainda mais." },
-  { img: "img/foto12.jpeg", desc:"Guiados pela fé e unidos pelo amor mais puro." }
+  { img: "img/foto12.jpeg", desc:"Guiados pela fé e unidos pelo amor mais puro." },
+  { img: "img/foto17.jpeg", desc:"Te amo ao infinito e alem..." },
+  { img: "img/foto18.jpeg", desc:"Meu amore mio." },
+  { img: "img/foto19.jpeg", desc:"Você é o amor da minha vida" }
 ];
 
 const playlist = [
@@ -636,25 +715,18 @@ const playlist = [
   { src: "midia/music8.mp3", name: "S01E08: Bed Of Roses" },
   { src: "midia/music9.mp3", name: "S01E09: Careless" },
   { src: "midia/music10.mp3", name: "S01E10: Apologize" },
-  { src: "midia/music11.mp3", name: "S01E11: Partilhar" }
-
+  { src: "midia/music11.mp3", name: "S01E11: Partilhar" },
+  { src: "midia/musica12.mp3", name: "S01E12: Jesus" },
+  { src: "midia/musica13.mp3", name: "S01E13: Eu vou gritarr" }
 ];
 
 const letters = {
-    1: { title: "Carta 1.1: O Presentão de Deus", body: "" },
-    2: { title: "Carta 2.1: Minha Pitanguinha", body: "" }
+    1: { title: "Carta 1.1: O Início", body: `Meu bem, apesar da cartinha de amor escrita a mão, quero também deixar isso guardado do meu jeito, como um bom garoto de TI kkkk.\n\nVocê está sendo uma das melhores coisas que me aconteceram neste ano. Que presentão Deus, junto da nossa Mãezinha, poderia me dar nesse final de ano… te colocar na minha vida justamente num momento em que eu jamais imaginaria. Acho que palavras não conseguem definir tudo o que estou sentindo nesse primeiro mês.\n\nSeu abraço, seu cheiro, sua mão na minha, seu beijo na minha bochecha... fico com o coração quentinho kkkk. A forma como você expressa o que sente por mim… tudo isso me toca de um jeito especial.\n\nIsso é apenas o começo da nossa história meu bem. Que possamos caminhar juntos com muito carinho, paciência e oração. Que Deus, ao lado da nossa Mãezinha, seja a base de tudo.\n\n"O amor é paciente, o amor é bondoso..." - 1 Coríntios 13:4-7 🙏` },
+    2: { title: "Carta 2.1: Minha Pitanguinha", body: `Minha pitanguinha,\n\nDois meses se passaram… e hoje eu posso dizer, com o coração transbordando de alegria, que você é minha namorada. Ufaa, ufaa kkkk.\n\nObrigado por esse tempo, por cada conversa, cada risada, cada cuidado e por tudo o que estamos vivendo juntos. Hoje você é minha melhor amiga, minha parceira, meu porto seguro, meu tudo.\n\nEu acredito de verdade que, se Deus nos uniu, não foi por acaso. Existe um propósito maior nos esperando, e eu quero seguir esse caminho com você. Continuarei rezando por nós.\n\nEu escolho você hoje, amanhã e para sempre. 🤍` },
+    3: { title: "Carta 3.1: Meu Amore Mio 🤍", body: `Meu amor,\n\nHoje faz 3 meses desde aquele rogai por nós em 15 de novembro de 2025… o dia em que sem eu perceber, Deus já estava escrevendo uma das histórias mais bonitas da minha vida.\n\nDe lá pra cá, cada detalhe nosso só reforça essa certeza. Seu sorriso que ilumina meus dias, seu cuidado que me envolve, sua fé que me inspira. Se antes meus planos eram solitários, hoje todos eles têm seu nome.\n\nQue esses 3 meses sejam apenas o começo de uma história longa, firme, leve e cheia de propósito. Eu quero caminhar com você em cada fase.\n\nTe amarei hoje, amanha, esta semana, este mês, este ano e para sempre... 🤍` }
 };
 
-letters[1].body = `Meu bem, apesar da cartinha de amor escrita a mão, quero também deixar isso guardado do meu jeito, como um bom garoto de TI kkkk.\n\nVocê está sendo uma das melhores coisas que me aconteceram neste ano. Que presentão Deus, junto da nossa Mãezinha, poderia me dar nesse final de ano… te colocar na minha vida justamente num momento em que eu jamais imaginaria. Acho que palavras não conseguem definir tudo o que estou sentindo nesse primeiro mês (Olha o contador lá em cima cronometrando certinho kkk).\n\nSeu abraço, seu cheiro, sua mão na minha, seu beijo na minha bochecha... fico com o coração quentinho kkkk. A forma como você expressa o que sente por mim… tudo isso me toca de um jeito especial, que faz sempre querer estar junto de você in qualquer momento.\n\nIsso é apenas o começo da nossa história meu bem. Que possamos caminhar juntos com muito carinho, paciência e oração, sempre ajudando um ao outro a se fortalecer. Que Deus, ao lado da nossa Mãezinha, seja a base de tudo e nos guie em cada caminho que formos construindo.\n\nQuero demonstrar sempre, do jeito que eu conseguir, tudo o que sinto por você, lembrando que continuo sendo tímido (Vamos concordar kkk).\n\n"O amor é paciente, o amor é bondoso..." - 1 Coríntios 13:4-7 🙏`;
-letters[2].body = `Minha pitanguinha,\n\nDois meses se passaram… e hoje eu posso dizer, com o coração transbordando de alegria, que você é minha namorada. Ufaa, ufaa kkkk. Pode até parecer simples dizer isso, mas o peso e a felicidade que essas palavras carregam são enormes pra mim.\n\nObrigado por esse tempo, por cada conversa, cada risada, cada cuidado e por tudo o que estamos vivendo juntos. A verdade é que estamos compartilhando momentos incríveis, coisas que eu jamais imaginei viver com alguém, e isso só reforça o quanto você é especial pra mim.\n\nHoje você é minha melhor amiga, minha parceira, minha namorada, meu porto seguro, meu tudo. E não posso deixar de dizer que, quando penso no futuro, é impossível não te imaginar caminhando ao meu lado, construindo uma vida juntos, sendo minha esposa e, se Deus permitir, a mãe dos meus filhos (rsrs).\n\nEu acredito de verdade que, se Deus nos uniu, não foi por acaso. Existe um propósito maior nos esperando, e eu quero seguir esse caminho com você. Continuarei rezando por nós, pedindo a Deus, junto da nossa Mãezinha, que nos guie e nos mantenha sempre na vontade d’Eles.\n\nEu escolho você hoje, amanhã e para sempre. 🤍 \n\n\Como dizia ANAVITÓRIA, eu quero partilhar a vida boa com você...`;
-
-function openLetter(id) {
-    document.getElementById('modalTitle').innerText = letters[id].title;
-    document.getElementById('modalBody').innerText = letters[id].body;
-    document.getElementById('letterModal').style.display = 'flex';
-}
-function closeLetter() { document.getElementById('letterModal').style.display = 'none'; }
-window.onclick = (e) => { if (e.target == document.getElementById('letterModal')) closeLetter(); }
+// --- LOGICA DO SITE ---
 
 const carousel = document.getElementById('carousel');
 content.forEach((item, idx) => {
@@ -723,8 +795,111 @@ mBtnTop.onclick = togglePlay;
 
 music.onended = nextTrack;
 music.ontimeupdate = () => { 
-    document.getElementById('progress').style.width = (music.currentTime / music.duration) * 100 + "%"; 
+    if(music.duration) document.getElementById('progress').style.width = (music.currentTime / music.duration) * 100 + "%"; 
 };
+
+function updateCounters() {
+    const metDate = new Date("2025-11-15T00:00:00");
+    const officialDate = new Date("2026-01-25T00:00:00");
+    const now = new Date();
+
+    const diffMet = now - metDate;
+    document.getElementById('daysMet').innerText = Math.floor(diffMet / (1000 * 60 * 60 * 24));
+    document.getElementById('hoursMet').innerText = Math.floor((diffMet / (1000 * 60 * 60)) % 24);
+    document.getElementById('minutesMet').innerText = Math.floor((diffMet / 1000 / 60) % 60);
+    document.getElementById('secondsMet').innerText = Math.floor((diffMet / 1000) % 60);
+
+    const diffOff = now - officialDate;
+    document.getElementById('days').innerText = Math.floor(diffOff / (1000 * 60 * 60 * 24));
+    document.getElementById('hours').innerText = Math.floor((diffOff / (1000 * 60 * 60)) % 24);
+    document.getElementById('minutes').innerText = Math.floor((diffOff / 1000 / 60) % 60);
+    document.getElementById('seconds').innerText = Math.floor((diffOff / 1000) % 60);
+}
+setInterval(updateCounters, 1000);
+
+function openLetter(id) {
+    document.getElementById('modalTitle').innerText = letters[id].title;
+    document.getElementById('modalBody').innerText = letters[id].body;
+    document.getElementById('letterModal').style.display = 'flex';
+}
+function closeLetter() { document.getElementById('letterModal').style.display = 'none'; }
+
+// --- LÓGICA DO QUIZ COM 2 PERGUNTAS ---
+
+const quizData = [
+    {
+        question: "Qual foi o dia em que nossos caminhos se cruzaram pela primeira vez?",
+        options: [
+            { text: "15 de Novembro 2025", correct: true },
+            { text: "25 de Janeiro 2026", correct: false },
+            { text: "30 de Dezembro 2025", correct: false }
+        ]
+    },
+    {
+        question: "Qual é a data oficial do nosso pedido de namoro?",
+        options: [
+            { text: "15 de Novembro 2025", correct: false },
+            { text: "25 de Janeiro 2026", correct: true },
+            { text: "01 de Janeiro 2026", correct: false }
+        ]
+    }
+];
+
+let currentQuestion = 0;
+
+function loadQuiz() {
+    const feedback = document.getElementById('quiz-feedback');
+    const questionText = document.getElementById('questionText');
+    const optionsContainer = document.getElementById('options');
+    
+    feedback.innerText = "";
+    questionText.innerText = quizData[currentQuestion].question;
+    optionsContainer.innerHTML = "";
+
+    quizData[currentQuestion].options.forEach(opt => {
+        const div = document.createElement('div');
+        div.className = 'opt';
+        div.innerText = opt.text;
+        div.onclick = () => checkQuiz(div, opt.correct);
+        optionsContainer.appendChild(div);
+    });
+}
+
+function checkQuiz(element, isCorrect) {
+    const feedback = document.getElementById('quiz-feedback');
+    const options = document.querySelectorAll('.opt');
+    
+    options.forEach(opt => {
+        opt.style.borderColor = 'transparent';
+        opt.style.background = 'rgba(255,255,255,0.05)';
+    });
+
+    if (isCorrect) {
+        element.style.borderColor = 'var(--success)';
+        feedback.style.color = 'var(--success)';
+        
+        if (currentQuestion < quizData.length - 1) {
+            feedback.innerText = "Correto! Indo para a próxima...";
+            setTimeout(() => {
+                currentQuestion++;
+                loadQuiz();
+            }, 1500);
+        } else {
+            feedback.innerText = "Acertou tudo! Uhmmm ganhou um vale boleto...rsrs ✨";
+        }
+    } else {
+        element.style.borderColor = 'var(--netflix-red)';
+        feedback.style.color = 'var(--netflix-red)';
+        feedback.innerText = "Poxa, você errou! Tente novamente! ❤️";
+    }
+}
+
+loadQuiz();
+
+function revealBento() {
+    const msg = document.getElementById('bento-message');
+    msg.style.opacity = msg.style.opacity == "1" ? "0" : "1";
+}
 
 function createStar() {
   const field = document.getElementById('magic-stars');
@@ -739,58 +914,6 @@ function createStar() {
   setTimeout(() => star.remove(), 2000);
 }
 setInterval(createStar, 120);
-
-const start = new Date('2025-11-15T00:00:00'); 
-setInterval(() => {
-  const diff = Math.abs(new Date() - start);
-  document.getElementById('days').innerText = Math.floor(diff / 86400000);
-  document.getElementById('hours').innerText = Math.floor(diff / 3600000) % 24;
-  document.getElementById('minutes').innerText = Math.floor(diff / 60000) % 60;
-  document.getElementById('seconds').innerText = Math.floor(diff / 1000) % 60;
-}, 1000);
-
-window.addEventListener('scroll', () => {
-    const items = document.querySelectorAll('.timeline-item');
-    items.forEach(item => {
-        const rect = item.getBoundingClientRect();
-        if(rect.top < window.innerHeight * 0.8) item.classList.add('show');
-    });
-});
-
-function checkQuiz(el, isCorrect) {
-    if(isCorrect) {
-        el.style.background = "#2ecc71";
-        document.getElementById('quizCard').innerHTML = `
-            <h2 style="color: var(--gold); font-family: 'Dancing Script'; font-size: 2rem;">Match 100% Confirmado!</h2>
-            <p style="margin-top:15px;">Você desbloqueou um: <b>"Vale-Abraço Para Sempre (Junto com beijinhos tbm rsrs)"</b></p>
-            <p style="font-size:0.8rem; color:#888;">Tire um print e me cobre! ❤️</p>
-        `;
-        for(let i=0; i<25; i++) setTimeout(createHeart, i*150);
-    } else {
-        el.style.background = "#e74c3c";
-        setTimeout(() => el.style.background = "rgba(255,255,255,0.05)", 500);
-    }
-}
-
-function createHeart() {
-    const heart = document.createElement('div');
-    heart.innerHTML = '❤️';
-    heart.style.position = 'fixed';
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.top = '100vh';
-    heart.style.fontSize = Math.random() * 20 + 20 + 'px';
-    heart.style.zIndex = '3000';
-    heart.style.transition = 'all 3s linear';
-    document.body.appendChild(heart);
-    setTimeout(() => { heart.style.top = '-10vh'; heart.style.opacity = '0'; }, 100);
-    setTimeout(() => heart.remove(), 3000);
-}
-
-function revealBento() {
-    const msg = document.getElementById('bento-message');
-    msg.style.opacity = (msg.style.opacity == '1') ? '0' : '1';
-    for(let i=0; i<5; i++) setTimeout(createHeart, i*100);
-}
 </script>
 </body>
 </html>
