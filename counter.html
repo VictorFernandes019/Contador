@@ -531,11 +531,11 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
   <h3 class="shelf-title">Cartas Selecionadas para Você</h3>
   <div class="letters-grid">
     <div class="letter-card" onclick="openLetter(1)">
-        <h4>Carta 1.1: O Início</h4>
+        <h4>Carta 1.1: O Início 🤍</h4>
         <p>Sobre aquele 15 de novembro e o presentão de Deus...</p>
     </div>
     <div class="letter-card" onclick="openLetter(2)">
-        <h4>Carta 2.1: Minha Pitanguinha</h4>
+        <h4>Carta 2.1: Minha Pitanguinha 🤍</h4>
         <p>Dois meses se passaram e o coração transborda...</p>
     </div>
     <div class="letter-card" onclick="openLetter(3)">
@@ -546,7 +546,12 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
     <div class="letter-card" onclick="openLetter(4)">
         <h4>Carta 4.1: Nossa Constelação 🤍</h4>
         <p>4 Meses de muito amor...</p>
-  </div>
+     </div>
+    <div class="letter-card" onclick="openLetter(5)">
+        <h4>Carta 5.1: Ao infinito e Além... 🤍</h4>
+        <p>5 Meses de rogai por nós...</p>
+    </div>
+
 </main>
 
 <section class="timeline-section">
@@ -704,6 +709,10 @@ const content = [
 { img: "img/foto21.jpeg", desc:"Minha Xuxuzinha!!" },
 { img: "img/foto22.jpeg", desc:"Minha Princesa!!" },
 { img: "img/foto23.jpeg", desc:"A mais bela que lirios brancos..." },
+{ img: "img/foto24.jpeg", desc:"A mais bela quanto a luz do luar..." },
+{ img: "img/foto25.jpeg", desc:"Minha Paixão" },
+
+
 ];
 
 const playlist = [
@@ -722,13 +731,18 @@ const playlist = [
   { src: "midia/musica13.mp3", name: "S01E13: Jesus" },
   { src: "midia/musica14.mp3", name: "S01E14: Meteoro" },
   { src: "midia/musica15.mp3", name: "S01E15: Você é o amor da minha vida...." },
+    { src: "midia/music16.mp3", name: "S01E16: Você é a metade do meu coração...." },
+
+  
 ];
 
 const letters = {
     1: { title: "Carta 1.1: O Início 🤍", body: `Meu bem, apesar da cartinha de amor escrita a mão, quero também deixar isso guardado do meu jeito, como um bom garoto de TI kkkk.\n\nVocê está sendo uma das melhores coisas que me aconteceram neste ano. Que presentão Deus, junto da nossa Mãezinha, poderia me dar nesse final de ano… te colocar na minha vida justamente num momento em que eu jamais imaginaria. Acho que palavras não conseguem definir tudo o que estou sentindo nesse primeiro mês.\n\nSeu abraço, seu cheiro, sua mão na minha, seu beijo na minha bochecha... fico com o coração quentinho kkkk. A forma como você expressa o que sente por mim… tudo isso me toca de um jeito especial.\n\nIsso é apenas o começo da nossa história meu bem. Que possamos caminhar juntos com muito carinho, paciência e oração. Que Deus, ao lado da nossa Mãezinha, seja a base de tudo.\n\n"O amor é paciente, o amor é bondoso..." - 1 Coríntios 13:4-7 🙏` },
     2: { title: "Carta 2.1: Minha Pitanguinha 🤍", body: `Minha pitanguinha,\n\nDois meses se passaram… e hoje eu posso dizer, com o coração transbordando de alegria, que você é minha namorada. Ufaa, ufaa kkkk.\n\nObrigado por esse tempo, por cada conversa, cada risada, cada cuidado e por tudo o que estamos vivendo juntos. Hoje você é minha melhor amiga, minha parceira, meu porto seguro, meu tudo.\n\nEu acredito de verdade que, se Deus nos uniu, não foi por acaso. Existe um propósito maior nos esperando, e eu quero seguir esse caminho com você. Continuarei rezando por nós.\n\nEu escolho você hoje, amanhã e para sempre. 🤍` },
     3: { title: "Carta 3.1: Meu Amore Mio 🤍", body: `Meu Amore Mio,\n\nHoje faz 3 meses desde aquele rogai por nós em 15 de novembro de 2025… o dia em que sem eu perceber, Deus já estava escrevendo uma das histórias mais bonitas da minha vida. E quando chegou 25 de janeiro de 2026, eu só fiz oficial aquilo que meu coração já sabia, era você. Te pedir em namoro foi sem dúvida, uma das decisões mais felizes e certas que já tomei.\n\nDe lá pra cá, cada detalhe nosso só reforça essa certeza. Seu sorriso que ilumina meus dias, seu cuidado que me envolve, sua fé que me inspira, seu jeitinho doce que me acalma e, ao mesmo tempo, me impulsiona a ser um homem melhor… você me transforma.\n\nSe antes meus planos eram solitários, hoje todos eles têm seu nome. Eu sonho com você, rezo por nós, agradeço a Deus pela sua vida e peço à nossa Mãezinha que nos cubra com seu manto, que guie nossos passos e fortaleça o nosso amor.\n\nQue esses 3 meses sejam apenas o começo de uma história longa, firme, leve e cheia de propósito. Eu quero caminhar com você em cada fase, em cada conquista, em cada desafio.\n\nTe amarei hoje, amanha, esta semana, este mês, este ano e para sempre... 🤍` },
-    4: { title: "Carta 4.1: Nossa Constelação Particular 🌌", body: `Minha Flor,\n\nChegamos aos 4 meses. Se a gente olhar para trás, 120 dias podem parecer pouco para o mundo, mas para quem vive cada segundo em sintonia, parece que nossas almas já se conheciam de outras vidas.\n\nSabe como eu um "Garoto de Programa", eu vivo tentando entender a lógica das coisas. Mas o que a gente tem foge de qualquer algoritmo ou sistema. É algo que foi "codificado" lá no alto.\n\nNesses 4 meses, você se tornou o meu ponto de equilíbrio. Ver nossa história se desenhando desde aquele 15 de novembro até esse exato momento é como observar as estrelas se alinhando para formar o desenho mais bonito do meu céu.\n\nObrigado por ser minha parceira de vida, por me impulsionar e por sonhar os mesmos sonhos que eu. Que a nossa Mãezinha continue passando na frente, iluminando nosso caminho e protegendo esse amor que, para mim, já é infinito.\n\nTe amo infinitamente... 🤍` }
+    4: { title: "Carta 4.1: Nossa Constelação Particular 🌌", body: `Minha Flor,\n\nChegamos aos 4 meses. Se a gente olhar para trás, 120 dias podem parecer pouco para o mundo, mas para quem vive cada segundo em sintonia, parece que nossas almas já se conheciam de outras vidas.\n\nSabe como eu um "Garoto de Programa", eu vivo tentando entender a lógica das coisas. Mas o que a gente tem foge de qualquer algoritmo ou sistema. É algo que foi "codificado" lá no alto.\n\nNesses 4 meses, você se tornou o meu ponto de equilíbrio. Ver nossa história se desenhando desde aquele 15 de novembro até esse exato momento é como observar as estrelas se alinhando para formar o desenho mais bonito do meu céu.\n\nObrigado por ser minha parceira de vida, por me impulsionar e por sonhar os mesmos sonhos que eu. Que a nossa Mãezinha continue passando na frente, iluminando nosso caminho e protegendo esse amor que, para mim, já é infinito.\n\nTe amo infinitamente... 🤍` },
+    5: { title: "Carta 5.1: Ao Infinito E Além 🚀", body: `Minha Xuxu, \n\nHoje a gente completa 5 meses… e, sendo bem sincero, eu ainda me pego tentando entender como algo tão forte pode ter crescido tão rápido e de forma tão linda.\n\nPorque não são só 5 meses… são 5 meses de carinho, de cuidado, de risadas, de aprendizados, de presença. São 5 meses onde, pouco a pouco, você foi se tornando essencial na minha vida.\n\nVocê chegou de um jeito tão leve… e quando eu percebi, já tinha tomado um espaço enorme no meu coração. Hoje, não consigo imaginar meus dias sem você, sem nossas conversas, sem o seu jeitinho que me acalma e me faz bem.\n\nEu gosto de pensar que o que a gente vive não é por acaso. Tem algo maior cuidando da gente, guiando nossos passos, fortalecendo o que sentimos. E eu peço todos os dias pra que Deus e nossa Mãezinha continuem abençoando a nossa história, protegendo e fazendo esse amor crescer cada vez mais.\n\nVocê é meu ponto de paz no meio do caos, minha alegria nos dias difíceis, e o motivo de muitos dos meus sorrisos. Estar com você é leve, é verdadeiro, é diferente de tudo que já vivi.\n\nE se nesses 5 meses já foi assim… eu fico imaginando tudo o que ainda vamos viver juntos.\n\nObrigado por ser você, por estar comigo, por acreditar na gente. Eu quero continuar escrevendo essa história ao seu lado, passo a passo… sempre juntos.\n\nTe amo, minha Xuxu… ao infinito e além 🤍` }
+
 };
 
 // --- LOGICA DO SITE ---
@@ -919,132 +933,129 @@ function createStar() {
   setTimeout(() => star.remove(), 2000);
 }
 setInterval(createStar, 120);
+</script>
+<div id="missao-espacial" style="background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; overflow: hidden; position: relative; min-height: 100vh;">
 
-// --- EXPERIÊNCIA: CONSTELAÇÃO DO AMOR ---
-
-function adicionarConstelacao() {
-    const space = document.createElement('div');
-    space.style.cssText = 'padding: 60px 20px; text-align: center; color: white; font-family: "serif"; position: relative; overflow: hidden;';
-    
-    space.innerHTML = `
-        <h2 style="font-weight: 300; letter-spacing: 4px; text-shadow: 0 0 10px #fff;">NOSSA CONSTELAÇÃO</h2>
-        <p style="font-size: 0.8em; color: #888; margin-bottom: 40px;">As estrelas se alinham para contar nossa história</p>
-
-        <div id="canvas-galaxia" style="position: relative; width: 300px; height: 350px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; background: radial-gradient(circle, rgba(29, 9, 229, 0.05) 0%, transparent 70%);">
-            <div class="ponto-estelar" id="p1" style="top: 20%; left: 50%;"></div>
-            <div class="ponto-estelar" id="p2" style="top: 50%; left: 30%;"></div>
-            <div class="ponto-estelar" id="p3" style="top: 50%; left: 70%;"></div>
-            <div class="ponto-estelar" id="p4" style="top: 80%; left: 70%;"></div>
-            
-            <svg id="linhas-constelacao" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
-                <line id="l1" x1="50%" y1="20%" x2="50%" y2="20%" stroke="rgba(255,255,255,0.5)" stroke-width="1" />
-                <line id="l2" x1="30%" y1="50%" x2="30%" y2="50%" stroke="rgba(255,255,255,0.5)" stroke-width="1" />
-                <line id="l3" x1="70%" y1="50%" x2="70%" y2="50%" stroke="rgba(255,255,255,0.5)" stroke-width="1" />
-            </svg>
-        </div>
-
-        <button id="btn-alinhar" style="margin-top: 30px; background: transparent; border: 1px solid #fff; color: #fff; padding: 10px 30px; border-radius: 50px; cursor: pointer; letter-spacing: 2px; transition: 0.5s;">
-            CONECTAR DESTINOS
-        </button>
-
-        <div id="mensagem-universo" style="opacity: 0; margin-top: 30px; transition: 2s; font-style: italic;">
-            "Escrito nas estrelas desde 15 de novembro. Feliz 4 meses amor, amo demais uceeee!!"
-        </div>
-    `;
-
-    document.body.appendChild(space);
-
-    const btn = document.getElementById('btn-alinhar');
-    const msg = document.getElementById('mensagem-universo');
-
-    btn.addEventListener('click', () => {
-        btn.style.opacity = "0";
-        btn.style.pointerEvents = "none";
+    <section id="stage-4" style="padding: 80px 20px; text-align: center; position: relative; z-index: 10; transition: 0.8s;">
+        <h2 style="color: #e50914; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 5px;">Mês 04</h2>
+        <div style="font-size: 0.7rem; color: #444; font-family: monospace; margin-bottom: 25px;"></div>
         
-        // Animação das linhas conectando para formar o "4"
-        const l1 = document.getElementById('l1');
-        const l2 = document.getElementById('l2');
-        const l3 = document.getElementById('l3');
+        <div id="constelacao-container" style="height: 180px; margin: 0 auto; max-width: 400px; display: flex; align-items: center; justify-content: center;">
+            <div style="font-size: 40px; filter: drop-shadow(0 0 10px #fff);">✨</div>
+        </div>
 
-        // Linha 1: Topo para o meio esquerda
-        l1.setAttribute('x2', '30%');
-        l1.setAttribute('y2', '50%');
-        l1.style.transition = "stroke-dashoffset 2s, x2 1.5s, y2 1.5s";
+        <p style="color: #999; font-style: italic; max-width: 350px; margin: 20px auto; line-height: 1.5;">
+            "Quatro meses construindo nossa história, estrela por estrela, até formar nosso próprio universo."
+        </p>
 
-        setTimeout(() => {
-            // Linha 2: Meio esquerda para o meio direita
-            l2.setAttribute('x2', '70%');
-            l2.setAttribute('y2', '50%');
-            l2.style.transition = "x2 1s, y2 1s";
-        }, 1000);
+        <div id="launch-control" style="margin-top: 40px;">
+            <button onclick="iniciarViagem()" style="background: #e50914; color: #fff; border: none; padding: 15px 40px; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 0 20px rgba(229,9,20,0.4); transition: 0.3s;">
+                LANÇAR PARA O MÊS 5 🚀
+            </button>
+        </div>
+    </section>
 
-        setTimeout(() => {
-            // Linha 3: Meio direita para baixo
-            l3.setAttribute('x2', '70%');
-            l3.setAttribute('y2', '80%');
-            l3.style.transition = "x2 1s, y2 1s";
-        }, 2000);
+    <div id="foguete" style="position: absolute; bottom: -100px; left: 50%; transform: translateX(-50%); font-size: 60px; z-index: 100; display: none;">🚀</div>
 
-        setTimeout(() => {
-            msg.style.opacity = "1";
-            dispararBrilhoEstelar();
-        }, 3000);
-    });
-}
+    <section id="stage-5" style="display: none; opacity: 0; padding: 100px 20px; text-align: center; transform: translateY(50px);">
+        <div style="width: 140px; height: 140px; background: radial-gradient(circle at 30% 30%, #eee, #666); border-radius: 50%; margin: 0 auto 30px; box-shadow: 0 0 50px rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
+            <div style="font-size: 30px; margin-bottom: 40px; animation: flagMove 2s infinite ease-in-out;">🚩</div>
+        </div>
 
-function dispararBrilhoEstelar() {
-    const pontos = document.querySelectorAll('.ponto-estelar');
-    pontos.forEach(p => {
-        p.style.boxShadow = "0 0 20px 5px #fff";
-        p.style.transform = "scale(1.5)";
-    });
-}
+        <div style="background: rgba(15,15,15,0.95); border: 1px solid #ffd700; padding: 35px; border-radius: 25px; max-width: 360px; margin: 0 auto; backdrop-filter: blur(10px);">
+            <h2 style="color: #ffd700; margin-top: 0; letter-spacing: 2px;">Mês 5: Pouso Concluido</h2>
+            <p style="color: #ddd; font-size: 0.95rem; line-height: 1.6;">
+                Nessa jornada espacial, descobri que meu porto seguro não é um lugar, mas sim você. Feliz 5 meses desde o rogai por nós xuxu rsrs
+            </p>
+            <div style="color: #0f0; font-family: monospace; font-size: 0.7rem; margin-top: 20px; border-top: 1px solid #222; padding-top: 15px;">
+            </div>
+        </div>
+    </section>
 
-// Estilos da Constelação
-const styleSpace = document.createElement('style');
-styleSpace.innerHTML = `
-    .ponto-estelar {
-        position: absolute;
-        width: 6px;
-        height: 6px;
-        background: #fff;
-        border-radius: 50%;
-        box-shadow: 0 0 10px #fff;
-        transform: translate(-50%, -50%);
-        transition: 1s;
+</div>
+
+<style>
+    /* Animações de Ambiente */
+    @keyframes flagMove { 0%, 100% { transform: rotate(-10deg); } 50% { transform: rotate(10deg); } }
+    
+    /* Efeito de Lançamento */
+    .rocket-fly {
+        display: block !important;
+        animation: launchUp 2s forwards ease-in;
     }
-    #linhas-constelacao line {
-        stroke-dasharray: 1000;
-        stroke-dashoffset: 1000;
-        animation: drawLine 2s forwards;
+
+    @keyframes launchUp {
+        0% { bottom: -100px; opacity: 1; }
+        100% { bottom: 150vh; opacity: 1; }
     }
-    @keyframes drawLine { to { stroke-dashoffset: 0; } }
-`;
-document.head.appendChild(styleSpace);
 
-adicionarConstelacao();
+    /* Tremida da tela */
+    .shaking { animation: shake 0.1s infinite; }
+    @keyframes shake {
+        0% { transform: translate(1px, 1px); }
+        50% { transform: translate(-1px, -2px); }
+        100% { transform: translate(1px, -1px); }
+    }
 
-// Suas funções originais de estrelas (mantidas para o fundo)
-function createStar() {
-  const field = document.getElementById('magic-stars');
-  if(!field) return;
-  const star = document.createElement('div');
-  star.className = 'star';
-  const size = Math.random() * 2 + 'px';
-  star.style.cssText = `width: ${size}; height: ${size}; left: ${Math.random()*100}vw; top: ${Math.random()*100}vh; position: absolute; background: white; border-radius: 50%; opacity: 0.6;`;
-  field.appendChild(star);
-  setTimeout(() => star.remove(), 2000);
+    /* Estrelas rápidas durante o salto */
+    .fast-stars .star { animation: starSpeed 0.5s linear infinite !important; }
+    @keyframes starSpeed {
+        from { transform: translateY(0); }
+        to { transform: translateY(100vh); }
+    }
+</style>
+
+<script>
+function iniciarViagem() {
+    const stage4 = document.getElementById('stage-4');
+    const stage5 = document.getElementById('stage-5');
+    const rocket = document.getElementById('foguete');
+    const container = document.getElementById('missao-espacial');
+
+    // 1. Esconde botão e inicia vibração
+    document.getElementById('launch-control').style.opacity = '0';
+    container.classList.add('shaking');
+    container.classList.add('fast-stars');
+
+    // 2. Dispara o foguete
+    rocket.classList.add('rocket-fly');
+
+    // 3. Troca de cenário (O Salto)
+    setTimeout(() => {
+        container.classList.remove('shaking');
+        container.classList.remove('fast-stars');
+        stage4.style.display = 'none';
+        
+        // Revela o Stage 5
+        stage5.style.display = 'block';
+        setTimeout(() => {
+            stage5.style.transition = 'all 1.2s ease-out';
+            stage5.style.opacity = '1';
+            stage5.style.transform = 'translateY(0)';
+            stage5.scrollIntoView({ behavior: 'smooth' });
+        }, 50);
+    }, 1800);
 }
-setInterval(createStar, 150);
 
-
+// Gerador de Estrelas Leve e Estável
+function createSpace() {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const size = Math.random() * 2 + 'px';
+    star.style.cssText = `
+        width: ${size}; height: ${size}; 
+        position: fixed; background: #fff; 
+        left: ${Math.random() * 100}vw; top: ${Math.random() * 100}vh;
+        border-radius: 50%; opacity: ${Math.random()};
+        z-index: 1; pointer-events: none;
+    `;
+    document.body.appendChild(star);
+    // Remove estrelas antigas para não pesar
+    setTimeout(() => star.remove(), 3000);
+}
+setInterval(createSpace, 150);
 </script>
 
-<footer style="text-align: center; padding-bottom: 120px;">
-    <h3 class="shelf-title">Créditos Finais</h3>
-    <p style="color: #888; font-style: italic;">Produzido com amor por Vitinho</p>
-    <p style="color: #888; font-size: 0.8rem; margin-top: 10px;">Copyright © 2026 - Nossa História Sem Fim</p>
+<footer style="text-align: center; padding: 40px 0; background: #000; position: relative; z-index: 5;">
+    <p style="color: #222; font-family: monospace; font-size: 0.7rem;">Produzido por Vitinho</p>
 </footer>
-
-</body>
-</html>
