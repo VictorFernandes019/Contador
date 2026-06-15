@@ -555,6 +555,10 @@ h1 { font-family: 'Dancing Script', cursive; font-size: clamp(3rem, 8vw, 4.5rem)
         <h4>Carta 6.2: Mil milhões... 🤍</h4>
         <p>6 Meses de um amor incodicional...</p>
     </div>
+    <div class="letter-card" onclick="openLetter(7)">
+        <h4>Carta 7: Perfeição 🤍</h4>
+        <p>7 Meses te amando ainda mais...</p>
+    </div>
 
 
 </main>
@@ -718,6 +722,15 @@ const content = [
 { img: "img/foto25.jpeg", desc:"Minha Paixão" },
 { img: "img/foto26.jpeg", desc:"Minha Pitelzinha" },
 { img: "img/foto27.jpeg", desc:"Minha Flor" },
+{ img: "img/foto28.jpeg", desc:"Amor da minha vida!!" },
+{ img: "img/foto29.jpeg", desc:"Meu sorriso diario" },
+{ img: "img/foto30.jpeg", desc:"Meu amorzão" },
+{ img: "img/foto31.jpeg", desc:"Te amo hoje e para sempre" },
+{ img: "img/foto32.jpeg", desc:"Você Sabia...? rsrs " },
+{ img: "img/foto33.jpeg", desc:"Você Sabão...? rsrs" },
+{ img: "img/foto34.jpeg", desc:"Você Sabuu...? rsrs" },
+{ img: "img/foto35.jpeg", desc:"Te amuuuu" },
+
 
 
 
@@ -741,6 +754,12 @@ const playlist = [
   { src: "midia/musica15.mp3", name: "S01E15: Você é o amor da minha vida..." },
     { src: "midia/music16.mp3", name: "S01E16: Você é a metade do meu coração..." },
     { src: "midia/music17.mp3", name: "S01E17: Amor meu..." },
+        { src: "midia/music18.mp3", name: "S01E18: Até o fim..." },
+        { src: "midia/music19.mp3", name: "S01E19: Exagerado" },
+        { src: "midia/music20.mp3", name: "S01E20: Seu é só" },
+
+
+
 
 
   
@@ -755,9 +774,11 @@ const letters = {
     title: "Carta 5.1: Ao infinito e Além...🚀", 
     body: `Minha Xuxu,\n\nHoje completamos cinco meses de muito amor e "Rogai Por Nós". É impressionante como sinto que a nossa conexão vem de outras vidas; a forma como a gente se entende e se apoia só me prova que Deus acertou em cheio quando cruzou nossos caminhos.\n\nVocê chegou de mansinho, com um jeito tão leve, e quando vi, já tinha tomado conta de cada pedaço do meu coração. Hoje, minha rotina tem outra cor porque você faz parte dela, e eu já não consigo e nem quero imaginar meus dias sem você ao meu lado.\n\nTenho a certeza de que nada disso é por acaso. Por isso, peço todos os dias para que o Senhor e Nossa Mãezinha continuem abençoando nossa história, nos cobrindo com proteção e fazendo esse sentimento florescer cada vez mais forte.\n\nVocê deu um novo significado à palavra felicidade. Quando tento explicar o que somos, esses versos do Jorge e Mateus dizem tudo por mim:\n\n"Que a gente se encaixa\nÉ a tampa e a panela\nÉ a chama e a vela\nÉ a cama e o colchão\nE que o mal de quem ama é a saudade\nVocê é a metade do meu coração\nE que eu sou o amor da sua vida"\n\nSe em apenas cinco meses vivemos coisas tão lindas, meu coração transborda só de imaginar tudo o que o futuro reserva para nós dois.\n\nTe amo ao infinito e além... 🤍`},
 
-    6: {  title: "Carta 6.2: Meio Ano de Conexão... ✨", body: 'Seis meses amor…\n\nÉ estranho pensar em como alguém consegue mudar tanto a rotina, os pensamentos e até o jeito da gente enxergar os dias, antes de você tudo era normal. Depois de você, tudo passou a ter mais sentido.\n\nNesses seis meses eu descobri que amor está nas pequenas coisas, nas nossas conversas sem hora para acabar, nos momentos em silêncio que ainda assim são especiais, no cuidado, na saudade e até na forma como você consegue melhorar um dia ruim só por existir.\n\nVocê trouxe paz para meu coração e felicidade para detalhes simples da vida. E quanto mais o tempo passa, mais eu tenho certeza de que encontrar você foi um dos presentes mais bonitos que Deus colocou no meu caminho.\n\nEu amo a forma como você me faz sentir querido, amado e completo. Amo seu jeito, seu sorriso, sua voz e suas manias, tudo com você se torna único.\n\nHoje, celebrando nossos seis meses, eu só consigo agradecer. Agradecer por cada abraço, cada risada, cada momento que virou memória e principalmente por ter você comigo.\n\nE se esses seis meses já foram tão inesquecíveis, eu mal posso esperar pelos próximos capítulos da nossa história minha princesa... rsrs.\n\nVocê é, sem dúvida minha escolha favorita todos os dias.\n\n E eu te amo mais do que qualquer texto conseguiria explicar meu amor...🤍'}
-
-    };
+    6: {  title: "Carta 6.2: Meio Ano de Conexão... ✨", body: 'Seis meses amor…\n\nÉ estranho pensar em como alguém consegue mudar tanto a rotina, os pensamentos e até o jeito da gente enxergar os dias, antes de você tudo era normal. Depois de você, tudo passou a ter mais sentido.\n\nNesses seis meses eu descobri que amor está nas pequenas coisas, nas nossas conversas sem hora para acabar, nos momentos em silêncio que ainda assim são especiais, no cuidado, na saudade e até na forma como você consegue melhorar um dia ruim só por existir.\n\nVocê trouxe paz para meu coração e felicidade para detalhes simples da vida. E quanto mais o tempo passa, mais eu tenho certeza de que encontrar você foi um dos presentes mais bonitos que Deus colocou no meu caminho.\n\nEu amo a forma como você me faz sentir querido, amado e completo. Amo seu jeito, seu sorriso, sua voz e suas manias, tudo com você se torna único.\n\nHoje, celebrando nossos seis meses, eu só consigo agradecer. Agradecer por cada abraço, cada risada, cada momento que virou memória e principalmente por ter você comigo.\n\nE se esses seis meses já foram tão inesquecíveis, eu mal posso esperar pelos próximos capítulos da nossa história minha princesa... rsrs.\n\nVocê é, sem dúvida minha escolha favorita todos os dias.\n\n E eu te amo mais do que qualquer texto conseguiria explicar meu amor...🤍'},
+    7: {
+  title: "Carta 7: A Perfeição... ✨", 
+body: 'Minha Princesa,\n\nHoje completamos 7 meses. Sete meses desde aquele dia 15 que mudou o rumo da minha história. Olhando para trás, vejo como cada dia ao seu lado foi um presente planejado por Deus e abençoado por Nossa Mãezinha.\n\nDizem que o número 7 representa a perfeição, e para mim, esses 210 dias foram exatamente assim, perfeitos em cada detalhe, em cada risada, em cada "Rogai por Nós" que rezamos juntos e em cada plano que começamos a traçar. Você não é apenas minha namorada, você é minha base, minha melhor amiga, minha futura esposa e a resposta mais bonita para as minhas orações em silêncio.\n\nObrigado por transformar minha rotina em poesia e por ser esse porto seguro que me inspira a ser um homem melhor a cada manhã. E te digo, esses 7 meses serão apenas o prefácio de uma vida inteira que vamos construir juntos, com muita fé, cumplicidade e esse amor que só cresce.\n\nTe amo ao infinito e além, hoje e para sempre 🤍\n\n'
+}};
 
 // --- LOGICA DO SITE ---
 
@@ -948,7 +969,7 @@ function createStar() {
 }
 setInterval(createStar, 120);
 </script>
-<div id="missao-espacial" style="background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; overflow: hidden; position: relative; min-height: 100vh;">
+<div id="missao-espacial" style="background: #02076d000; color: #fff; font-family: 'Segoe UI', sans-serif; overflow: hidden; position: relative; min-height: 100vh;">
 
     <section id="stage-4" style="padding: 80px 20px; text-align: center; position: relative; z-index: 10; transition: 0.8s;">
         <h2 style="color: #e50914; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 5px;">Mês 04</h2>
@@ -1177,6 +1198,205 @@ function desbloquearMensagem() {
 }
 </script>
 
-<footer style="text-align: center; padding: 40px 0; background: #000; position: relative; z-index: 5;">
-    <p style="color: #004411; font-family: monospace; font-size: 0.7rem;">FEITO POR VICTOR // 2026</p>
+    <div id="novo-modulo-m7" style="margin-top: 60px; border-top: 1px solid rgba(0, 255, 65, 0.3); padding-top: 55px; text-align: center;">
+    
+    <div style="font-size: 0.75rem; color: #00ff41; margin-bottom: 40px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; text-align: left; text-shadow: 0 0 12px rgba(0, 255, 65, 0.7); padding-left: 5px;">
+    </div>
+    
+    <div id="caixa-m7" onclick="abrirMensagemM7()" class="caixa-galaxia-premium" style="cursor: pointer; border: 1px solid rgba(0, 255, 65, 0.55); width: 240px; height: 240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(15, 10, 45, 0.95) 0%, rgba(1, 1, 5, 0.98) 100%); border-radius: 32px; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); position: relative; backdrop-filter: blur(20px); box-shadow: 0 0 50px rgba(0, 0, 0, 0.95), inset 0 0 25px rgba(0, 255, 65, 0.2); overflow: hidden;">
+        
+        <div class="galaxia-spin" style="position: absolute; width: 300px; height: 300px; background: radial-gradient(ellipse at center, rgba(114, 9, 184, 0.3) 0%, rgba(0, 255, 65, 0.1) 45%, transparent 70%); z-index: 1;"></div>
+
+        <div id="box-icon-m7" style="font-size: 68px; filter: drop-shadow(0 0 20px rgba(0, 255, 65, 0.85)); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; z-index: 2;">🛸</div>
+    </div>
+
+    <p id="instrucao-m7" style="margin-top: 30px; font-size: 0.85rem; font-weight: bold; color: #ffffff; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 12px rgba(255,255,255,0.6); animation: blink 1.5s infinite;">
+        Interceptar Cápsula Cósmica [M7]
+    </p>
+
+    <div id="mensagem-secreta-m7" style="display: none; opacity: 0; transform: scale(0.95) translateY(20px); transition: 1.2s all cubic-bezier(0.16, 1, 0.3, 1); margin: 35px auto 0 auto; width: 440px; height: 440px; box-sizing: border-box;">
+        <div class="scrollbar-m7" style="border: 1px solid rgba(0, 255, 65, 0.5); padding: 50px 40px; border-radius: 32px; box-shadow: 0 30px 70px rgba(0, 0, 0, 0.98), inset 0 0 40px rgba(114, 9, 184, 0.35); width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box; overflow-y: auto; position: relative; backdrop-filter: blur(25px); overflow-x: hidden; background: #010105;">
+            
+            <div class="galaxia-spin" style="position: absolute; top: -50px; left: -30px; width: 500px; height: 500px; background: radial-gradient(circle at center, rgba(147, 51, 234, 0.35) 0%, rgba(6, 182, 212, 0.2) 35%, rgba(0, 255, 65, 0.08) 55%, transparent 75%); z-index: 0; pointer-events: none;"></div>
+            
+            <div style="position: absolute; top: 15%; left: 15%; font-size: 8px; color: #fff; opacity: 0.5; animation: blink 2.5s infinite;">✦</div>
+            <div style="position: absolute; bottom: 25%; right: 15%; font-size: 10px; color: #06b6d4; opacity: 0.7; animation: blink 1.8s infinite 0.3s;">✦</div>
+            <div style="position: absolute; top: 80%; left: 25%; font-size: 7px; color: #a855f7; opacity: 0.6; animation: blink 3s infinite 0.6s;">✦</div>
+            <div style="position: absolute; top: 45%; right: 10%; font-size: 6px; color: #fff; opacity: 0.4; animation: blink 2s infinite 0.9s;">✦</div>
+            
+            <div style="position: relative; z-index: 2;">
+                <h3 style="color: #ffffff; margin-top: 0; font-size: 1rem; font-weight: 600; letter-spacing: 3px; text-shadow: 0 0 10px #00ff41; text-transform: uppercase; margin-bottom: 25px; text-align: center;">
+                </h3>
+                <p style="color: rgba(255, 255, 255, 0.98); font-size: 0.98rem; line-height: 1.85; text-align: justify; margin-bottom: 0; font-weight: 300; letter-spacing: 0.6px; padding: 0 5px;">
+                O tempo voou e o nosso universo ganhou mais uma constelação brilhante! Chegamos aos 7 meses. Se com 6 a nossa órbita já era perfeita, hoje eu tenho a certeza absoluta de que não existem distâncias ou gravidade capazes de parar o que a gente construiu. Você continua sendo meu alinhamento planetário favorito, a estrela mais radiante do meu céu e o motivo do meu mundo nunca parar de girar. Te amo ainda mais hoje meu amor, feliz 7 meses! 🤍✨
+                </p>
+                
+                <div style="font-size: 9px; margin-top: 35px; color: rgba(0, 255, 65, 0.65); text-align: center; letter-spacing: 4px; text-transform: uppercase; font-weight: bold; text-shadow: 0 0 6px rgba(0,255,65,0.5);">
+                    -- system: telemetry_7.0_stable --
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+</div></div></div>
+
+<style>
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    
+    /* Efeito de Rotação Suave da Galáxia */
+    @keyframes spinGalaxy {
+        0% { transform: rotate(0deg) scale(1); }
+        50% { transform: rotate(180deg) scale(1.05); }
+        100% { transform: rotate(360deg) scale(1); }
+    }
+    .galaxia-spin {
+        animation: spinGalaxy 28s linear infinite;
+    }
+    
+    /* Hover Hi-Tech Magnífico */
+    .caixa-galaxia-premium:hover {
+        border-color: #ffffff !important;
+        box-shadow: 0 0 45px rgba(0, 255, 65, 0.45) , 0 0 25px rgba(114, 9, 184, 0.65), inset 0 0 20px rgba(255, 255, 255, 0.1) !important;
+        transform: translateY(-8px) scale(1.03);
+        background: radial-gradient(circle, rgba(28, 20, 77, 0.95) 0%, rgba(2, 2, 10, 1) 100%) !important;
+    }
+    .caixa-galaxia-premium:hover #box-icon-m7 {
+        transform: scale(1.15) rotate(-12deg);
+        filter: drop-shadow(0 0 25px #00ff41) drop-shadow(0 0 10px #ffffff);
+    }
+    
+    /* Personalização elegante da barra de rolagem se necessária */
+    .scrollbar-m7::-webkit-scrollbar { width: 4px; }
+    .scrollbar-m7::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+    .scrollbar-m7::-webkit-scrollbar-thumb { background: rgba(0, 255, 65, 0.4); border-radius: 4px; }
+    
+    /* Partículas de Supernova Expandidas */
+    .heart-particle { position: absolute; pointer-events: none; z-index: 100; animation: flyOutSpace 1.5s cubic-bezier(0.1, 0.8, 0.2, 1) forwards; }
+    @keyframes flyOutSpace { 
+        0% { transform: translate(-50%, -50%) scale(0.5) rotate(0deg); opacity: 1; filter: drop-shadow(0 0 6px currentColor); } 
+        100% { transform: translate(var(--x), var(--y)) scale(0.1) rotate(450deg); opacity: 0; } 
+    }
+</style>
+
+<script>
+// Ajuste dinâmico do Matrix de Fundo
+(function() {
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    function resizeCanvas() {
+        canvas.width = 450;
+        canvas.height = canvas.parentElement.offsetHeight || 1200;
+    }
+    resizeCanvas();
+    
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789🤍07✨⭐🪐";
+    const fontSize = 10;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+    for (let x = 0; x < columns; x++) drops[x] = 1;
+
+    function drawMatrix() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "rgba(0, 255, 65, 0.22)";
+        ctx.font = fontSize + "px monospace";
+        for (let i = 0; i < drops.length; i++) {
+            const text = letters.charAt(Math.floor(Math.random() * letters.length));
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+        }
+    }
+    setInterval(drawMatrix, 65);
+    window.addEventListener('resize', resizeCanvas);
+})();
+
+// Desbloqueio M6 intacto
+function desbloquearMensagem() {
+    const caixa = document.getElementById('caixa-preta');
+    const msg = document.getElementById('mensagem-secreta');
+    const lock = document.getElementById('lock-icon');
+    const mod = document.getElementById('modulo-surpresa');
+
+    if (!caixa || !msg) return;
+
+    for(let i=0; i<25; i++) {
+        const heart = document.createElement('div');
+        heart.innerHTML = Math.random() > 0.5 ? '💚' : '🤍';
+        heart.className = 'heart-particle';
+        heart.style.setProperty('--x', (Math.random() * 400 - 200) + 'px');
+        heart.style.setProperty('--y', (Math.random() * 400 - 200) + 'px');
+        heart.style.left = '50%';
+        heart.style.top = '25%';
+        heart.style.animation = 'flyOutSpace 1.2s ease-out forwards';
+        mod.appendChild(heart);
+        setTimeout(() => heart.remove(), 1200);
+    }
+
+    lock.innerHTML = '🔓';
+    caixa.style.background = 'rgba(0, 255, 65, 0.1)';
+    
+    setTimeout(() => {
+        caixa.style.display = 'none';
+        msg.style.display = 'block';
+        setTimeout(() => {
+            msg.style.opacity = '1';
+            msg.style.transform = 'translateY(0)';
+        }, 50);
+    }, 600);
+}
+
+// Explosão de Supernova M7 Dinâmica e Ampla
+function abrirMensagemM7() {
+    const caixaM7 = document.getElementById('caixa-m7');
+    const instrucaoM7 = document.getElementById('instrucao-m7');
+    const msgM7 = document.getElementById('mensagem-secreta-m7');
+    const mod = document.getElementById('modulo-surpresa');
+
+    if (!caixaM7 || !msgM7) return;
+
+    const cosmosElements = ['✨', '🪐', '💚', '🤍', '⭐', '☄️'];
+
+    for(let i=0; i<45; i++) {
+        const particle = document.createElement('div');
+        particle.innerHTML = cosmosElements[Math.floor(Math.random() * cosmosElements.length)];
+        particle.className = 'heart-particle';
+        
+        particle.style.color = Math.random() > 0.5 ? '#00ff41' : '#a855f7';
+        particle.style.fontSize = (Math.random() * 12 + 16) + 'px';
+        
+        // Raio de dispersão cósmica ultra amplo
+        particle.style.setProperty('--x', (Math.random() * 500 - 250) + 'px');
+        particle.style.setProperty('--y', (Math.random() * -400 - 60) + 'px');
+        particle.style.left = '50%';
+        particle.style.top = (caixaM7.offsetTop + 120) + 'px';
+        
+        particle.style.animation = 'flyOutSpace 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+        
+        mod.appendChild(particle);
+        setTimeout(() => particle.remove(), 1500);
+    }
+
+    caixaM7.style.transform = 'scale(0.85) rotate(25deg)';
+    caixaM7.style.opacity = '0';
+    if(instrucaoM7) instrucaoM7.style.opacity = '0';
+
+    setTimeout(() => {
+        caixaM7.style.display = 'none';
+        if(instrucaoM7) instrucaoM7.style.display = 'none';
+        msgM7.style.display = 'block';
+        setTimeout(() => {
+            msgM7.style.opacity = '1';
+            msgM7.style.transform = 'scale(1) translateY(0)';
+            const canvas = document.getElementById('matrix-canvas');
+            if(canvas) canvas.height = mod.offsetHeight;
+        }, 50);
+    }, 450);
+}
+</script>
+
+<footer style="text-align: center; padding: 40px 0; background: #02076d000; position: relative; z-index: 5;">
+    <p style="color: rgba(0, 68, 17, 0.4); font-family: monospace; font-size: 0.65rem; letter-spacing: 1px;">FEITO POR VICTOR // 2026</p>
 </footer>
