@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Rogai por Nós — Vitinho &amp; Karlinha</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,13 +25,15 @@
   --shadow-lg:0 40px 90px rgba(28,25,18,0.16);
 }
 
-*{ margin:0; padding:0; box-sizing:border-box; }
-html{ scroll-behavior:smooth; }
+*{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html{ scroll-behavior:smooth; overflow-x:hidden; width:100%; -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 body{
   font-family:'Manrope', sans-serif;
   color:var(--ink);
   background:var(--bg);
   overflow-x:hidden;
+  width:100%;
+  max-width:100vw;
   cursor:default;
 }
 @media (prefers-reduced-motion: reduce){
@@ -264,6 +266,93 @@ h1.hero-title em{ font-style:italic; font-weight:500; color:var(--accent); }
 
 footer{ text-align:center; padding:60px 0 40px; color:var(--ink-soft); font-size:0.76rem; letter-spacing:0.04em; position:relative; z-index:2; }
 footer .heart{ color:var(--accent); }
+
+/* ================================================================
+   AJUSTES DE CELULAR — telas até 680px
+   ================================================================ */
+@media (max-width:680px){
+  header{ padding:18px 5%; }
+  header.scrolled{ padding:14px 5%; }
+  .brand{ font-size:1rem; }
+
+  .hero{ padding:120px 5.5% 50px; gap:36px; }
+  .hero-desc{ font-size:0.98rem; }
+  .btn{ padding:13px 22px; font-size:0.8rem; }
+  .hero-frame{ border-radius:22px; }
+  .hero-tag{ top:-10px; right:-8px; padding:9px 13px; border-radius:14px; }
+  .hero-tag strong{ font-size:1.02rem; }
+  .hero-tag span{ font-size:0.52rem; }
+  .hero-caption{ font-size:0.92rem; left:16px; right:16px; bottom:16px; }
+
+  section{ scroll-margin-top:70px; }
+  .sec-head{ margin-bottom:36px; }
+  .sec-sub{ font-size:0.9rem; }
+
+  .stats{ padding:70px 5.5% 20px; }
+  .stat-group{ margin-bottom:38px; }
+  .stat-group-label{ font-size:0.68rem; margin-bottom:16px; }
+  .stat-row{ display:grid; grid-template-columns:1fr 1fr; border:none; max-width:340px; }
+  .stat-cell{ border-left:none; border-bottom:1px solid var(--line); padding:20px 4px; }
+  .stat-cell:nth-child(odd){ border-right:1px solid var(--line); }
+  .stat-cell:nth-child(3), .stat-cell:nth-child(4){ border-bottom:none; }
+  .stat-num{ font-size:1.9rem; }
+  .stat-label{ font-size:0.6rem; }
+
+  .us{ padding:36px 5.5% 60px; }
+  .us-bento{ height:280px; gap:10px; }
+  .us-text h2{ font-size:1.9rem; }
+  .us-text p{ font-size:0.94rem; }
+
+  .letters{ padding:10px 5.5% 60px; }
+  .letters-grid{ grid-template-columns:1fr; gap:14px; }
+  .letter-card{ padding:22px 20px; border-radius:18px; }
+
+  .journey{ padding:60px 5.5%; }
+  .t-item{ grid-template-columns:44px 1fr; gap:14px; padding:22px 0; }
+  .t-num{ font-size:1.2rem; }
+  .t-text{ font-size:0.9rem; }
+
+  .picks{ padding:10px 5.5% 60px; }
+  .picks-grid{ grid-template-columns:1fr 1fr; gap:12px; }
+  .pick-card{ padding:22px 14px; border-radius:16px; }
+  .pick-ico{ width:44px; height:44px; font-size:1.2rem; margin-bottom:12px; }
+
+  .months{ padding:60px 5.5%; }
+  .segmented{ max-width:100%; justify-content:center; }
+  .seg-btn{ padding:8px 14px; font-size:0.74rem; }
+  .month-panel{ padding:30px 22px; border-radius:20px; }
+  .month-panel h3{ font-size:1.25rem; }
+
+  .trial{ padding:10px 5.5% 60px; }
+  .quiz-card{ padding:28px 22px; border-radius:20px; }
+  .q-opt{ padding:13px 15px; font-size:0.9rem; }
+
+  .wall{ padding:60px 5.5% 40px; }
+  .notes{ gap:10px; }
+  .note{ width:42%; min-width:130px; min-height:110px; padding:14px; font-size:0.86rem; border-radius:14px; }
+  .secret-wrap{ margin-top:44px; }
+  .secret-btn{ padding:22px; border-radius:16px; }
+
+  .lily-surprise{ padding:60px 5.5% 30px; }
+  .lily-wrap{ max-width:290px; }
+
+  .modal-box{ padding:30px 24px; border-radius:20px; max-height:86vh; }
+  .modal-box h2{ font-size:1.5rem; }
+  .close-modal{ top:16px; right:16px; }
+
+  .player{ bottom:calc(16px + env(safe-area-inset-bottom)); right:16px; padding:8px 14px 8px 10px; gap:9px; }
+  .track-title{ max-width:96px; font-size:0.62rem; }
+  #playBtn{ width:32px; height:32px; }
+
+  footer{ padding:40px 20px 30px; font-size:0.7rem; }
+}
+
+@media (max-width:380px){
+  .stat-row{ max-width:290px; }
+  .stat-num{ font-size:1.65rem; }
+  .picks-grid{ grid-template-columns:1fr 1fr; gap:10px; }
+  .note{ width:100%; }
+}
 </style>
 </head>
 <body>
