@@ -102,7 +102,7 @@ h1.hero-title em{ font-style:italic; font-weight:500; color:var(--accent); }
 .btn-line:hover{ background:var(--ink); color:var(--bg); transform:translateY(-2px); }
 
 .hero-panel{ position:relative; }
-.hero-frame{ position:relative; aspect-ratio:4/5; border-radius:28px; overflow:hidden; box-shadow:var(--shadow-lg); }
+.hero-frame{ position:relative; aspect-ratio:4/5; min-height:340px; background:var(--bg-alt); border-radius:28px; overflow:hidden; box-shadow:var(--shadow-lg); }
 .hero-slide{ position:absolute; inset:0; opacity:0; transition:opacity 1.8s ease; overflow:hidden; }
 .hero-slide.active{ opacity:1; }
 .hero-slide img{ width:100%; height:100%; object-fit:cover; animation:kenburns 11s ease-in-out infinite alternate; }
@@ -150,10 +150,13 @@ h1.hero-title em{ font-style:italic; font-weight:500; color:var(--accent); }
 .us{ padding:70px 6% 110px; }
 .us-grid{ max-width:1120px; margin:0 auto; display:grid; grid-template-columns:1fr 1.1fr; gap:60px; align-items:center; }
 .us-bento{ display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:14px; height:420px; }
-.us-bento img{ width:100%; height:100%; object-fit:cover; border-radius:20px; box-shadow:var(--shadow-sm); transition:0.4s; }
+.us-bento img{ width:100%; height:100%; object-fit:cover; border-radius:20px; background:var(--bg-alt); box-shadow:var(--shadow-sm); transition:0.4s; }
 .us-bento img:hover{ transform:scale(1.02); box-shadow:var(--shadow-md); }
 .us-bento a:nth-child(1) img{ border-top-left-radius:44px; }
 .us-bento a:nth-child(4) img{ border-bottom-right-radius:44px; }
+@media (max-width:680px){
+  .us-bento img{ border-radius:14px !important; }
+}
 .us-text .sec-eyebrow{ margin-bottom:16px; }
 .us-text h2{ font-family:'Fraunces', serif; font-weight:600; font-style:italic; font-size:clamp(2.1rem,3.6vw,2.8rem); margin-bottom:20px; color:var(--accent); }
 .us-text p{ color:var(--ink-soft); line-height:1.85; font-size:1.02rem; }
@@ -583,7 +586,7 @@ footer .heart{ color:var(--accent); }
 <script>
 /* ================= DADOS ================= */
 const photos = [
-  { img:"img/Foto1.jpeg", desc:"Era uma vez, em 15 de novembro." },
+  { img:"img/foto1.jpeg", desc:"Era uma vez, em 15 de novembro." },
   { img:"img/foto2.jpeg", desc:"Que sorte a nossa..." },
   { img:"img/foto3.jpeg", desc:"Bocó de mola e cara de boba alegre." },
   { img:"img/foto4.jpeg", desc:"Nosso amor é a aventura mais linda do mundo." },
@@ -685,198 +688,239 @@ const quizData = [
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ================= CURSOR CUSTOM ================= */
-if(window.matchMedia('(pointer: fine)').matches && !reducedMotion){
-  document.body.classList.add('has-custom-cursor');
-  const dot = document.getElementById('cursorDot');
-  const ring = document.getElementById('cursorRing');
-  let rx=0, ry=0, mx=0, my=0;
-  window.addEventListener('mousemove', (e)=>{
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = mx+'px'; dot.style.top = my+'px';
-  });
-  function loop(){
-    rx += (mx-rx)*0.18; ry += (my-ry)*0.18;
-    ring.style.left = rx+'px'; ring.style.top = ry+'px';
-    requestAnimationFrame(loop);
-  }
-  loop();
-  document.querySelectorAll('a, button, .letter-card, .pick-card, .note, .q-opt, .seg-btn').forEach(el=>{
-    el.addEventListener('mouseenter', ()=>ring.classList.add('grow'));
-    el.addEventListener('mouseleave', ()=>ring.classList.remove('grow'));
-  });
-}
+/* =====================================================================
+   CONTEÚDO ESSENCIAL — roda primeiro e isolado, para nunca depender
+   de recursos "bônus" (cursor, parallax) que podem falhar em
+   navegadores de celular mais antigos ou dentro de apps (WhatsApp/Instagram)
+   ===================================================================== */
 
-/* ================= NAV SCROLL ================= */
-const header = document.getElementById('siteHeader');
-window.addEventListener('scroll', ()=>{
-  header.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive:true });
+/* ---- carrossel hero ---- */
+try{
+  const carousel = document.getElementById('carousel');
+  photos.forEach((p, idx)=>{
+    const slide = document.createElement('div');
+    slide.className = 'hero-slide' + (idx===0 ? ' active' : '');
+    const img = document.createElement('img');
+    img.src = p.img; img.alt = ''; img.loading = 'eager'; img.decoding = 'async';
+    slide.appendChild(img);
+    carousel.appendChild(slide);
+  });
+  const heroCap = document.createElement('div');
+  heroCap.className = 'hero-caption';
+  heroCap.innerText = photos[0].desc;
+  carousel.appendChild(heroCap);
+  let photoIdx = 0;
+  window.showSlide = function(i){
+    const slides = document.querySelectorAll('.hero-slide');
+    if(!slides.length) return;
+    slides[photoIdx].classList.remove('active');
+    photoIdx = (i + photos.length) % photos.length;
+    slides[photoIdx].classList.add('active');
+    heroCap.innerText = photos[photoIdx].desc;
+  };
+  setInterval(()=>window.showSlide(photoIdx+1), 6000);
+} catch(err){ console.error('Carrossel hero:', err); }
 
-/* ================= REVEAL ON SCROLL ================= */
-const revealEls = document.querySelectorAll('.reveal');
-if('IntersectionObserver' in window && !reducedMotion){
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach((entry, i)=>{
-      if(entry.isIntersecting){
-        setTimeout(()=>entry.target.classList.add('in-view'), (i%4)*80);
-        io.unobserve(entry.target);
-      }
+/* ---- imagens da seção Nós: fallback caso alguma falhe ao carregar ---- */
+try{
+  document.querySelectorAll('.us-bento img').forEach(img=>{
+    img.loading = 'eager'; img.decoding = 'async';
+    img.addEventListener('error', ()=>{ img.style.background = 'var(--bg-alt)'; img.style.minHeight = '80px'; });
+  });
+} catch(err){ console.error('Fotos Nós:', err); }
+
+/* ---- contadores ---- */
+try{
+  function updateCounters(){
+    const metDate = new Date("2025-11-15T00:00:00");
+    const officialDate = new Date("2026-01-25T00:00:00");
+    const now = new Date();
+
+    const diffMet = now - metDate;
+    document.getElementById('daysMet').innerText = Math.floor(diffMet/(1000*60*60*24));
+    document.getElementById('hoursMet').innerText = Math.floor((diffMet/(1000*60*60))%24);
+    document.getElementById('minutesMet').innerText = Math.floor((diffMet/1000/60)%60);
+    document.getElementById('secondsMet').innerText = Math.floor((diffMet/1000)%60);
+    document.getElementById('heroDays').innerText = Math.floor(diffMet/(1000*60*60*24));
+
+    const diffOff = now - officialDate;
+    document.getElementById('days').innerText = Math.floor(diffOff/(1000*60*60*24));
+    document.getElementById('hours').innerText = Math.floor((diffOff/(1000*60*60))%24);
+    document.getElementById('minutes').innerText = Math.floor((diffOff/1000/60)%60);
+    document.getElementById('seconds').innerText = Math.floor((diffOff/1000)%60);
+
+    [document.getElementById('secondsMet'), document.getElementById('seconds')].forEach(el=>{
+      el.classList.remove('tick'); void el.offsetWidth; el.classList.add('tick');
     });
-  }, { threshold:0.15, rootMargin:'0px 0px -40px 0px' });
-  revealEls.forEach(el=>io.observe(el));
-} else {
-  revealEls.forEach(el=>el.classList.add('in-view'));
-}
+  }
+  updateCounters();
+  setInterval(updateCounters, 1000);
+} catch(err){ console.error('Contadores:', err); }
 
-/* ================= CARROSSEL HERO ================= */
-const carousel = document.getElementById('carousel');
-photos.forEach((p, idx)=>{
-  const slide = document.createElement('div');
-  slide.className = 'hero-slide' + (idx===0 ? ' active' : '');
-  slide.innerHTML = `<img src="${p.img}" alt="">`;
-  carousel.appendChild(slide);
-});
-const heroCap = document.createElement('div');
-heroCap.className = 'hero-caption';
-heroCap.innerText = photos[0].desc;
-carousel.appendChild(heroCap);
-let photoIdx = 0;
-function showSlide(i){
-  const slides = document.querySelectorAll('.hero-slide');
-  if(!slides.length) return;
-  slides[photoIdx].classList.remove('active');
-  photoIdx = (i + photos.length) % photos.length;
-  slides[photoIdx].classList.add('active');
-  heroCap.innerText = photos[photoIdx].desc;
-}
-setInterval(()=>showSlide(photoIdx+1), 6000);
-
-/* ================= CONTADORES ================= */
-function updateCounters(){
-  const metDate = new Date("2025-11-15T00:00:00");
-  const officialDate = new Date("2026-01-25T00:00:00");
-  const now = new Date();
-
-  const diffMet = now - metDate;
-  document.getElementById('daysMet').innerText = Math.floor(diffMet/(1000*60*60*24));
-  document.getElementById('hoursMet').innerText = Math.floor((diffMet/(1000*60*60))%24);
-  document.getElementById('minutesMet').innerText = Math.floor((diffMet/1000/60)%60);
-  document.getElementById('secondsMet').innerText = Math.floor((diffMet/1000)%60);
-  document.getElementById('heroDays').innerText = Math.floor(diffMet/(1000*60*60*24));
-
-  const diffOff = now - officialDate;
-  document.getElementById('days').innerText = Math.floor(diffOff/(1000*60*60*24));
-  document.getElementById('hours').innerText = Math.floor((diffOff/(1000*60*60))%24);
-  document.getElementById('minutes').innerText = Math.floor((diffOff/1000/60)%60);
-  document.getElementById('seconds').innerText = Math.floor((diffOff/1000)%60);
-
-  [document.getElementById('secondsMet'), document.getElementById('seconds')].forEach(el=>{
-    el.classList.remove('tick'); void el.offsetWidth; el.classList.add('tick');
+/* ---- cartas ---- */
+try{
+  const lettersGrid = document.getElementById('lettersGrid');
+  Object.keys(letters).forEach(id=>{
+    const l = letters[id];
+    const card = document.createElement('div');
+    card.className = 'letter-card';
+    card.onclick = ()=>openLetter(id);
+    const preview = l.body.split('\n')[0].slice(0,58);
+    card.innerHTML = `<div class="letter-num">Carta nº ${l.num}</div><h4>${l.title}</h4><p>${preview}...</p><div class="letter-arrow">Ler carta →</div>`;
+    lettersGrid.appendChild(card);
   });
-}
-updateCounters();
-setInterval(updateCounters, 1000);
+} catch(err){ console.error('Cartas:', err); }
 
-/* ================= CARTAS ================= */
-const lettersGrid = document.getElementById('lettersGrid');
-Object.keys(letters).forEach(id=>{
-  const l = letters[id];
-  const card = document.createElement('div');
-  card.className = 'letter-card';
-  card.onclick = ()=>openLetter(id);
-  const preview = l.body.split('\n')[0].slice(0,58);
-  card.innerHTML = `<div class="letter-num">Carta nº ${l.num}</div><h4>${l.title}</h4><p>${preview}...</p><div class="letter-arrow">Ler carta →</div>`;
-  lettersGrid.appendChild(card);
-});
-function openLetter(id){
+window.openLetter = function(id){
   document.getElementById('modalTitle').innerText = letters[id].title;
   document.getElementById('modalBody').innerText = letters[id].body;
   document.getElementById('letterModal').classList.add('show');
-}
-function closeLetter(){ document.getElementById('letterModal').classList.remove('show'); }
+};
+window.closeLetter = function(){ document.getElementById('letterModal').classList.remove('show'); };
 
-/* ================= MESES ================= */
-const segmented = document.getElementById('segmented');
-const monthPanel = document.getElementById('monthPanel');
-const offerKeys = Object.keys(offerings);
-function renderMonth(key){
-  [...segmented.children].forEach(b=>b.classList.remove('active'));
-  document.getElementById('seg-'+key).classList.add('active');
-  monthPanel.style.opacity = 0;
-  setTimeout(()=>{
-    const o = offerings[key];
-    monthPanel.innerHTML = `<h3>${o.title}</h3><p>${o.body}</p>`;
-    monthPanel.style.opacity = 1;
-  }, 180);
-}
-offerKeys.forEach(key=>{
-  const btn = document.createElement('button');
-  btn.className = 'seg-btn'; btn.id = 'seg-'+key; btn.innerText = 'Mês '+key;
-  btn.onclick = ()=>renderMonth(key);
-  segmented.appendChild(btn);
-});
-renderMonth(offerKeys[0]);
-
-/* ================= QUIZ ================= */
-let currentQuestion = 0;
-function loadQuiz(){
-  const feedback = document.getElementById('quiz-feedback');
-  const questionText = document.getElementById('questionText');
-  const optionsContainer = document.getElementById('options');
-  feedback.innerText = '';
-  questionText.innerText = quizData[currentQuestion].question;
-  optionsContainer.innerHTML = '';
-  quizData[currentQuestion].options.forEach(opt=>{
-    const div = document.createElement('div');
-    div.className = 'q-opt'; div.innerText = opt.t;
-    div.onclick = ()=>checkQuiz(div, opt.c);
-    optionsContainer.appendChild(div);
-  });
-}
-function checkQuiz(el, isCorrect){
-  const feedback = document.getElementById('quiz-feedback');
-  document.querySelectorAll('.q-opt').forEach(o=>{ o.style.borderColor='var(--line)'; o.style.background='transparent'; });
-  if(isCorrect){
-    el.style.borderColor = 'var(--sage)'; el.style.background = 'rgba(111,125,92,0.08)';
-    feedback.style.color = 'var(--sage)';
-    if(currentQuestion < quizData.length-1){
-      feedback.innerText = 'Correto! Próxima pergunta...';
-      setTimeout(()=>{ currentQuestion++; loadQuiz(); }, 1300);
-    } else {
-      feedback.innerText = 'Acertou tudo! Vai ganhar um vale... ✨';
-    }
-  } else {
-    el.style.borderColor = 'var(--accent)'; el.style.background = 'rgba(181,80,47,0.06)';
-    feedback.style.color = 'var(--accent)';
-    feedback.innerText = 'Poxa mor, tente de novo! ❤️';
+/* ---- meses ---- */
+try{
+  const segmented = document.getElementById('segmented');
+  const monthPanel = document.getElementById('monthPanel');
+  const offerKeys = Object.keys(offerings);
+  function renderMonth(key){
+    [...segmented.children].forEach(b=>b.classList.remove('active'));
+    document.getElementById('seg-'+key).classList.add('active');
+    monthPanel.style.opacity = 0;
+    setTimeout(()=>{
+      const o = offerings[key];
+      monthPanel.innerHTML = `<h3>${o.title}</h3><p>${o.body}</p>`;
+      monthPanel.style.opacity = 1;
+    }, 180);
   }
-}
-loadQuiz();
+  offerKeys.forEach(key=>{
+    const btn = document.createElement('button');
+    btn.className = 'seg-btn'; btn.id = 'seg-'+key; btn.innerText = 'Mês '+key;
+    btn.onclick = ()=>renderMonth(key);
+    segmented.appendChild(btn);
+  });
+  renderMonth(offerKeys[0]);
+} catch(err){ console.error('Meses:', err); }
 
-/* ================= SEGREDO ================= */
-function toggleSecret(){ document.getElementById('secretMsg').classList.toggle('open'); }
+/* ---- quiz ---- */
+try{
+  let currentQuestion = 0;
+  function loadQuiz(){
+    const feedback = document.getElementById('quiz-feedback');
+    const questionText = document.getElementById('questionText');
+    const optionsContainer = document.getElementById('options');
+    feedback.innerText = '';
+    questionText.innerText = quizData[currentQuestion].question;
+    optionsContainer.innerHTML = '';
+    quizData[currentQuestion].options.forEach(opt=>{
+      const div = document.createElement('div');
+      div.className = 'q-opt'; div.innerText = opt.t;
+      div.onclick = ()=>checkQuiz(div, opt.c);
+      optionsContainer.appendChild(div);
+    });
+  }
+  function checkQuiz(el, isCorrect){
+    const feedback = document.getElementById('quiz-feedback');
+    document.querySelectorAll('.q-opt').forEach(o=>{ o.style.borderColor='var(--line)'; o.style.background='transparent'; });
+    if(isCorrect){
+      el.style.borderColor = 'var(--sage)'; el.style.background = 'rgba(111,125,92,0.08)';
+      feedback.style.color = 'var(--sage)';
+      if(currentQuestion < quizData.length-1){
+        feedback.innerText = 'Correto! Próxima pergunta...';
+        setTimeout(()=>{ currentQuestion++; loadQuiz(); }, 1300);
+      } else {
+        feedback.innerText = 'Acertou tudo! Vai ganhar um vale... ✨';
+      }
+    } else {
+      el.style.borderColor = 'var(--accent)'; el.style.background = 'rgba(181,80,47,0.06)';
+      feedback.style.color = 'var(--accent)';
+      feedback.innerText = 'Poxa mor, tente de novo! ❤️';
+    }
+  }
+  loadQuiz();
+} catch(err){ console.error('Quiz:', err); }
 
-/* ================= PLAYER ================= */
-const music = document.getElementById('music');
-const playBtn = document.getElementById('playBtn');
-const playBtnTop = document.getElementById('playBtnTop');
-const eq = document.getElementById('eq');
-let tIdx = 0;
-function loadTrack(i){ music.src = playlist[i].src; document.getElementById('trackTitle').innerText = playlist[i].name; }
-function setEq(playing){ eq.querySelectorAll('span').forEach(s=>{ s.style.animationPlayState = playing ? 'running' : 'paused'; if(!playing) s.style.height='4px'; }); }
-function togglePlay(){
-  if(music.paused){ music.play(); playBtn.innerText='⏸'; playBtnTop.innerText='⏸ Pausar'; setEq(true); }
-  else{ music.pause(); playBtn.innerText='▶'; playBtnTop.innerText='▶ Ouvir nossa trilha'; setEq(false); }
+window.toggleSecret = function(){ document.getElementById('secretMsg').classList.toggle('open'); };
+
+/* ---- player de música ---- */
+try{
+  const music = document.getElementById('music');
+  const playBtn = document.getElementById('playBtn');
+  const playBtnTop = document.getElementById('playBtnTop');
+  const eq = document.getElementById('eq');
+  let tIdx = 0;
+  function loadTrack(i){ music.src = playlist[i].src; document.getElementById('trackTitle').innerText = playlist[i].name; }
+  function setEq(playing){ eq.querySelectorAll('span').forEach(s=>{ s.style.animationPlayState = playing ? 'running' : 'paused'; if(!playing) s.style.height='4px'; }); }
+  function togglePlay(){
+    if(music.paused){ music.play().catch(()=>{}); playBtn.innerText='⏸'; playBtnTop.innerText='⏸ Pausar'; setEq(true); }
+    else{ music.pause(); playBtn.innerText='▶'; playBtnTop.innerText='▶ Ouvir nossa trilha'; setEq(false); }
+  }
+  function nextTrack(){ tIdx=(tIdx+1)%playlist.length; loadTrack(tIdx); music.play().catch(()=>{}); playBtn.innerText='⏸'; playBtnTop.innerText='⏸ Pausar'; setEq(true); }
+  function prevTrack(){ tIdx=(tIdx-1+playlist.length)%playlist.length; loadTrack(tIdx); music.play().catch(()=>{}); playBtn.innerText='⏸'; playBtnTop.innerText='⏸ Pausar'; setEq(true); }
+  loadTrack(tIdx);
+  document.getElementById('nextTrack').onclick = nextTrack;
+  document.getElementById('prevTrack').onclick = prevTrack;
+  playBtn.onclick = togglePlay;
+  playBtnTop.onclick = togglePlay;
+  music.onended = nextTrack;
+} catch(err){ console.error('Player:', err); }
+
+/* =====================================================================
+   RECURSOS "BÔNUS" — protegidos, nunca podem travar o essencial acima
+   ===================================================================== */
+
+/* ---- cursor customizado (só desktop com mouse) ---- */
+try{
+  if(window.matchMedia('(pointer: fine)').matches && !reducedMotion){
+    document.body.classList.add('has-custom-cursor');
+    const dot = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let rx=0, ry=0, mx=0, my=0;
+    window.addEventListener('mousemove', (e)=>{
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx+'px'; dot.style.top = my+'px';
+    });
+    function loop(){
+      rx += (mx-rx)*0.18; ry += (my-ry)*0.18;
+      ring.style.left = rx+'px'; ring.style.top = ry+'px';
+      requestAnimationFrame(loop);
+    }
+    loop();
+    document.querySelectorAll('a, button, .letter-card, .pick-card, .note, .q-opt, .seg-btn').forEach(el=>{
+      el.addEventListener('mouseenter', ()=>ring.classList.add('grow'));
+      el.addEventListener('mouseleave', ()=>ring.classList.remove('grow'));
+    });
+  }
+} catch(err){ console.error('Cursor custom:', err); }
+
+/* ---- header ao rolar ---- */
+try{
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', ()=>{
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive:true });
+} catch(err){ console.error('Header scroll:', err); }
+
+/* ---- revelar ao rolar ---- */
+try{
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && !reducedMotion){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach((entry, i)=>{
+        if(entry.isIntersecting){
+          setTimeout(()=>entry.target.classList.add('in-view'), (i%4)*80);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.15, rootMargin:'0px 0px -40px 0px' });
+    revealEls.forEach(el=>io.observe(el));
+  } else {
+    revealEls.forEach(el=>el.classList.add('in-view'));
+  }
+} catch(err){
+  console.error('Reveal on scroll:', err);
+  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in-view'));
 }
-function nextTrack(){ tIdx=(tIdx+1)%playlist.length; loadTrack(tIdx); music.play(); playBtn.innerText='⏸'; playBtnTop.innerText='⏸ Pausar'; setEq(true); }
-function prevTrack(){ tIdx=(tIdx-1+playlist.length)%playlist.length; loadTrack(tIdx); music.play(); playBtn.innerText='⏸'; playBtnTop.innerText='⏸ Pausar'; setEq(true); }
-loadTrack(tIdx);
-document.getElementById('nextTrack').onclick = nextTrack;
-document.getElementById('prevTrack').onclick = prevTrack;
-playBtn.onclick = togglePlay;
-playBtnTop.onclick = togglePlay;
-music.onended = nextTrack;
 </script>
 </body>
 </html>
