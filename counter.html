@@ -3,1675 +3,791 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Loveflix: A Magia de Nós ❤️</title>
+<title>Rogai por Nós — Vitinho &amp; Karlinha</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --disney-blue: #173040;
-  --netflix-red: #a566d6;
-  --pink: #e893c2;
-  --gold: #3fb8a3;
-  --dark: #0d1b2a;
-  --card: #173040;
-  --card-2: #0f1826;
-  --border-soft: #1e3548;
-  --text-muted: #a8b8c4;
-  --success: #2ecc71;
+:root{
+  --bg:#faf7f1;
+  --bg-alt:#f1ebdd;
+  --card:#ffffff;
+  --ink:#1c1912;
+  --ink-soft:#66604f;
+  --line:rgba(28,25,18,0.1);
+  --accent:#b5502f;
+  --accent-soft:#f0c9b4;
+  --sage:#6f7d5c;
+  --gold:#c9a24a;
+  --shadow-sm:0 10px 30px rgba(28,25,18,0.07);
+  --shadow-md:0 24px 60px rgba(28,25,18,0.11);
+  --shadow-lg:0 40px 90px rgba(28,25,18,0.16);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  font-family:'Manrope', sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  overflow-x:hidden;
+  cursor:default;
+}
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+}
+img{ max-width:100%; display:block; }
+section{ scroll-margin-top:90px; position:relative; z-index:2; }
+::selection{ background:var(--accent); color:#fff; }
 
-body { 
-    background-color: var(--dark); 
-    color: white; 
-    overflow-x: hidden;
-    background:
-      radial-gradient(ellipse 60% 35% at 20% 5%, rgba(63,184,163,0.16) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 35% at 80% 12%, rgba(165,102,214,0.14) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 25% at 50% 25%, rgba(232,147,194,0.09) 0%, transparent 60%),
-      radial-gradient(circle at 30% 15%, #16304a 0%, #0d1b2a 55%, #070f18 100%);
+/* ================= GRÃO / TEXTURA SUTIL ================= */
+.grain{
+  position:fixed; inset:0; z-index:1; pointer-events:none; opacity:0.035; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
-/* --- ESTRELAS MÁGICAS --- */
-#magic-stars {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 1;
+/* ================= CURSOR CUSTOM (desktop) ================= */
+.cursor-dot, .cursor-ring{ position:fixed; top:0; left:0; pointer-events:none; z-index:9999; border-radius:50%; transform:translate(-50%,-50%); will-change:transform; }
+.cursor-dot{ width:6px; height:6px; background:var(--accent); transition:opacity 0.2s; }
+.cursor-ring{ width:34px; height:34px; border:1.5px solid rgba(181,80,47,0.55); transition:width 0.25s, height 0.25s, opacity 0.2s, background 0.25s; }
+.cursor-ring.grow{ width:60px; height:60px; background:rgba(181,80,47,0.06); }
+body.has-custom-cursor, body.has-custom-cursor a, body.has-custom-cursor button{ cursor:none; }
+
+/* ================= REVEAL ================= */
+.reveal{ opacity:0; transform:translateY(34px); transition:opacity 0.85s cubic-bezier(.19,1,.22,1), transform 0.85s cubic-bezier(.19,1,.22,1); }
+.reveal.in-view{ opacity:1; transform:translateY(0); }
+
+/* ================= NAV ================= */
+header{
+  position:fixed; top:0; width:100%; z-index:200; padding:24px 6%;
+  display:flex; justify-content:space-between; align-items:center;
+  transition:0.4s; background:transparent;
+}
+header.scrolled{ background:rgba(250,247,241,0.82); backdrop-filter:blur(14px); padding:16px 6%; box-shadow:0 1px 0 var(--line); }
+.brand{ font-family:'Fraunces', serif; font-weight:600; font-size:1.15rem; letter-spacing:-0.02em; }
+.brand em{ font-style:italic; color:var(--accent); }
+.nav-links{ display:flex; gap:34px; }
+.nav-links a{ color:var(--ink); text-decoration:none; font-size:0.82rem; font-weight:600; letter-spacing:0.02em; position:relative; padding-bottom:3px; }
+.nav-links a::after{ content:''; position:absolute; left:0; bottom:0; width:0; height:1.5px; background:var(--accent); transition:0.3s; }
+.nav-links a:hover::after{ width:100%; }
+@media (max-width:840px){ .nav-links{ display:none; } }
+
+/* ================= HERO ================= */
+.hero{
+  min-height:100vh; padding:150px 6% 60px; position:relative;
+  display:grid; grid-template-columns:1.05fr 0.95fr; gap:60px; align-items:center;
+}
+.mesh{ position:absolute; inset:0; z-index:-1; overflow:hidden; }
+.blob{ position:absolute; border-radius:50%; filter:blur(90px); opacity:0.5; }
+.blob-a{ width:44vw; height:44vw; top:-14%; left:-10%; background:radial-gradient(circle, var(--accent-soft), transparent 70%); animation:driftA 24s ease-in-out infinite; }
+.blob-b{ width:38vw; height:38vw; top:5%; right:-12%; background:radial-gradient(circle, var(--sage), transparent 70%); opacity:0.28; animation:driftB 28s ease-in-out infinite; }
+.blob-c{ width:30vw; height:30vw; bottom:-10%; left:20%; background:radial-gradient(circle, var(--gold), transparent 70%); opacity:0.22; animation:driftA 20s ease-in-out infinite reverse; }
+@keyframes driftA{ 0%,100%{ transform:translate(0,0) scale(1);} 50%{ transform:translate(4%,3%) scale(1.08);} }
+@keyframes driftB{ 0%,100%{ transform:translate(0,0) scale(1);} 50%{ transform:translate(-3%,4%) scale(1.05);} }
+
+.eyebrow{ display:flex; align-items:center; gap:10px; font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); margin-bottom:22px; }
+.eyebrow::before{ content:''; width:30px; height:1.5px; background:var(--accent); display:inline-block; }
+h1.hero-title{ font-family:'Fraunces', serif; font-weight:600; font-size:clamp(2.6rem,5.6vw,4.4rem); line-height:1.05; letter-spacing:-0.02em; margin-bottom:24px; }
+h1.hero-title em{ font-style:italic; font-weight:500; color:var(--accent); }
+.hero-desc{ font-size:1.08rem; color:var(--ink-soft); line-height:1.75; max-width:480px; margin-bottom:36px; }
+
+.btn-row{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+.btn{ font-family:'Manrope',sans-serif; font-weight:700; font-size:0.86rem; padding:15px 28px; border-radius:999px; cursor:pointer; border:1.5px solid var(--ink); transition:0.3s; display:inline-flex; align-items:center; gap:8px; }
+.btn-fill{ background:var(--ink); color:var(--bg); }
+.btn-fill:hover{ background:var(--accent); border-color:var(--accent); transform:translateY(-2px); box-shadow:var(--shadow-sm); }
+.btn-line{ background:transparent; color:var(--ink); }
+.btn-line:hover{ background:var(--ink); color:var(--bg); transform:translateY(-2px); }
+
+.hero-panel{ position:relative; }
+.hero-frame{ position:relative; aspect-ratio:4/5; border-radius:28px; overflow:hidden; box-shadow:var(--shadow-lg); }
+.hero-slide{ position:absolute; inset:0; opacity:0; transition:opacity 1.8s ease; overflow:hidden; }
+.hero-slide.active{ opacity:1; }
+.hero-slide img{ width:100%; height:100%; object-fit:cover; animation:kenburns 11s ease-in-out infinite alternate; }
+@keyframes kenburns{ 0%{ transform:scale(1) translate(0,0); } 100%{ transform:scale(1.12) translate(-1.5%,-1.5%); } }
+.hero-slide::after{ content:''; position:absolute; inset:0; background:linear-gradient(0deg, rgba(28,25,18,0.55), transparent 45%); }
+.hero-caption{ position:absolute; left:24px; right:24px; bottom:22px; z-index:3; color:#fff; font-family:'Fraunces', serif; font-style:italic; font-size:1.05rem; }
+.hero-tag{ position:absolute; top:-16px; right:-16px; background:var(--card); border-radius:20px; padding:14px 18px; box-shadow:var(--shadow-md); display:flex; flex-direction:column; align-items:center; z-index:5; }
+.hero-tag strong{ font-family:'Fraunces', serif; font-size:1.3rem; color:var(--accent); }
+.hero-tag span{ font-size:0.62rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft); }
+
+.scroll-cue{ position:absolute; bottom:26px; left:6%; display:flex; align-items:center; gap:10px; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); }
+.scroll-cue .line{ width:1px; height:34px; background:var(--ink-soft); position:relative; overflow:hidden; }
+.scroll-cue .line::after{ content:''; position:absolute; top:-100%; left:0; width:100%; height:100%; background:var(--accent); animation:scrollLine 1.8s ease-in-out infinite; }
+@keyframes scrollLine{ 0%{ top:-100%; } 60%{ top:100%; } 100%{ top:100%; } }
+@media (max-width:960px){
+  .hero{ grid-template-columns:1fr; padding-top:120px; text-align:center; }
+  .eyebrow{ justify-content:center; } .eyebrow::before{ display:none; }
+  .hero-desc{ margin-left:auto; margin-right:auto; }
+  .btn-row{ justify-content:center; }
+  .hero-panel{ order:-1; max-width:380px; margin:0 auto; }
+  .scroll-cue{ display:none; }
 }
 
-.star {
-  position: absolute;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.5;
-  animation: twinkle linear infinite;
-}
+/* ================= CABEÇALHOS ================= */
+.sec-head{ max-width:640px; margin:0 auto 56px; }
+.sec-head.center{ text-align:center; }
+.sec-eyebrow{ font-size:0.76rem; font-weight:700; letter-spacing:0.09em; text-transform:uppercase; color:var(--accent); margin-bottom:14px; }
+.sec-title{ font-family:'Fraunces', serif; font-weight:600; font-size:clamp(1.9rem,3.6vw,2.6rem); letter-spacing:-0.01em; }
+.sec-title em{ font-style:italic; color:var(--accent); font-weight:500; }
+.sec-sub{ color:var(--ink-soft); margin-top:14px; font-size:0.98rem; line-height:1.7; }
 
-@keyframes twinkle {
-  0% { transform: translateY(0) scale(1); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateY(-100px) scale(0); opacity: 0; }
-}
+/* ================= CONTADORES ================= */
+.stats{ padding:110px 6% 40px; }
+.stat-group{ margin-bottom:56px; }
+.stat-group-label{ font-size:0.8rem; font-weight:700; letter-spacing:0.05em; color:var(--ink-soft); margin-bottom:24px; text-align:center; text-transform:uppercase; }
+.stat-row{ display:flex; justify-content:center; max-width:760px; margin:0 auto; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.stat-cell{ flex:1; text-align:center; padding:30px 10px; border-left:1px solid var(--line); }
+.stat-cell:first-child{ border-left:none; }
+.stat-num{ font-family:'Fraunces', serif; font-weight:600; font-size:clamp(2rem,4.4vw,3rem); font-variant-numeric:tabular-nums; color:var(--ink); display:inline-block; }
+.stat-label{ font-size:0.66rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); margin-top:8px; }
+.tick{ animation:tickPop 0.4s ease; display:inline-block; }
+@keyframes tickPop{ 0%{ transform:scale(1); } 45%{ transform:scale(1.18); color:var(--accent); } 100%{ transform:scale(1); } }
 
-/* --- HEADER --- */
-header {
-  position: fixed;
-  top: 0; width: 100%; padding: 20px 6%;
-  background: rgba(13,27,42,0.55);
-  backdrop-filter: blur(16px);
-  border-bottom: 0.5px solid var(--border-soft);
-  display: flex; justify-content: space-between; align-items: center;
-  z-index: 1000;
-}
+/* ================= NÓS ================= */
+.us{ padding:70px 6% 110px; }
+.us-grid{ max-width:1120px; margin:0 auto; display:grid; grid-template-columns:1fr 1.1fr; gap:60px; align-items:center; }
+.us-bento{ display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:14px; height:420px; }
+.us-bento img{ width:100%; height:100%; object-fit:cover; border-radius:20px; box-shadow:var(--shadow-sm); transition:0.4s; }
+.us-bento img:hover{ transform:scale(1.02); box-shadow:var(--shadow-md); }
+.us-bento a:nth-child(1) img{ border-top-left-radius:44px; }
+.us-bento a:nth-child(4) img{ border-bottom-right-radius:44px; }
+.us-text .sec-eyebrow{ margin-bottom:16px; }
+.us-text h2{ font-family:'Fraunces', serif; font-weight:600; font-style:italic; font-size:clamp(2.1rem,3.6vw,2.8rem); margin-bottom:20px; color:var(--accent); }
+.us-text p{ color:var(--ink-soft); line-height:1.85; font-size:1.02rem; }
+.us-tag{ margin-top:20px; font-size:0.8rem; font-weight:700; letter-spacing:0.04em; color:var(--sage); }
+@media (max-width:900px){ .us-grid{ grid-template-columns:1fr; } .us-bento{ order:-1; height:340px; } }
 
-.nav-links { display: flex; gap: 28px; }
-.nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase; transition: 0.3s; }
-.nav-links a:hover { color: var(--gold); }
-@media (max-width: 800px) { .nav-links { display: none; } }
+/* ================= CARTAS ================= */
+.letters{ padding:20px 6% 110px; background:var(--bg-alt); }
+.letters-grid{ max-width:1160px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:20px; }
+.letter-card{ background:var(--card); border-radius:22px; padding:30px 26px; cursor:pointer; transition:0.35s cubic-bezier(.19,1,.22,1); box-shadow:var(--shadow-sm); }
+.letter-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-md); }
+.letter-num{ font-family:'Fraunces', serif; font-size:0.72rem; letter-spacing:0.08em; color:var(--accent); font-weight:600; margin-bottom:14px; text-transform:uppercase; }
+.letter-card h4{ font-family:'Fraunces', serif; font-weight:600; font-style:italic; font-size:1.2rem; margin-bottom:10px; }
+.letter-card p{ color:var(--ink-soft); font-size:0.88rem; line-height:1.6; }
+.letter-arrow{ margin-top:16px; font-size:0.8rem; color:var(--accent); font-weight:700; }
 
-.brand { font-size: 1.7rem; font-weight: 700; letter-spacing: -1px; }
-.brand span { color: var(--gold); }
-.brand i { font-family: 'Dancing Script', cursive; color: #fff; font-style: normal; margin-left: 5px; }
+/* ================= JORNADA ================= */
+.journey{ padding:110px 6%; }
+.timeline{ max-width:720px; margin:0 auto; }
+.t-item{ display:grid; grid-template-columns:80px 1fr; gap:24px; padding:30px 0; border-top:1px solid var(--line); }
+.t-item:last-child{ border-bottom:1px solid var(--line); }
+.t-num{ font-family:'Fraunces', serif; font-size:1.6rem; font-style:italic; color:var(--accent); }
+.t-date{ font-size:0.76rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px; display:block; }
+.t-text{ color:var(--ink-soft); line-height:1.75; font-size:0.98rem; }
+.t-text strong{ color:var(--ink); }
 
-/* --- HERO --- */
-.hero {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 40px;
-  padding: 140px 6% 60px;
-  position: relative;
-}
+/* ================= ESCOLHA Nº1 ================= */
+.picks{ padding:20px 6% 110px; background:var(--bg-alt); }
+.picks-grid{ max-width:1000px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+.pick-card{ background:var(--card); border-radius:20px; padding:32px 22px; text-align:center; box-shadow:var(--shadow-sm); transition:0.3s; }
+.pick-card:hover{ transform:translateY(-5px); box-shadow:var(--shadow-md); }
+.pick-ico{ width:52px; height:52px; border-radius:16px; background:linear-gradient(135deg, var(--accent-soft), #fff); display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin:0 auto 18px; }
+.pick-card h5{ font-family:'Fraunces', serif; font-weight:600; font-size:1.02rem; margin-bottom:10px; }
+.pick-card p{ font-size:0.82rem; color:var(--ink-soft); line-height:1.55; }
+@media (max-width:760px){ .picks-grid{ grid-template-columns:repeat(2,1fr); } }
 
-.hero-carousel {
-  width: 100%;
-  height: 78vh;
-  max-height: 640px;
-  position: relative;
-  z-index: 1;
-  order: 2;
-}
+/* ================= MESES ================= */
+.months{ padding:110px 6%; }
+.segmented{ display:flex; justify-content:center; gap:6px; flex-wrap:wrap; background:var(--bg-alt); border-radius:999px; padding:6px; max-width:fit-content; margin:0 auto 40px; }
+.seg-btn{ border:none; background:transparent; padding:10px 20px; border-radius:999px; font-weight:700; font-size:0.82rem; color:var(--ink-soft); cursor:pointer; transition:0.3s; }
+.seg-btn.active{ background:var(--ink); color:var(--bg); }
+.month-panel{ max-width:640px; margin:0 auto; background:var(--card); border-radius:26px; padding:48px; box-shadow:var(--shadow-sm); text-align:center; transition:opacity 0.3s; }
+.month-panel h3{ font-family:'Fraunces', serif; font-weight:600; font-style:italic; color:var(--accent); font-size:1.5rem; margin-bottom:16px; }
+.month-panel p{ color:var(--ink-soft); line-height:1.85; font-size:0.98rem; }
 
-.slide {
-  position: absolute;
-  width: 100%; height: 100%;
-  opacity: 0;
-  transition: opacity 1.5s ease-in-out;
-  display: flex; align-items: center; justify-content: center;
-}
+/* ================= QUIZ ================= */
+.trial{ padding:20px 6% 110px; background:var(--bg-alt); }
+.quiz-card{ max-width:520px; margin:0 auto; background:var(--card); border-radius:24px; padding:42px; box-shadow:var(--shadow-sm); }
+.quiz-card h4{ font-family:'Fraunces', serif; font-weight:600; font-size:1.2rem; margin-bottom:26px; text-align:center; }
+.q-opts{ display:flex; flex-direction:column; gap:10px; }
+.q-opt{ padding:15px 18px; border-radius:14px; border:1.5px solid var(--line); cursor:pointer; transition:0.25s; font-size:0.94rem; font-weight:600; }
+.q-opt:hover{ border-color:var(--accent); background:rgba(181,80,47,0.04); }
+#quiz-feedback{ margin-top:18px; font-weight:700; min-height:22px; text-align:center; font-size:0.88rem; }
 
-.slide.active { opacity: 1; }
+/* ================= MURAL + SEGREDO ================= */
+.wall{ padding:110px 6% 60px; text-align:center; }
+.notes{ display:flex; flex-wrap:wrap; gap:16px; justify-content:center; max-width:700px; margin:0 auto; }
+.note{ width:150px; min-height:130px; border-radius:18px; padding:20px; display:flex; align-items:center; justify-content:center; text-align:center; font-family:'Fraunces', serif; font-style:italic; font-size:0.95rem; background:var(--card); box-shadow:var(--shadow-sm); transition:0.3s; }
+.note:hover{ transform:translateY(-4px) rotate(-1deg); }
+.note:nth-child(3n+1){ color:var(--accent); } .note:nth-child(3n+2){ color:var(--sage); } .note:nth-child(3n){ color:var(--gold); }
 
-.slide img.bg {
-  position: absolute;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  filter: brightness(0.3) blur(15px);
-  border-radius: 28px;
-}
+.secret-wrap{ max-width:480px; margin:60px auto 0; text-align:center; padding:0 6%; }
+.secret-btn{ width:100%; background:var(--ink); color:var(--bg); border:none; border-radius:20px; padding:28px; cursor:pointer; transition:0.3s; }
+.secret-btn:hover{ background:var(--accent); }
+.secret-ico{ font-size:1.6rem; margin-bottom:8px; }
+.secret-btn h5{ font-family:'Fraunces', serif; font-style:italic; font-weight:500; }
+.secret-msg{ opacity:0; max-height:0; overflow:hidden; transition:0.6s ease; font-family:'Fraunces', serif; font-style:italic; color:var(--accent); font-size:1.02rem; }
+.secret-msg.open{ opacity:1; max-height:260px; margin-top:20px; }
 
-.photo-card {
-  position: relative;
-  z-index: 5;
-  height: 92%;
-  width: 100%;
-  max-width: 420px;
-  aspect-ratio: 4/5;
-  border-radius: 24px;
-  border: 0.5px solid rgba(255,255,255,0.15);
-  overflow: hidden;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-  transform: scale(0.95);
-  transition: transform 1s ease;
-  background: transparent;
-}
+/* ================= LÍRIO SURPRESA ================= */
+.lily-surprise{ padding:110px 6% 50px; text-align:center; }
+.lily-wrap{ max-width:420px; margin:0 auto; }
+.lily-svg{ width:100%; height:auto; overflow:visible; }
+.lily-stem path{ stroke-dasharray:300; stroke-dashoffset:300; animation:growStem 1.6s ease forwards; }
+@keyframes growStem{ to{ stroke-dashoffset:0; } }
+.petal path{ transform-box:fill-box; transform-origin:50% 100%; animation:bloomPetal 1.3s cubic-bezier(.19,1,.22,1) both; }
+.petal-1 path{ animation-delay:0.6s; } .petal-2 path{ animation-delay:0.7s; } .petal-3 path{ animation-delay:0.8s; }
+.petal-4 path{ animation-delay:0.9s; } .petal-5 path{ animation-delay:1.0s; } .petal-6 path{ animation-delay:1.1s; }
+@keyframes bloomPetal{ 0%{ transform:scale(0) rotate(-10deg); opacity:0; } 60%{ opacity:1; } 100%{ transform:scale(1) rotate(0deg); opacity:1; } }
+.lily-center, .stamens{ opacity:0; animation:lilyFadeIn 0.8s ease forwards; animation-delay:1.4s; }
+@keyframes lilyFadeIn{ to{ opacity:1; } }
+.lily-flower{ transform-box:fill-box; transform-origin:50% 100%; animation:swayFlower 5s ease-in-out infinite; animation-delay:1.8s; }
+@keyframes swayFlower{ 0%,100%{ transform:rotate(-2deg); } 50%{ transform:rotate(2deg); } }
+.lily-caption{ margin-top:26px; font-family:'Fraunces', serif; font-style:italic; color:var(--ink-soft); font-size:0.95rem; }
 
-.slide.active .photo-card { transform: scale(1); }
+/* ================= MODAL ================= */
+.modal{ position:fixed; inset:0; background:rgba(28,25,18,0.55); backdrop-filter:blur(10px); z-index:999; display:none; align-items:center; justify-content:center; padding:20px; }
+.modal.show{ display:flex; animation:modalBg 0.3s ease; }
+@keyframes modalBg{ from{ opacity:0; } to{ opacity:1; } }
+.modal-box{ max-width:600px; width:100%; max-height:82vh; overflow-y:auto; background:var(--card); border-radius:28px; padding:48px; position:relative; box-shadow:var(--shadow-lg); animation:modalPop 0.45s cubic-bezier(.19,1,.22,1); }
+@keyframes modalPop{ from{ transform:scale(0.92) translateY(14px); opacity:0; } to{ transform:scale(1) translateY(0); opacity:1; } }
+.modal-box h2{ font-family:'Fraunces', serif; font-weight:600; font-style:italic; font-size:1.9rem; color:var(--accent); margin-bottom:22px; }
+.modal-box p{ line-height:1.9; color:var(--ink-soft); white-space:pre-wrap; margin-bottom:20px; font-size:0.97rem; }
+.modal-sign{ font-size:0.78rem; font-weight:700; letter-spacing:0.04em; color:var(--sage); }
+.close-modal{ position:absolute; top:24px; right:26px; font-size:1.3rem; cursor:pointer; color:var(--ink-soft); width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:0.25s; }
+.close-modal:hover{ background:var(--bg-alt); color:var(--ink); }
 
-.photo-card img.main {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-}
+/* ================= PLAYER ================= */
+.player{ position:fixed; bottom:24px; right:24px; z-index:300; background:var(--card); border-radius:999px; padding:10px 18px 10px 12px; display:flex; align-items:center; gap:12px; box-shadow:var(--shadow-md); max-width:88vw; }
+.p-controls{ display:flex; align-items:center; gap:6px; }
+.mini-btn{ background:transparent; border:none; color:var(--ink); font-size:0.9rem; cursor:pointer; opacity:0.6; transition:0.25s; width:26px; height:26px; }
+.mini-btn:hover{ opacity:1; color:var(--accent); }
+#playBtn{ width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--bg); border:none; cursor:pointer; font-size:0.75rem; transition:0.25s; }
+#playBtn:hover{ background:var(--accent); }
+.eq{ display:flex; align-items:flex-end; gap:2.5px; height:14px; }
+.eq span{ width:3px; background:var(--accent); border-radius:2px; height:4px; animation:eqBar 1s ease-in-out infinite; animation-play-state:paused; }
+.eq span:nth-child(2){ animation-delay:0.15s; } .eq span:nth-child(3){ animation-delay:0.3s; } .eq span:nth-child(4){ animation-delay:0.45s; }
+@keyframes eqBar{ 0%,100%{ height:4px; } 50%{ height:14px; } }
+.track-title{ font-size:0.68rem; font-weight:700; max-width:130px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
-.hero-content {
-  position: relative;
-  z-index: 20;
-  max-width: 480px;
-  text-align: left;
-  order: 1;
-}
-
-.tagline { 
-    color: var(--gold); 
-    font-weight: 500; 
-    font-size: 0.8rem; 
-    text-transform: uppercase; 
-    letter-spacing: 4px;
-    margin-bottom: 18px;
-    display: block;
-}
-
-@media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; text-align: center; padding-top: 110px; }
-  .hero-carousel { height: 50vh; order: 1; }
-  .hero-content { text-align: center; margin: 0 auto; order: 2; }
-  .photo-card { max-width: 340px; margin: 0 auto; }
-}
-
-h1 { font-family: 'Georgia', 'Dancing Script', cursive; font-style: italic; font-size: clamp(2.6rem, 7vw, 4rem); margin-bottom: 15px; text-shadow: 2px 2px 20px rgba(0,0,0,0.6); line-height: 1.15; font-weight: 400; }
-
-.desc { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 35px; line-height: 1.7; }
-
-.btn-group { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-start; }
-@media (max-width: 900px) { .btn-group { justify-content: center; } }
-
-.btn {
-  padding: 10px 22px;
-  border-radius: 8px;
-  border: none;
-  font-weight: 500;
-  font-size: 0.8rem;
-  cursor: pointer;
-  display: flex; 
-  align-items: center; 
-  gap: 6px;
-  transition: all 0.3s ease;
-  letter-spacing: 1px;
-}
-
-.btn-white { background: linear-gradient(90deg, var(--gold), var(--netflix-red)); color: #fff; }
-.btn-white:hover { background: #e6e6e6; transform: translateY(-2px); }
-.btn-outline { background: transparent; color: white; border: 0.5px solid var(--border-soft); }
-.btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
-
-/* --- STATS & LETTERS --- */
-.stats-shelf {
-  padding: 60px 5% 40px;
-  position: relative;
-  z-index: 30;
-  background: transparent;
-  scroll-margin-top: 90px;
-}
-
-#cartas, #linha-do-tempo, #quiz { scroll-margin-top: 100px; }
-
-.shelf-title { font-size: 1.35rem; margin-bottom: 25px; color: #fff; font-weight: 500; }
-.shelf-title::before { content: "✦ "; color: var(--gold); font-size: 1rem; }
-
-.grid-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 12px;
-  margin-bottom: 40px;
-}
-
-.stat-box {
-  background: linear-gradient(180deg, var(--card), var(--card-2));
-  padding: 26px 15px;
-  border-radius: 14px;
-  text-align: center;
-  border: 0.5px solid var(--border-soft);
-  transition: 0.3s;
-}
-
-.stat-box:hover { border-color: var(--gold); transform: translateY(-2px); }
-
-.stat-box span { font-family: 'Georgia', serif; font-size: 2rem; font-weight: 400; color: var(--gold); display: block; }
-.stat-box label { color: var(--text-muted); font-size: 0.65rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; }
-.grid-stats .stat-box:nth-child(2) span { color: var(--netflix-red); }
-.grid-stats .stat-box:nth-child(3) span { color: var(--pink); }
-.grid-stats .stat-box:nth-child(4) span { color: var(--gold); }
-.grid-stats .stat-box:nth-child(2):hover { border-color: var(--netflix-red); }
-.grid-stats .stat-box:nth-child(3):hover { border-color: var(--pink); }
-
-/* NOVA SEÇÃO DO PEDIDO */
-.special-episode {
-    padding: 60px 5%;
-    background: linear-gradient(135deg, var(--card), var(--card-2));
-    border: 0.5px solid var(--border-soft);
-    border-radius: 24px;
-    margin: 40px 5%;
-    z-index: 30;
-    position: relative;
-}
-
-.proposal-layout {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.proposal-photos {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    min-width: 300px;
-}
-
-.proposal-photos img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 14px;
-    border: 0.5px solid var(--border-soft);
-    transition: 0.3s;
-}
-
-.proposal-photos img:hover { transform: scale(1.03); border-color: var(--gold); }
-
-.proposal-text {
-    flex: 1;
-    min-width: 300px;
-}
-
-.proposal-text h2 { 
-    font-family: 'Georgia', serif; 
-    font-style: italic;
-    font-weight: 400;
-    color: var(--gold); 
-    font-size: 2.2rem; 
-    margin-bottom: 15px;
-}
-
-.letters-grid {
-    columns: 3 250px;
-    column-gap: 20px;
-}
-.letters-grid .letter-card { break-inside: avoid; margin-bottom: 20px; display: inline-block; width: 100%; }
-.letters-grid .letter-card:nth-child(3n+2) { margin-top: 28px; }
-.letters-grid .letter-card:nth-child(3n) { margin-top: 12px; }
-@media (max-width: 700px) {
-  .letters-grid { columns: 1; }
-  .letters-grid .letter-card:nth-child(n) { margin-top: 0; }
-}
-
-.letter-card {
-    background: linear-gradient(135deg, var(--card), var(--card-2));
-    border-radius: 14px;
-    padding: 22px;
-    cursor: pointer;
-    border: 0.5px solid var(--border-soft);
-    transition: 0.3s;
-    position: relative;
-    overflow: hidden;
-}
-.letter-card::before {
-    content: "";
-    position: absolute; top: 0; left: 0; width: 100%; height: 3px;
-    background: linear-gradient(90deg, var(--gold), var(--netflix-red), var(--pink));
-    opacity: 0.7;
-}
-
-.letter-card:hover { transform: translateY(-3px); border-color: var(--netflix-red); }
-.letter-card h4 { font-family: 'Georgia', serif; font-style: italic; font-weight: 400; font-size: 1.05rem; color: var(--gold); margin-bottom: 6px; }
-.letter-card p { color: var(--text-muted); font-size: 0.85rem; }
-
-/* --- LINHA DO TEMPO --- */
-.timeline-section {
-    padding: 80px 5%;
-    position: relative;
-    z-index: 30;
-    overflow: hidden;
-}
-
-.timeline-container {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.timeline-line {
-    position: absolute;
-    left: 50%;
-    width: 1.5px;
-    height: 100%;
-    background: linear-gradient(to bottom, var(--gold), var(--border-soft), transparent);
-    transform: translateX(-50%);
-}
-
-.timeline-item {
-    margin-bottom: 60px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    opacity: 1;
-}
-
-.timeline-content {
-    width: 45%;
-    padding: 20px;
-    background: linear-gradient(135deg, var(--card), var(--card-2));
-    border-radius: 16px;
-    border: 0.5px solid var(--border-soft);
-    position: relative;
-}
-
-.timeline-item:nth-child(even) { flex-direction: row-reverse; }
-
-.timeline-dot {
-    width: 12px; height: 12px;
-    background: var(--dark);
-    border: 2px solid var(--gold);
-    border-radius: 50%;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0 0 12px rgba(212,169,74,0.5);
-}
-
-.timeline-date { color: var(--gold); font-weight: 500; font-size: 0.85rem; margin-bottom: 6px; display: block; letter-spacing: 0.5px; }
-.timeline-text { font-size: 0.85rem; line-height: 1.6; color: #dcdce2; }
-
-/* --- SEÇÕES EXISTENTES --- */
-.top-picks { padding: 40px 5%; z-index: 30; position: relative; text-align: center; }
-.picks-container { 
-    display: flex; 
-    gap: 20px; 
-    justify-content: center; 
-    flex-wrap: wrap; 
-    padding: 20px 0; 
-}
-.pick-card {
-    width: 180px; height: 260px;
-    background: linear-gradient(180deg, var(--card), var(--card-2)); border-radius: 16px;
-    position: relative; cursor: pointer;
-    transition: 0.4s; overflow: hidden;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    border: 0.5px solid var(--border-soft);
-}
-.pick-card:hover { transform: translateY(-4px); border-color: var(--gold); }
-.pick-card i { font-size: 2.2rem; margin-bottom: 15px; }
-.pick-card span { font-size: 0.85rem; font-weight: 500; text-align: center; }
-.pick-card .hover-text {
-    position: absolute; bottom: -100%; left: 0; width: 100%; height: 100%;
-    background: rgba(10,12,22,0.97); display: flex; align-items: center;
-    justify-content: center; padding: 18px; text-align: center; transition: 0.4s; font-size: 0.85rem;
-    color: var(--gold); border-radius: 16px;
-}
-.pick-card:hover .hover-text { bottom: 0; }
-
-.quiz-section { 
-    padding: 70px 5%; text-align: center; z-index: 30; position: relative;
-    background: transparent; margin: 40px 0;
-}
-.quiz-card {
-    max-width: 500px; margin: 0 auto; background: linear-gradient(135deg, var(--card), var(--card-2));
-    padding: 32px; border-radius: 20px; border: 0.5px solid var(--border-soft);
-}
-.quiz-options { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
-.opt { 
-    padding: 14px; background: rgba(255,255,255,0.03); border-radius: 10px;
-    cursor: pointer; transition: 0.3s; border: 0.5px solid var(--border-soft);
-}
-.opt:hover { background: rgba(255,255,255,0.06); border-color: var(--gold); }
-#quiz-feedback { margin-top: 20px; font-weight: 500; min-height: 24px; transition: 0.3s; }
-
-/* --- NOVAS SEÇÕES CRIATIVAS --- */
-.creative-section { padding: 40px 5%; z-index: 30; position: relative; }
-
-/* Estilo para o Mural de Mensagens */
-.mood-board {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-}
-.mood-note {
-    background: var(--gold);
-    color: #1a2340;
-    padding: 20px;
-    width: 180px;
-    min-height: 180px;
-    border-radius: 14px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    transform: rotate(-2deg);
-    font-family: 'Georgia', serif;
-    font-style: italic;
-    font-size: 1.15rem;
-    display: flex; align-items: center; justify-content: center; text-align: center;
-}
-.mood-note:nth-child(even) { transform: rotate(2deg); background: var(--card); color: #fff; border: 0.5px solid var(--border-soft); }
-
-/* 1. Em Breve (Próximos Lançamentos) */
-.coming-soon-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-}
-.preview-card {
-    background: linear-gradient(135deg, var(--card), var(--card-2)); border-radius: 14px; overflow: hidden;
-    position: relative; height: 120px; border: 0.5px solid var(--border-soft); border-left: 3px solid var(--gold);
-    display: flex; flex-direction: column; justify-content: center; padding: 20px;
-}
-.preview-card small { color: var(--gold); font-weight: 500; font-size: 0.7rem; letter-spacing: 1px; }
-.preview-card h5 { margin: 6px 0; font-size: 1rem; font-weight: 500; }
-
-/* 2. Bento de Amor (Easter Egg) */
-.bento-box {
-    background: linear-gradient(135deg, var(--card), var(--card-2));
-    padding: 32px; border-radius: 20px; text-align: center;
-    cursor: pointer; border: 1px dashed var(--border-soft); transition: 0.5s;
-    margin-bottom: 40px;
-}
-.bento-box:hover { border-color: var(--gold); }
-.bento-box:active { transform: scale(0.98); }
-#bento-message { opacity: 0; transition: 0.5s; font-style: italic; font-family: 'Georgia', serif; color: var(--gold); margin-top: 15px; }
-
-/* --- MODAL --- */
-.letter-modal {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.95);
-    z-index: 2000;
-    display: none; align-items: center; justify-content: center;
-    padding: 20px; backdrop-filter: blur(10px);
-}
-
-.modal-content {
-    background: linear-gradient(160deg, var(--card), var(--card-2)); max-width: 600px; width: 100%;
-    max-height: 80vh; overflow-y: auto; padding: 44px;
-    border-radius: 24px; position: relative; border: 0.5px solid var(--border-soft);
-}
-
-.modal-content h2 { font-family: 'Georgia', serif; font-style: italic; font-weight: 400; font-size: 2.2rem; color: var(--gold); margin-bottom: 20px; }
-.modal-content p { line-height: 1.8; color: #dcdce2; white-space: pre-wrap; margin-bottom: 20px; }
-.close-modal { position: absolute; top: 22px; right: 24px; font-size: 1.4rem; cursor: pointer; color: var(--text-muted); }
-.close-modal:hover { color: var(--gold); }
-
-/* --- MINI PLAYER AJUSTADO --- */
-.magic-player {
-    position: fixed; bottom: 25px; right: 25px;
-    background: rgba(15,17,28,0.9); backdrop-filter: blur(20px);
-    padding: 12px 20px; border-radius: 14px; border: 0.5px solid var(--border-soft);
-    display: flex; align-items: center; gap: 15px; z-index: 1000;
-}
-
-.player-controls-mini {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.mini-nav-btn {
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: 0.3s;
-}
-
-.mini-nav-btn:hover { opacity: 1; color: var(--gold); }
-
-#musicBtn {
-    width: 35px; height: 35px; border-radius: 50%;
-    background: var(--gold); color: var(--dark);
-    border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
-    font-size: 0.8rem;
-}
-
-@media (max-width: 768px) {
-    .hero-carousel { height: 45vh; }
-    .timeline-line { left: 20px; }
-    .timeline-content { width: 85%; }
-    .timeline-dot { left: 20px; }
-    .timeline-item { flex-direction: row !important; padding-left: 40px; }
-    .picks-container { justify-content: center; }
-}
+footer{ text-align:center; padding:60px 0 40px; color:var(--ink-soft); font-size:0.76rem; letter-spacing:0.04em; position:relative; z-index:2; }
+footer .heart{ color:var(--accent); }
 </style>
 </head>
 <body>
 
-<div id="magic-stars"></div>
+<div class="grain"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-dot" id="cursorDot"></div>
 
-<header>
-  <div class="brand">LOVE<span>FLIX</span><i>Original</i></div>
+<header id="siteHeader">
+  <div class="brand">Rogai <em>por Nós</em></div>
   <nav class="nav-links">
-    <a href="#contadores">Contador</a>
+    <a href="#tempo">Tempo</a>
     <a href="#cartas">Cartas</a>
-    <a href="#linha-do-tempo">Jornada</a>
+    <a href="#jornada">Jornada</a>
+    <a href="#meses">Meses</a>
     <a href="#quiz">Quiz</a>
   </nav>
 </header>
 
-<section class="hero">
-  <div class="hero-carousel" id="carousel"></div>
-  <div class="hero-content">
-    <span class="tagline">✦ Estrelado por Vitinho & Karlinha ✦</span>
-    <h1>Rogai por Nós</h1>
-    <p class="desc" id="photo-desc">Nossa história oficial começou em 25 de Janeiro!</p>
-    <div class="btn-group">
-      <button class="btn btn-white" id="musicBtnTop">▶ ASSISTIR</button>
-      <button class="btn btn-outline" id="prevBtn">ANTERIOR</button>
-      <button class="btn btn-outline" id="nextBtn">PRÓXIMO</button>
+<section class="hero" id="inicio">
+  <div class="mesh">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+    <div class="blob blob-c"></div>
+  </div>
+  <div class="hero-copy">
+    <span class="eyebrow">Vitinho &amp; Karlinha</span>
+    <h1 class="hero-title">Uma história <em>escrita</em> a duas mãos</h1>
+    <p class="hero-desc">Desde 15 de novembro a gente vem colecionando dias, cartas e uma trilha sonora só nossa. Este espaço guarda tudo isso — fotos, orações, promessas e o que ainda está por vir.</p>
+    <div class="btn-row">
+      <button class="btn btn-fill" id="playBtnTop">▶ Ouvir nossa trilha</button>
+      <a href="#cartas" class="btn btn-line">Ler as cartas</a>
+    </div>
+  </div>
+  <div class="hero-panel">
+    <div class="hero-tag"><strong id="heroDays">0</strong><span>dias juntos</span></div>
+    <div class="hero-frame" id="carousel"></div>
+  </div>
+  <div class="scroll-cue"><span>Role para explorar</span><div class="line"></div></div>
+</section>
+
+<section class="stats" id="tempo">
+  <div class="sec-head center reveal">
+    <div class="sec-eyebrow">O tempo, contado</div>
+    <h3 class="sec-title">Cada <em>segundo</em> importa</h3>
+  </div>
+  <div class="stat-group reveal">
+    <div class="stat-group-label">Desde que nos conhecemos · 15 de novembro de 2025</div>
+    <div class="stat-row">
+      <div class="stat-cell"><span class="stat-num" id="daysMet">0</span><div class="stat-label">Dias</div></div>
+      <div class="stat-cell"><span class="stat-num" id="hoursMet">0</span><div class="stat-label">Horas</div></div>
+      <div class="stat-cell"><span class="stat-num" id="minutesMet">0</span><div class="stat-label">Minutos</div></div>
+      <div class="stat-cell"><span class="stat-num" id="secondsMet">0</span><div class="stat-label">Segundos</div></div>
+    </div>
+  </div>
+  <div class="stat-group reveal">
+    <div class="stat-group-label">Namoro oficial · 25 de janeiro de 2026</div>
+    <div class="stat-row">
+      <div class="stat-cell"><span class="stat-num" id="days">0</span><div class="stat-label">Dias</div></div>
+      <div class="stat-cell"><span class="stat-num" id="hours">0</span><div class="stat-label">Horas</div></div>
+      <div class="stat-cell"><span class="stat-num" id="minutes">0</span><div class="stat-label">Minutos</div></div>
+      <div class="stat-cell"><span class="stat-num" id="seconds">0</span><div class="stat-label">Segundos</div></div>
     </div>
   </div>
 </section>
 
-<svg viewBox="0 0 1440 80" style="display:block;width:100%;position:relative;z-index:5;margin-top:-1px" preserveAspectRatio="none">
-  <path d="M0,40 C360,90 1080,0 1440,40 L1440,80 L0,80 Z" fill="#173040" opacity="0.35"/>
-  <path d="M0,55 C480,10 960,90 1440,55 L1440,80 L0,80 Z" fill="#0f1826" opacity="0.6"/>
-</svg>
-
-<main class="stats-shelf" id="contadores">
-  <h3 class="shelf-title">Tempo que Nos Conhecemos (15/11/2025)</h3>
-  <div class="grid-stats" style="margin-bottom: 60px;">
-    <div class="stat-box"><span id="daysMet">0</span><label>Dias</label></div>
-    <div class="stat-box"><span id="hoursMet">0</span><label>Horas</label></div>
-    <div class="stat-box"><span id="minutesMet">0</span><label>Minutos</label></div>
-    <div class="stat-box"><span id="secondsMet">0</span><label>Segundos</label></div>
+<section class="us">
+  <div class="us-grid">
+    <div class="us-bento reveal">
+      <a><img src="img/foto13.jpeg" alt="Foto do pedido 1"></a>
+      <a><img src="img/foto14.jpeg" alt="Foto do pedido 2"></a>
+      <a><img src="img/foto15.jpeg" alt="Foto do pedido 3"></a>
+      <a><img src="img/foto16.jpeg" alt="Foto do pedido 4"></a>
+    </div>
+    <div class="us-text reveal">
+      <div class="sec-eyebrow">25 de janeiro de 2026</div>
+      <h2>Nós 🤍</h2>
+      <p>Dia 25/01/2026 não foi apenas uma data no calendário, foi o dia em que o "eu" e o "você" se transformaram em <b>nós</b> oficialmente. Olhar nos seus olhos e ouvir o seu "sim" foi sentir o cuidado de Deus e o carinho de Nossa Senhora confirmando que nossos caminhos foram feitos para se cruzar. Que essas fotos registrem apenas o início de uma eternidade ao seu lado.</p>
+      <p class="us-tag">#OFICIALMENTENAMORADOS</p>
+    </div>
   </div>
+</section>
 
-  <h3 class="shelf-title">Tempo de Namoro Oficial (25/01/2026)</h3>
-  <div class="grid-stats">
-    <div class="stat-box"><span id="days">0</span><label>Dias</label></div>
-    <div class="stat-box"><span id="hours">0</span><label>Horas</label></div>
-    <div class="stat-box"><span id="minutes">0</span><label>Minutos</label></div>
-    <div class="stat-box"><span id="seconds">0</span><label>Segundos</label></div>
+<section class="letters" id="cartas">
+  <div class="sec-head center reveal">
+    <div class="sec-eyebrow">Correspondência</div>
+    <h3 class="sec-title">Cartas para <em>você</em></h3>
+    <p class="sec-sub">Uma para cada mês, sempre no dia 15.</p>
   </div>
+  <div class="letters-grid" id="lettersGrid"></div>
+</section>
 
-  <section class="special-episode">
-    <div class="proposal-layout">
-        <div class="proposal-photos">
-            <img src="img/foto13.jpeg" alt="Foto do Pedido 1">
-            <img src="img/foto14.jpeg" alt="Foto do Pedido 2">
-            <img src="img/foto15.jpeg" alt="Foto do Pedido 3">
-            <img src="img/foto16.jpeg" alt="Foto do Pedido 4">
-        </div>
-        <div class="proposal-text">
-            <h2>Nós 🤍 </h2>
-            <p style="font-size: 1rem; color: #ddd; line-height: 1.6;">
-                Dia 25/01/2026 não foi apenas uma data no calendário, foi o dia em que o "eu" e o "você" se transformaram em <b>nós</b> oficialmente. 
-                Olhar nos seus olhos e ouvir o seu "sim" foi sentir o cuidado de Deus e o carinho de Nossa Senhora confirmando que nossos caminhos foram feitos para se cruzar. 
-                Que essas fotos registrem apenas o início de uma eternidade ao seu lado.
-            </p>
-            <p style="margin-top: 15px; color: var(--gold); font-weight: bold;">#OficialmenteNamorados ❤️</p>
-        </div>
-    </div>
-  </section>
-
-  <h3 class="shelf-title" id="cartas">Cartas Selecionadas para Você</h3>
-  <div class="letters-grid">
-    <div class="letter-card" onclick="openLetter(1)">
-        <h4>Carta 1.1: O Início 🤍</h4>
-        <p>Sobre aquele 15 de novembro e o presentão de Deus...</p>
-    </div>
-    <div class="letter-card" onclick="openLetter(2)">
-        <h4>Carta 2.1: Minha Pitanguinha 🤍</h4>
-        <p>Dois meses se passaram e o coração transborda...</p>
-    </div>
-    <div class="letter-card" onclick="openLetter(3)">
-        <h4>Carta 3.1: Meu Amore Mio 🤍</h4>
-        <p>3 meses de uma história escrita por Deus...</p>
-        
-    </div>
-    <div class="letter-card" onclick="openLetter(4)">
-        <h4>Carta 4.1: Nossa Constelação 🤍</h4>
-        <p>4 Meses de muito amor...</p>
-     </div>
-    <div class="letter-card" onclick="openLetter(5)">
-        <h4>Carta 5.1: Ao infinito e Além... 🤍</h4>
-        <p>5 Meses de rogai por nós...</p>
-    </div>
-     <div class="letter-card" onclick="openLetter(6)">
-        <h4>Carta 6.2: Mil milhões... 🤍</h4>
-        <p>6 Meses de um amor incodicional...</p>
-    </div>
-    <div class="letter-card" onclick="openLetter(7)">
-        <h4>Carta 7.1: Perfeição 🤍</h4>
-        <p>7 Meses te amando ainda mais...</p>
-    </div>
-    <div class="letter-card" onclick="openLetter(8)">
-        <h4>Carta 8.1: Meu lar 🤍</h4>
-        <p>8 meses ao lado da minha xuxu...</p>
-    </div>
-    <div class="letter-card" onclick="openLetter(9)">
-        <h4>Carta 9.1: Nove Luas 🤍</h4>
-        <p>9 meses e a certeza cada vez mais firme...</p>
-    </div>
-
+<section class="journey" id="jornada">
+  <div class="sec-head center reveal">
+    <div class="sec-eyebrow">A origem</div>
+    <h3 class="sec-title">Nossos capítulos <em>inesquecíveis</em></h3>
   </div>
-</main>
-
-<section class="timeline-section" id="linha-do-tempo">
-    <h3 class="shelf-title" style="text-align: center; margin-bottom: 50px;">Nossos Capítulos Inesquecíveis</h3>
-    <div class="timeline-container">
-        <div class="timeline-line"></div>
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <span class="timeline-date">15 Nov 2025</span>
-                <p class="timeline-text">Onde tudo começou. O dia em que Deus cruzou nossos caminhos de forma inesperada.</p>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <span class="timeline-date">O Primeiro "Beijo" (Eitchaaa)</span>
-                <p class="timeline-text">Um momento inesquecível... Pancremo, Pancremo hehe.</p>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <span class="timeline-date">25 Jan 2026</span>
-                <p class="timeline-text"><strong>O Pedido Oficial!</strong> O dia em que decidimos caminhar de mãos dadas perante o mundo e perante Deus. ❤️</p>
-            </div>
-        </div>
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <span class="timeline-date">O Futuro</span>
-                <p class="timeline-text">Spoiler: Muitos capítulos ainda serão escritos, com muita fé e cumplicidade. ❤️</p>
-            </div>
-        </div>
-    </div>
+  <div class="timeline">
+    <div class="t-item reveal"><div class="t-num">01</div><div><span class="t-date">15 Nov 2025</span><p class="t-text">Onde tudo começou. O dia em que Deus cruzou nossos caminhos de forma inesperada.</p></div></div>
+    <div class="t-item reveal"><div class="t-num">02</div><div><span class="t-date">O primeiro "beijo" (Eitchaaa)</span><p class="t-text">Um momento inesquecível... Pancremo, pancremo hehe.</p></div></div>
+    <div class="t-item reveal"><div class="t-num">03</div><div><span class="t-date">25 Jan 2026</span><p class="t-text"><strong>O pedido oficial!</strong> O dia em que decidimos caminhar de mãos dadas perante o mundo e perante Deus.</p></div></div>
+    <div class="t-item reveal"><div class="t-num">04</div><div><span class="t-date">O futuro</span><p class="t-text">Spoiler: muitos capítulos ainda serão escritos, com muita fé e cumplicidade.</p></div></div>
+  </div>
 </section>
 
-<section class="top-picks">
-    <h3 class="shelf-title">Porque você é Minha Escolha nº 1</h3>
-    <div class="picks-container">
-        <div class="pick-card">
-            <i>😊</i><span>Seu Sorriso</span>
-            <div class="hover-text">Ele ilumina até o meu dia mais difícil e me faz sorrir junto sem perceber.</div>
-        </div>
-        <div class="pick-card">
-            <i>🙏</i><span>Sua Fé</span>
-            <div class="hover-text">A forma como você ama a Deus e Maria me inspira a ser um homem melhor.</div>
-        </div>
-        <div class="pick-card">
-            <i>🥰</i><span>Seu Cuidado</span>
-            <div class="hover-text">Como você se preocupa comigo e me apoia em cada pequeno detalhe.</div>
-        </div>
-        <div class="pick-card">
-            <i>✨</i><span>Sua Essência</span>
-            <div class="hover-text">Você é única, autêntica e tem o coração mais lindo que já conheci.</div>
-        </div>
-    </div>
+<section class="picks">
+  <div class="sec-head center reveal">
+    <div class="sec-eyebrow">Sem dúvidas</div>
+    <h3 class="sec-title">Por que você é minha <em>escolha nº 1</em></h3>
+  </div>
+  <div class="picks-grid">
+    <div class="pick-card reveal"><div class="pick-ico">😊</div><h5>Seu sorriso</h5><p>Ilumina até o meu dia mais difícil e me faz sorrir junto sem perceber.</p></div>
+    <div class="pick-card reveal"><div class="pick-ico">🙏</div><h5>Sua fé</h5><p>A forma como você ama a Deus e Maria me inspira a ser um homem melhor.</p></div>
+    <div class="pick-card reveal"><div class="pick-ico">🥰</div><h5>Seu cuidado</h5><p>Como você se preocupa comigo e me apoia em cada pequeno detalhe.</p></div>
+    <div class="pick-card reveal"><div class="pick-ico">✨</div><h5>Sua essência</h5><p>Você é única, autêntica e tem o coração mais lindo que já conheci.</p></div>
+  </div>
 </section>
 
-<section class="quiz-section" id="quiz">
-    <h3 class="shelf-title">Teste de Match Loveflix</h3>
-    <p style="margin-bottom: 20px; color: #ccc;">Prove que você presta atenção nos detalhes!</p>
-    <div class="quiz-card" id="quizCard">
-        <h4 id="questionText">Qual foi o dia em que nossos caminhos se cruzaram pela primeira vez?</h4>
-        <div class="quiz-options" id="options">
-            </div>
-        <div id="quiz-feedback"></div>
-    </div>
+<section class="months" id="meses">
+  <div class="sec-head center reveal">
+    <div class="sec-eyebrow">Um agradecimento por mês</div>
+    <h3 class="sec-title">Meses que <em>marcaram</em></h3>
+  </div>
+  <div class="segmented reveal" id="segmented"></div>
+  <div class="month-panel reveal" id="monthPanel"></div>
 </section>
 
-<section class="creative-section">
-    <h3 class="shelf-title">Próximos Lançamentos (Spoiler!)</h3>
-    <div class="coming-soon-grid">
-        <div class="preview-card">
-            <small>EM EXIBIÇÃO</small>
-            <h5>Momentos em 2026</h5>
-            <p style="font-size: 0.75rem; color: #aaa;">Nossa jornada como namorados oficiais!</p>
-        </div>
-        <div class="preview-card" style="border-left-color: #2ecc71;">
-            <small style="color: #2ecc71;">ESTREIA CONCLUÍDA</small>
-            <h5>O Pedido Oficial</h5>
-            <p style="font-size: 0.75rem; color: #aaa;">Foi perfeito! 25/01/2026 ❤️</p>
-        </div>
-        <div class="preview-card">
-            <small>EM PRODUÇÃO</small>
-            <h5>Nosso Futuro</h5>
-            <p style="font-size: 0.75rem; color: #aaa;">Construindo nossa casa sobre a rocha (Mateus 7:24).</p>
-        </div>
-    </div>
+<section class="trial" id="quiz">
+  <div class="sec-head center reveal">
+    <div class="sec-eyebrow">Prova de atenção</div>
+    <h3 class="sec-title">Você lembra <em>de tudo?</em></h3>
+  </div>
+  <div class="quiz-card reveal">
+    <h4 id="questionText"></h4>
+    <div class="q-opts" id="options"></div>
+    <div id="quiz-feedback"></div>
+  </div>
 </section>
 
-<section class="creative-section">
-    <div class="bento-box" onclick="revealBento()">
-        <span style="font-size: 3rem;">🎁</span>
-        <h4>Clique para abrir o "Bento de Amor"</h4>
-        <div id="bento-message">
-            "Você é a prova de que Deus ouve minhas orações em silêncio. Meu presente mais bonito, minha base e agora, oficialmente, minha namorada. Te amo!"
-        </div>
-    </div>
+<section class="wall">
+  <div class="sec-head center reveal">
+    <div class="sec-eyebrow">Pregado com carinho</div>
+    <h3 class="sec-title">Mural de <em>orações</em></h3>
+  </div>
+  <div class="notes">
+    <div class="note reveal">Deus é a base!</div>
+    <div class="note reveal">Maria passa na frente ❤️</div>
+    <div class="note reveal">O amor tudo suporta.</div>
+    <div class="note reveal">Nossa oração tem poder.</div>
+  </div>
+  <div class="secret-wrap reveal">
+    <button class="secret-btn" onclick="toggleSecret()">
+      <div class="secret-ico">🤍</div>
+      <h5>Toque para abrir uma mensagem escondida</h5>
+    </button>
+    <div class="secret-msg" id="secretMsg">"Você é a prova de que Deus ouve minhas orações em silêncio. Meu presente mais bonito, minha base e agora, oficialmente, minha namorada. Te amo!"</div>
+  </div>
 </section>
 
-<section class="creative-section">
-    <h3 class="shelf-title">Mural de Post-its Espirituais</h3>
-    <div class="mood-board">
-        <div class="mood-note">Deus é a base!</div>
-        <div class="mood-note">Maria passa na frente ❤️</div>
-        <div class="mood-note">O amor tudo suporta.</div>
-        <div class="mood-note">Nossa oração tem poder.</div>
-    </div>
+<section class="lily-surprise reveal" id="surpresa">
+  <div class="sec-head center">
+    <div class="sec-eyebrow">Um agradinho especial</div>
+    <h3 class="sec-title">Um <em>lírio</em> só pra você</h3>
+    <p class="sec-sub">Porque você foi, é e sempre será mais bela que lírios brancos.</p>
+  </div>
+  <div class="lily-wrap">
+    <svg class="lily-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <g class="lily-stem">
+        <path d="M200 400 C 200 300, 195 260, 200 220" stroke="#6f7d5c" stroke-width="4" fill="none"/>
+        <path d="M200 320 C 170 310, 150 290, 140 270" stroke="#6f7d5c" stroke-width="3" fill="none"/>
+        <path d="M200 320 C 170 300, 155 275, 150 255" stroke="#6f7d5c" stroke-width="2.5" fill="none"/>
+        <path d="M200 340 C 230 330, 250 310, 260 290" stroke="#6f7d5c" stroke-width="3" fill="none"/>
+        <path d="M200 340 C 232 322, 250 300, 258 278" stroke="#6f7d5c" stroke-width="2.5" fill="none"/>
+      </g>
+      <g transform="translate(200,190)">
+        <g class="lily-flower">
+          <g class="petal petal-1"><path d="M0,0 C -14,-40 -8,-90 0,-120 C 8,-90 14,-40 0,0 Z" fill="#fdfbf7" stroke="#e7ddc9" stroke-width="1.5"/></g>
+          <g class="petal petal-2" transform="rotate(60)"><path d="M0,0 C -14,-40 -8,-90 0,-120 C 8,-90 14,-40 0,0 Z" fill="#fdfbf7" stroke="#e7ddc9" stroke-width="1.5"/></g>
+          <g class="petal petal-3" transform="rotate(120)"><path d="M0,0 C -14,-40 -8,-90 0,-120 C 8,-90 14,-40 0,0 Z" fill="#fdfbf7" stroke="#e7ddc9" stroke-width="1.5"/></g>
+          <g class="petal petal-4" transform="rotate(180)"><path d="M0,0 C -14,-40 -8,-90 0,-120 C 8,-90 14,-40 0,0 Z" fill="#fdfbf7" stroke="#e7ddc9" stroke-width="1.5"/></g>
+          <g class="petal petal-5" transform="rotate(240)"><path d="M0,0 C -14,-40 -8,-90 0,-120 C 8,-90 14,-40 0,0 Z" fill="#fdfbf7" stroke="#e7ddc9" stroke-width="1.5"/></g>
+          <g class="petal petal-6" transform="rotate(300)"><path d="M0,0 C -14,-40 -8,-90 0,-120 C 8,-90 14,-40 0,0 Z" fill="#fdfbf7" stroke="#e7ddc9" stroke-width="1.5"/></g>
+          <g class="stamens">
+            <line x1="0" y1="0" x2="-18" y2="-38" stroke="#c9a24a" stroke-width="2"/>
+            <line x1="0" y1="0" x2="18" y2="-38" stroke="#c9a24a" stroke-width="2"/>
+            <line x1="0" y1="0" x2="0" y2="-44" stroke="#c9a24a" stroke-width="2"/>
+            <line x1="0" y1="0" x2="-8" y2="-46" stroke="#c9a24a" stroke-width="2"/>
+            <line x1="0" y1="0" x2="8" y2="-46" stroke="#c9a24a" stroke-width="2"/>
+            <circle cx="-18" cy="-38" r="3" fill="#b5502f"/>
+            <circle cx="18" cy="-38" r="3" fill="#b5502f"/>
+            <circle cx="0" cy="-44" r="3" fill="#b5502f"/>
+            <circle cx="-8" cy="-46" r="3" fill="#b5502f"/>
+            <circle cx="8" cy="-46" r="3" fill="#b5502f"/>
+          </g>
+          <circle class="lily-center" cx="0" cy="0" r="9" fill="#c9a24a"/>
+        </g>
+      </g>
+    </svg>
+    <p class="lily-caption">Te amo meu amor 🤍</p>
+  </div>
 </section>
 
-<div class="letter-modal" id="letterModal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeLetter()">&times;</span>
-        <h2 id="modalTitle">Título da Carta</h2>
-        <p id="modalBody">Conteúdo da carta...</p>
-        <p style="font-size: 0.9rem; color: var(--gold); font-weight: bold;">Com todo amor, Vitinho.</p>
-    </div>
+<footer>Feito com <span class="heart">♥</span> por Victor · 2026</footer>
+
+<div class="modal" id="letterModal">
+  <div class="modal-box">
+    <span class="close-modal" onclick="closeLetter()">&times;</span>
+    <h2 id="modalTitle"></h2>
+    <p id="modalBody"></p>
+    <p class="modal-sign">Com todo amor, Vitinho.</p>
+  </div>
 </div>
 
-<div class="magic-player">
-    <div class="player-controls-mini">
-        <button class="mini-nav-btn" id="prevTrackMini">⏮</button>
-        <button id="musicBtn">▶</button>
-        <button class="mini-nav-btn" id="nextTrackMini">⏭</button>
-    </div>
-    <div>
-        <p id="trackTitle" style="font-size: 0.75rem; font-weight: 700; color: #fff;">S01E01: Pupila</p>
-        <div style="width: 80px; height: 3px; background: rgba(255,255,255,0.2); margin-top: 5px;">
-            <div id="progress" style="width: 0%; height: 100%; background: var(--netflix-red);"></div>
-        </div>
-    </div>
+<div class="player">
+  <div class="p-controls">
+    <button class="mini-btn" id="prevTrack">⏮</button>
+    <button id="playBtn">▶</button>
+    <button class="mini-btn" id="nextTrack">⏭</button>
+  </div>
+  <div>
+    <div class="track-title" id="trackTitle">S01E01</div>
+    <div class="eq" id="eq"><span></span><span></span><span></span><span></span></div>
+  </div>
 </div>
 
 <audio id="music"></audio>
 
 <script>
-const content = [
-  { img: "img/Foto1.jpeg", desc: "Era uma vez, em 15 de novembro." },
-  { img: "img/foto2.jpeg", desc: "Que sorte a nossa..." },
-  { img: "img/foto3.jpeg", desc: "Bocó de mola e Cara de boba alegre." },
-  { img: "img/foto4.jpeg", desc: "Nosso amor é a aventura mais linda do mundo." },
-  { img: "img/foto5.jpeg", desc: "Você é o meu 'felizes para sempre' diário." },
-  { img: "img/foto6.jpeg", desc: "Sob a proteção de Maria, caminhamos juntos." },
-  { img: "img/foto7.jpeg", desc: "O brilho das estrelas inveja o seu sorriso." },
-  { img: "img/foto8.jpeg", desc: "Te amo mil milhões" },
-  { img: "img/foto9.jpeg", desc: "Nossa história está apenas no primeiro capítulo." },
-  { img: "img/foto10.jpeg", desc:"Você é a resposta das minhas orações."},
-  { img: "img/foto11.jpeg", desc:"Spoiler: Eu vou te amar ainda mais." },
-  { img: "img/foto12.jpeg", desc:"Guiados pela fé e unidos pelo amor mais puro." },
-  { img: "img/foto17.jpeg", desc:"Te amo ao infinito e alem..." },
-  { img: "img/foto18.jpeg", desc:"Meu amore mio." },
-  { img: "img/foto19.jpeg", desc:"Você é o amor da minha vida" },
-{ img: "img/foto20.jpeg", desc:"Minha Pitanguinha!!" },
-{ img: "img/foto21.jpeg", desc:"Minha Xuxuzinha!!" },
-{ img: "img/foto22.jpeg", desc:"Minha Princesa!!" },
-{ img: "img/foto23.jpeg", desc:"A mais bela que lirios brancos..." },
-{ img: "img/foto24.jpeg", desc:"A mais bela quanto a luz do luar..." },
-{ img: "img/foto25.jpeg", desc:"Minha Paixão" },
-{ img: "img/foto26.jpeg", desc:"Minha Pitelzinha" },
-{ img: "img/foto27.jpeg", desc:"Minha Flor" },
-{ img: "img/foto28.jpeg", desc:"Amor da minha vida!!" },
-{ img: "img/foto29.jpeg", desc:"Meu sorriso diario" },
-{ img: "img/foto30.jpeg", desc:"Meu amorzão" },
-{ img: "img/foto31.jpeg", desc:"Te amo hoje e para sempre" },
-{ img: "img/foto32.jpeg", desc:"Você Sabia...? rsrs " },
-{ img: "img/foto33.jpeg", desc:"Você Sabão...? rsrs" },
-{ img: "img/foto34.jpeg", desc:"Você Sabuu...? rsrs" },
-{ img: "img/foto35.jpeg", desc:"Te amuuuu" },
-{ img: "img/foto36.jpeg", desc:"Love you" },
-{ img: "img/foto37.jpeg", desc:"Te quero" },
-{ img: "img/foto38.jpeg", desc:"Amo te" },
-{ img: "img/foto39.jpeg", desc:"Te amo" },
-{ img: "img/foto40.jpeg", desc:"Amore Mio" },
-{ img: "img/foto41.jpeg", desc:"Te amo de montão" },
-{ img: "img/foto42.jpeg", desc:"Amo você que não da para descrever..." },
-{ img: "img/foto43.jpeg", desc:"Amo te" },
-
-
-
-
-
+/* ================= DADOS ================= */
+const photos = [
+  { img:"img/Foto1.jpeg", desc:"Era uma vez, em 15 de novembro." },
+  { img:"img/foto2.jpeg", desc:"Que sorte a nossa..." },
+  { img:"img/foto3.jpeg", desc:"Bocó de mola e cara de boba alegre." },
+  { img:"img/foto4.jpeg", desc:"Nosso amor é a aventura mais linda do mundo." },
+  { img:"img/foto5.jpeg", desc:"Você é o meu 'felizes para sempre' diário." },
+  { img:"img/foto6.jpeg", desc:"Sob a proteção de Maria, caminhamos juntos." },
+  { img:"img/foto7.jpeg", desc:"O brilho das estrelas inveja o seu sorriso." },
+  { img:"img/foto8.jpeg", desc:"Te amo mil milhões." },
+  { img:"img/foto9.jpeg", desc:"Nossa história está apenas no primeiro capítulo." },
+  { img:"img/foto10.jpeg", desc:"Você é a resposta das minhas orações." },
+  { img:"img/foto11.jpeg", desc:"Spoiler: eu vou te amar ainda mais." },
+  { img:"img/foto12.jpeg", desc:"Guiados pela fé e unidos pelo amor mais puro." },
+  { img:"img/foto17.jpeg", desc:"Te amo ao infinito e além..." },
+  { img:"img/foto18.jpeg", desc:"Meu amore mio." },
+  { img:"img/foto19.jpeg", desc:"Você é o amor da minha vida." },
+  { img:"img/foto20.jpeg", desc:"Minha Pitanguinha!!" },
+  { img:"img/foto21.jpeg", desc:"Minha Xuxuzinha!!" },
+  { img:"img/foto22.jpeg", desc:"Minha Princesa!!" },
+  { img:"img/foto23.jpeg", desc:"A mais bela que lírios brancos..." },
+  { img:"img/foto24.jpeg", desc:"A mais bela quanto a luz do luar..." },
+  { img:"img/foto25.jpeg", desc:"Minha Paixão." },
+  { img:"img/foto26.jpeg", desc:"Minha Pitelzinha." },
+  { img:"img/foto27.jpeg", desc:"Minha Flor." },
+  { img:"img/foto28.jpeg", desc:"Amor da minha vida!!" },
+  { img:"img/foto29.jpeg", desc:"Meu sorriso diário." },
+  { img:"img/foto30.jpeg", desc:"Meu amorzão." },
+  { img:"img/foto31.jpeg", desc:"Te amo hoje e para sempre." },
+  { img:"img/foto32.jpeg", desc:"Você sabia...? rsrs" },
+  { img:"img/foto33.jpeg", desc:"Você sabão...? rsrs" },
+  { img:"img/foto34.jpeg", desc:"Você sabuu...? rsrs" },
+  { img:"img/foto35.jpeg", desc:"Te amuuuu." },
+  { img:"img/foto36.jpeg", desc:"Love you." },
+  { img:"img/foto37.jpeg", desc:"Te quero." },
+  { img:"img/foto38.jpeg", desc:"Amo te." },
+  { img:"img/foto39.jpeg", desc:"Te amo." },
+  { img:"img/foto40.jpeg", desc:"Amore Mio." },
+  { img:"img/foto41.jpeg", desc:"Te amo de montão." },
+  { img:"img/foto42.jpeg", desc:"Amo você, que não dá para descrever..." },
+  { img:"img/foto43.jpeg", desc:"Meu amo." },
+  { img:"img/foto44.jpeg", desc:"Te quero." },
+  { img:"img/foto45.jpeg", desc:"I love You." },
+  { img:"img/foto46.jpeg", desc:"Amo di minha vida." },
 
 ];
 
 const playlist = [
-  { src: "midia/music.mp3", name: "S01E01: Pupila" },
-  { src: "midia/music2.mp3", name: "S01E02: Lisboa" },
-  { src: "midia/music3.mp3", name: "S01E03: Univ que Desconheço" },
-  { src: "midia/music4.mp3", name: "S01E04: Rosa e o Beija-Flor" },
-  { src: "midia/music5.mp3", name: "S01E05: 2 Much" },
-  { src: "midia/music6.mp3", name: "S01E06: Que sorte a nossa..." },
-  { src: "midia/music7.mp3", name: "S01E07: Heaven" },
-  { src: "midia/music8.mp3", name: "S01E08: Bed Of Roses" },
-  { src: "midia/music9.mp3", name: "S01E09: Careless" },
-  { src: "midia/music10.mp3", name: "S01E10: Apologize" },
-  { src: "midia/music11.mp3", name: "S01E11: Partilhar" },
-  { src: "midia/musica12.mp3", name: "S01E12: Eu vou gritarr" },
-  { src: "midia/musica13.mp3", name: "S01E13: Jesus" },
-  { src: "midia/musica14.mp3", name: "S01E14: Meteoro" },
-  { src: "midia/musica15.mp3", name: "S01E15: Você é o amor da minha vida..." },
-    { src: "midia/music16.mp3", name: "S01E16: Você é a metade do meu coração..." },
-    { src: "midia/music17.mp3", name: "S01E17: Amor meu..." },
-    { src: "midia/music18.mp3", name: "S01E18: Até o fim..." },
-    { src: "midia/music19.mp3", name: "S01E19: Exagerado" },
-    { src: "midia/music20.mp3", name: "S01E20: Seu é só" },
-    { src: "midia/music21.mp3", name: "S01E21: É você..." },
-    { src: "midia/music22.mp3", name: "S01E22: Perfect!" },
+  { src:"midia/music.mp3", name:"S01E01 · Pupila" },
+  { src:"midia/music2.mp3", name:"S01E02 · Lisboa" },
+  { src:"midia/music3.mp3", name:"S01E03 · Univ. que Desconheço" },
+  { src:"midia/music4.mp3", name:"S01E04 · Rosa e o Beija-Flor" },
+  { src:"midia/music5.mp3", name:"S01E05 · 2 Much" },
+  { src:"midia/music6.mp3", name:"S01E06 · Que Sorte a Nossa" },
+  { src:"midia/music7.mp3", name:"S01E07 · Heaven" },
+  { src:"midia/music8.mp3", name:"S01E08 · Bed Of Roses" },
+  { src:"midia/music9.mp3", name:"S01E09 · Careless" },
+  { src:"midia/music10.mp3", name:"S01E10 · Apologize" },
+  { src:"midia/music11.mp3", name:"S01E11 · Partilhar" },
+  { src:"midia/musica12.mp3", name:"S01E12 · Eu Vou Gritar" },
+  { src:"midia/musica13.mp3", name:"S01E13 · Jesus" },
+  { src:"midia/musica14.mp3", name:"S01E14 · Meteoro" },
+  { src:"midia/musica15.mp3", name:"S01E15 · Você é o Amor da Minha Vida" },
+  { src:"midia/music16.mp3", name:"S01E16 · Metade do Meu Coração" },
+  { src:"midia/music17.mp3", name:"S01E17 · Amor Meu" },
+  { src:"midia/music18.mp3", name:"S01E18 · Até o Fim" },
+  { src:"midia/music19.mp3", name:"S01E19 · Exagerado" },
+  { src:"midia/music20.mp3", name:"S01E20 · Seu é Só" },
+  { src:"midia/music21.mp3", name:"S01E21 · É Você" },
+  { src:"midia/music22.mp3", name:"S01E22 · Perfect!" },
+  { src:"midia/music23.mp3", name:"S01E23 · Outside" }
 
-
-
-
-
-
-
-  
 ];
 
 const letters = {
-    1: { title: "Carta 1.1: O Início 🤍", body: `Meu bem, apesar da cartinha de amor escrita a mão, quero também deixar isso guardado do meu jeito, como um bom garoto de TI kkkk.\n\nVocê está sendo uma das melhores coisas que me aconteceram neste ano. Que presentão Deus, junto da nossa Mãezinha, poderia me dar nesse final de ano… te colocar na minha vida justamente num momento em que eu jamais imaginaria. Acho que palavras não conseguem definir tudo o que estou sentindo nesse primeiro mês.\n\nSeu abraço, seu cheiro, sua mão na minha, seu beijo na minha bochecha... fico com o coração quentinho kkkk. A forma como você expressa o que sente por mim… tudo isso me toca de um jeito especial.\n\nIsso é apenas o começo da nossa história meu bem. Que possamos caminhar juntos com muito carinho, paciência e oração. Que Deus, ao lado da nossa Mãezinha, seja a base de tudo.\n\n"O amor é paciente, o amor é bondoso..." - 1 Coríntios 13:4-7 🙏` },
-    2: { title: "Carta 2.1: Minha Pitanguinha 🤍", body: `Minha pitanguinha,\n\nDois meses se passaram… e hoje eu posso dizer, com o coração transbordando de alegria, que você é minha namorada. Ufaa, ufaa kkkk.\n\nObrigado por esse tempo, por cada conversa, cada risada, cada cuidado e por tudo o que estamos vivendo juntos. Hoje você é minha melhor amiga, minha parceira, meu porto seguro, meu tudo.\n\nEu acredito de verdade que, se Deus nos uniu, não foi por acaso. Existe um propósito maior nos esperando, e eu quero seguir esse caminho com você. Continuarei rezando por nós.\n\nEu escolho você hoje, amanhã e para sempre. 🤍` },
-    3: { title: "Carta 3.1: Meu Amore Mio 🤍", body: `Meu Amore Mio,\n\nHoje faz 3 meses desde aquele rogai por nós em 15 de novembro de 2025… o dia em que sem eu perceber, Deus já estava escrevendo uma das histórias mais bonitas da minha vida. E quando chegou 25 de janeiro de 2026, eu só fiz oficial aquilo que meu coração já sabia, era você. Te pedir em namoro foi sem dúvida, uma das decisões mais felizes e certas que já tomei.\n\nDe lá pra cá, cada detalhe nosso só reforça essa certeza. Seu sorriso que ilumina meus dias, seu cuidado que me envolve, sua fé que me inspira, seu jeitinho doce que me acalma e, ao mesmo tempo, me impulsiona a ser um homem melhor… você me transforma.\n\nSe antes meus planos eram solitários, hoje todos eles têm seu nome. Eu sonho com você, rezo por nós, agradeço a Deus pela sua vida e peço à nossa Mãezinha que nos cubra com seu manto, que guie nossos passos e fortaleça o nosso amor.\n\nQue esses 3 meses sejam apenas o começo de uma história longa, firme, leve e cheia de propósito. Eu quero caminhar com você em cada fase, em cada conquista, em cada desafio.\n\nTe amarei hoje, amanha, esta semana, este mês, este ano e para sempre... 🤍` },
-    4: { title: "Carta 4.1: Nossa Constelação Particular 🌌", body: `Minha Flor,\n\nChegamos aos 4 meses. Se a gente olhar para trás, 120 dias podem parecer pouco para o mundo, mas para quem vive cada segundo em sintonia, parece que nossas almas já se conheciam de outras vidas.\n\nSabe como eu um "Garoto de Programa", eu vivo tentando entender a lógica das coisas. Mas o que a gente tem foge de qualquer algoritmo ou sistema. É algo que foi "codificado" lá no alto.\n\nNesses 4 meses, você se tornou o meu ponto de equilíbrio. Ver nossa história se desenhando desde aquele 15 de novembro até esse exato momento é como observar as estrelas se alinhando para formar o desenho mais bonito do meu céu.\n\nObrigado por ser minha parceira de vida, por me impulsionar e por sonhar os mesmos sonhos que eu. Que a nossa Mãezinha continue passando na frente, iluminando nosso caminho e protegendo esse amor que, para mim, já é infinito.\n\nTe amo infinitamente... 🤍` },
-    5:  { 
-    title: "Carta 5.1: Ao infinito e Além...🚀", 
-    body: `Minha Xuxu,\n\nHoje completamos cinco meses de muito amor e "Rogai Por Nós". É impressionante como sinto que a nossa conexão vem de outras vidas; a forma como a gente se entende e se apoia só me prova que Deus acertou em cheio quando cruzou nossos caminhos.\n\nVocê chegou de mansinho, com um jeito tão leve, e quando vi, já tinha tomado conta de cada pedaço do meu coração. Hoje, minha rotina tem outra cor porque você faz parte dela, e eu já não consigo e nem quero imaginar meus dias sem você ao meu lado.\n\nTenho a certeza de que nada disso é por acaso. Por isso, peço todos os dias para que o Senhor e Nossa Mãezinha continuem abençoando nossa história, nos cobrindo com proteção e fazendo esse sentimento florescer cada vez mais forte.\n\nVocê deu um novo significado à palavra felicidade. Quando tento explicar o que somos, esses versos do Jorge e Mateus dizem tudo por mim:\n\n"Que a gente se encaixa\nÉ a tampa e a panela\nÉ a chama e a vela\nÉ a cama e o colchão\nE que o mal de quem ama é a saudade\nVocê é a metade do meu coração\nE que eu sou o amor da sua vida"\n\nSe em apenas cinco meses vivemos coisas tão lindas, meu coração transborda só de imaginar tudo o que o futuro reserva para nós dois.\n\nTe amo ao infinito e além... 🤍`},
-
-    6: {  title: "Carta 6.2: Meio Ano de Conexão... ✨", body: 'Seis meses amor…\n\nÉ estranho pensar em como alguém consegue mudar tanto a rotina, os pensamentos e até o jeito da gente enxergar os dias, antes de você tudo era normal. Depois de você, tudo passou a ter mais sentido.\n\nNesses seis meses eu descobri que amor está nas pequenas coisas, nas nossas conversas sem hora para acabar, nos momentos em silêncio que ainda assim são especiais, no cuidado, na saudade e até na forma como você consegue melhorar um dia ruim só por existir.\n\nVocê trouxe paz para meu coração e felicidade para detalhes simples da vida. E quanto mais o tempo passa, mais eu tenho certeza de que encontrar você foi um dos presentes mais bonitos que Deus colocou no meu caminho.\n\nEu amo a forma como você me faz sentir querido, amado e completo. Amo seu jeito, seu sorriso, sua voz e suas manias, tudo com você se torna único.\n\nHoje, celebrando nossos seis meses, eu só consigo agradecer. Agradecer por cada abraço, cada risada, cada momento que virou memória e principalmente por ter você comigo.\n\nE se esses seis meses já foram tão inesquecíveis, eu mal posso esperar pelos próximos capítulos da nossa história minha princesa... rsrs.\n\nVocê é, sem dúvida minha escolha favorita todos os dias.\n\n E eu te amo mais do que qualquer texto conseguiria explicar meu amor...🤍'},
-    7: {
-  title: "Carta 7: A Perfeição... ✨", 
-  body: 'Minha Princesa,\n\nHoje completamos 7 meses. Sete meses desde aquele dia 15 que mudou o rumo da minha história. Olhando para trás, vejo como cada dia ao seu lado foi um presente planejado por Deus e abençoado por Nossa Mãezinha.\n\nDizem que o número 7 representa a perfeição, e para mim, esses 210 dias foram exatamente assim, perfeitos em cada detalhe, em cada risada, em cada "Rogai por Nós" que rezamos juntos e em cada plano que começamos a traçar. Você não é apenas minha namorada, você é minha base, minha melhor amiga, minha futura esposa e a resposta mais bonita para as minhas orações em silêncio.\n\nObrigado por transformar minha rotina em poesia e por ser esse porto seguro que me inspira a ser um homem melhor a cada manhã. E te digo, esses 7 meses serão apenas o prefácio de uma vida inteira que vamos construir juntos, com muita fé, cumplicidade e esse amor que só cresce.\n\nTe amo ao infinito e além, hoje e para sempre 🤍\n\n'},
-8: {
-  title: "Carta 8.1: 8 Meses, 8 Certezas 🤍",
-  body: 'Hoje faz 8 meses desde que Deus cruzou os nossos caminhos de uma forma tão bonita. E, olhando para tudo o que vivemos até aqui, percebo que o maior presente que recebi foi ter você ao meu lado.\n\nSe eu pudesse resumir esses meses em algumas certezas, seriam estas:\n\n1. Aprendi que o amor mora nas coisas mais simples: nas nossas conversas, nas risadas, nos abraços demorados e até nos momentos de silêncio.\n\n2. Descobri que amar você é uma escolha que faço todos os dias e que faria mil vezes de novo.\n\n3. Entendi que nenhuma conquista faz sentido se eu não puder compartilhá-la com você.\n\n4. Vi que Deus e Nossa Mãezinha escreveram uma história muito mais bonita do que qualquer uma que eu pudesse imaginar.\n\n5. Percebi que você trouxe paz para a minha vida. O seu carinho, o seu jeito e a sua companhia fazem qualquer dia ficar melhor.\n\n6. Passei a sonhar mais alto, porque agora todos os meus planos têm você neles.\n\n7. Tenho certeza de que quero continuar segurando a sua mão em cada nova fase da nossa vida, enfrentando as dificuldades e comemorando cada vitória juntos.\n\n8. Descobri que esses 8 meses são apenas o começo da história mais linda que quero viver: a nossa.\n\nObrigado por cada sorriso, cada oração, cada abraço e por transformar os meus dias em dias mais felizes.\n\nFeliz 8 meses, minha Pitanguinha. Que Deus continue abençoando o nosso amor e nos conduzindo por muitos e muitos anos juntos.\n\nEu te amo mais do que as palavras conseguem explicar. Hoje, amanhã e sempre. 🤍\n\n'
-},
-9: {
-  title: "Carta 9.1: Nove Luas 🤍",
-body: 'Hoje é dia 15, e você já sabe o que esse número significa pra gente. Nove meses se passaram desde aquele 15 de novembro, e é engraçado pensar que uma data que já era especial virou, com o tempo, um mês inteiro de comemoração todo dia 15.\n\nDizem que 9 meses é o tempo de uma vida inteira se formar, se preparar para vir ao mundo. E, de um certo jeito, eu sinto que foi exatamente isso que aconteceu com a gente nesses nove meses, uma versão nova de mim foi se formando, mais paciente, mais grata, mais próxima de Deus e de Nossa Mãezinha, só de ter você por perto.\n\nCada carta que escrevi pra você até aqui foi um retrato de um momento diferente da gente, mas todas elas dizem a mesma coisa no fundo eu escolho você. Escolhi no primeiro mês, no quinto, no oitavo, e escolho de novo hoje, com a mesma certeza de sempre, só que agora um pouco mais forte, mais madura, mais nossa.\n\nE eu não poderia deixar de te agradecer por uma coisa que tem significado muito pra mim ultimamente. Mesmo nos momentos em que eu não estou bem, quando estou preocupado, desanimado ou passando por dias mais difíceis, você continua ao meu lado. Você me apoia, me escuta, me acolhe e me lembra que eu não preciso enfrentar tudo sozinho. Talvez você nem perceba o quanto isso significa pra mim, mas significa muito. Obrigado por não soltar a minha mão justamente quando eu mais preciso dela.\n\nObrigado por ser esse colo, essa paz, essa risada boba em todos os dias. Obrigado por sonhar comigo o nosso futuro e por deixar eu fazer parte da sua rotina de um jeito tão simples e tão bonito. E, principalmente, obrigado por ser minha companheira não apenas nos dias bons, mas também nos dias em que as coisas não estão tão bem.\n\nQue Deus e Nossa Mãezinha continuem sendo a base de tudo o que a gente constrói, cuidando de nós, do nosso amor e dos nossos caminhos. E que os próximos meses sejam só a continuação dessa história que, com certeza, é a minha favorita.\n\nFeliz 9 meses, Amor da minha vida. Obrigado por tudo, por tanto e, acima de tudo, por estar comigo. Te amo mais um pouquinho a cada dia 15. 🤍'  
-}}
-;
-
-// --- LOGICA DO SITE ---
-
-const carousel = document.getElementById('carousel');
-content.forEach((item, idx) => {
-  const slide = document.createElement('div');
-  slide.className = `slide ${idx === 0 ? 'active' : ''}`;
-  slide.innerHTML = `<img src="${item.img}" class="bg"><div class="photo-card"><img src="${item.img}" class="main"></div>`;
-  carousel.appendChild(slide);
-});
-
-let currentPhotoIdx = 0;
-function changeSlideAuto() {
-  const slides = document.querySelectorAll('.slide');
-  if(!slides.length) return;
-  slides[currentPhotoIdx].classList.remove('active');
-  currentPhotoIdx = (currentPhotoIdx + 1) % content.length;
-  slides[currentPhotoIdx].classList.add('active');
-  document.getElementById('photo-desc').innerText = content[currentPhotoIdx].desc;
-}
-setInterval(changeSlideAuto, 6000);
-
-const music = document.getElementById('music');
-const mBtn = document.getElementById('musicBtn');
-const mBtnTop = document.getElementById('musicBtnTop');
-let tIdx = 0;
-
-function loadTrack(i) { 
-    music.src = playlist[i].src; 
-    document.getElementById('trackTitle').innerText = playlist[i].name; 
-}
-
-function togglePlay() {
-    if(music.paused) { 
-        music.play(); 
-        mBtn.innerText = "⏸"; 
-        mBtnTop.innerText = "⏸ PAUSAR"; 
-    } else { 
-        music.pause(); 
-        mBtn.innerText = "▶"; 
-        mBtnTop.innerText = "▶ ASSISTIR"; 
-    }
-}
-
-function nextTrack() {
-    tIdx = (tIdx + 1) % playlist.length;
-    loadTrack(tIdx);
-    music.play();
-    mBtn.innerText = "⏸";
-    mBtnTop.innerText = "⏸ PAUSAR";
-}
-
-function prevTrack() {
-    tIdx = (tIdx - 1 + playlist.length) % playlist.length;
-    loadTrack(tIdx);
-    music.play();
-    mBtn.innerText = "⏸";
-    mBtnTop.innerText = "⏸ PAUSAR";
-}
-
-loadTrack(tIdx);
-document.getElementById('nextBtn').onclick = nextTrack;
-document.getElementById('prevBtn').onclick = prevTrack;
-document.getElementById('nextTrackMini').onclick = nextTrack;
-document.getElementById('prevTrackMini').onclick = prevTrack;
-mBtn.onclick = togglePlay; 
-mBtnTop.onclick = togglePlay;
-
-music.onended = nextTrack;
-music.ontimeupdate = () => { 
-    if(music.duration) document.getElementById('progress').style.width = (music.currentTime / music.duration) * 100 + "%"; 
+  1:{ title:"Carta 1 · O Início 🤍", num:"01", body:`Meu bem, apesar da cartinha de amor escrita a mão, quero também deixar isso guardado do meu jeito, como um bom garoto de TI kkkk.\n\nVocê está sendo uma das melhores coisas que me aconteceram neste ano. Que presentão Deus, junto da nossa Mãezinha, poderia me dar nesse final de ano… te colocar na minha vida justamente num momento em que eu jamais imaginaria. Acho que palavras não conseguem definir tudo o que estou sentindo nesse primeiro mês.\n\nSeu abraço, seu cheiro, sua mão na minha, seu beijo na minha bochecha... fico com o coração quentinho kkkk. A forma como você expressa o que sente por mim… tudo isso me toca de um jeito especial.\n\nIsso é apenas o começo da nossa história meu bem. Que possamos caminhar juntos com muito carinho, paciência e oração. Que Deus, ao lado da nossa Mãezinha, seja a base de tudo.\n\n"O amor é paciente, o amor é bondoso..." - 1 Coríntios 13:4-7 🙏` },
+  2:{ title:"Carta 2 · Minha Pitanguinha 🤍", num:"02", body:`Minha pitanguinha,\n\nDois meses se passaram… e hoje eu posso dizer, com o coração transbordando de alegria, que você é minha namorada. Ufaa, ufaa kkkk.\n\nObrigado por esse tempo, por cada conversa, cada risada, cada cuidado e por tudo o que estamos vivendo juntos. Hoje você é minha melhor amiga, minha parceira, meu porto seguro, meu tudo.\n\nEu acredito de verdade que, se Deus nos uniu, não foi por acaso. Existe um propósito maior nos esperando, e eu quero seguir esse caminho com você. Continuarei rezando por nós.\n\nEu escolho você hoje, amanhã e para sempre. 🤍` },
+  3:{ title:"Carta 3 · Meu Amore Mio 🤍", num:"03", body:`Meu Amore Mio,\n\nHoje faz 3 meses desde aquele rogai por nós em 15 de novembro de 2025… o dia em que sem eu perceber, Deus já estava escrevendo uma das histórias mais bonitas da minha vida. E quando chegou 25 de janeiro de 2026, eu só fiz oficial aquilo que meu coração já sabia, era você. Te pedir em namoro foi sem dúvida, uma das decisões mais felizes e certas que já tomei.\n\nDe lá pra cá, cada detalhe nosso só reforça essa certeza. Seu sorriso que ilumina meus dias, seu cuidado que me envolve, sua fé que me inspira, seu jeitinho doce que me acalma e, ao mesmo tempo, me impulsiona a ser um homem melhor… você me transforma.\n\nTe amarei hoje, amanhã, esta semana, este mês, este ano e para sempre... 🤍` },
+  4:{ title:"Carta 4 · Nossa Constelação 🌌", num:"04", body:`Minha Flor,\n\nChegamos aos 4 meses. Se a gente olhar para trás, 120 dias podem parecer pouco para o mundo, mas para quem vive cada segundo em sintonia, parece que nossas almas já se conheciam de outras vidas.\n\nSabe como eu sou "de TI", eu vivo tentando entender a lógica das coisas. Mas o que a gente tem foge de qualquer algoritmo ou sistema. É algo que foi "codificado" lá no alto.\n\nNesses 4 meses, você se tornou o meu ponto de equilíbrio. Obrigado por ser minha parceira de vida, por me impulsionar e por sonhar os mesmos sonhos que eu.\n\nTe amo infinitamente... 🤍` },
+  5:{ title:"Carta 5 · Ao Infinito e Além 🚀", num:"05", body:`Minha Xuxu,\n\nHoje completamos cinco meses de muito amor e "Rogai Por Nós". É impressionante como sinto que a nossa conexão vem de outras vidas; a forma como a gente se entende e se apoia só me prova que Deus acertou em cheio quando cruzou nossos caminhos.\n\nVocê chegou de mansinho, com um jeito tão leve, e quando vi, já tinha tomado conta de cada pedaço do meu coração.\n\nSe em apenas cinco meses vivemos coisas tão lindas, meu coração transborda só de imaginar tudo o que o futuro reserva para nós dois.\n\nTe amo ao infinito e além... 🤍` },
+  6:{ title:"Carta 6 · Meio Ano de Conexão ✨", num:"06", body:`Seis meses amor…\n\nÉ estranho pensar em como alguém consegue mudar tanto a rotina, os pensamentos e até o jeito da gente enxergar os dias, antes de você tudo era normal. Depois de você, tudo passou a ter mais sentido.\n\nNesses seis meses eu descobri que amor está nas pequenas coisas, nas nossas conversas sem hora para acabar, no cuidado, na saudade e até na forma como você consegue melhorar um dia ruim só por existir.\n\nVocê é, sem dúvida, minha escolha favorita todos os dias. 🤍` },
+  7:{ title:"Carta 7 · A Perfeição ✨", num:"07", body:`Minha Princesa,\n\nHoje completamos 7 meses. Sete meses desde aquele dia 15 que mudou o rumo da minha história. Olhando para trás, vejo como cada dia ao seu lado foi um presente planejado por Deus e abençoado por Nossa Mãezinha.\n\nDizem que o número 7 representa a perfeição, e para mim, esses 210 dias foram exatamente assim. Você não é apenas minha namorada, você é minha base, minha melhor amiga, minha futura esposa.\n\nTe amo ao infinito e além, hoje e para sempre 🤍` },
+  8:{ title:"Carta 8 · 8 Certezas 🤍", num:"08", body:`Hoje faz 8 meses desde que Deus cruzou os nossos caminhos de uma forma tão bonita.\n\n1. Aprendi que o amor mora nas coisas mais simples.\n2. Descobri que amar você é uma escolha que faço todos os dias.\n3. Entendi que nenhuma conquista faz sentido se eu não puder compartilhá-la com você.\n4. Vi que Deus e Nossa Mãezinha escreveram uma história muito mais bonita do que qualquer uma que eu pudesse imaginar.\n\nFeliz 8 meses, minha Pitanguinha. Hoje, amanhã e sempre. 🤍` },
+  9:{ title:"Carta 9 · Nove Luas 🤍", num:"09", body:`Hoje é dia 15, e você já sabe o que esse número significa pra gente. Nove meses se passaram desde aquele 15 de novembro.\n\nDizem que 9 meses é o tempo de uma vida inteira se formar. E, de um certo jeito, eu sinto que foi exatamente isso que aconteceu com a gente, uma versão nova de mim foi se formando, mais paciente, mais grata, mais próxima de Deus, só de ter você por perto.\n\nObrigado por não soltar a minha mão justamente quando eu mais preciso dela.\n\nFeliz 9 meses, amor da minha vida. 🤍` },
+  10:{ title:"Carta 10 · Nota Dez 🤍", num:"10", body:`Meu amo,\n\nDez meses. E olha que engraçado, aqui no Brasil a gente diz que "é nota dez" quando algo é perfeito, impecável, sem nada a acrescentar. Pois é exatamente assim que eu descreveria esses dez meses ao seu lado: nota dez.\n\nDez meses desde aquele 15 de novembro que, sem eu saber, já estava sendo escrito por Deus lá em cima. Dez meses aprendendo que amor de verdade não é sobre grandes gestos, mas sobre escolher o outro todos os dias, mesmo nos dias difíceis, mesmo cansado, mesmo sem jeito com as palavras (afinal não sou bom de falar mas sim de... kkkk).\n\nVocê pegou esse garoto de TI, cheio de lógica e pouca poesia, e me ensinou que existem coisas que nenhum algoritmo explica. Seu jeito de cuidar, sua fé que não abala, a forma como você segura minha mão e faz tudo parecer mais leve, tudo isso eu não sei explicar, só sei que funciona, e funciona muito bem.\n\nQue Deus e Nossa Mãezinha continuem sendo a base de tudo isso que a gente construiu. Dez meses foi só o preview do trailer, ansioso pra viver o filme inteiro com você.\n\nTe amo, hoje, amanhã e sempre. Nota dez, sem discussão. 🤍` }
 };
 
-function updateCounters() {
-    const metDate = new Date("2025-11-15T00:00:00");
-    const officialDate = new Date("2026-01-25T00:00:00");
-    const now = new Date();
-
-    const diffMet = now - metDate;
-    document.getElementById('daysMet').innerText = Math.floor(diffMet / (1000 * 60 * 60 * 24));
-    document.getElementById('hoursMet').innerText = Math.floor((diffMet / (1000 * 60 * 60)) % 24);
-    document.getElementById('minutesMet').innerText = Math.floor((diffMet / 1000 / 60) % 60);
-    document.getElementById('secondsMet').innerText = Math.floor((diffMet / 1000) % 60);
-
-    const diffOff = now - officialDate;
-    document.getElementById('days').innerText = Math.floor(diffOff / (1000 * 60 * 60 * 24));
-    document.getElementById('hours').innerText = Math.floor((diffOff / (1000 * 60 * 60)) % 24);
-    document.getElementById('minutes').innerText = Math.floor((diffOff / 1000 / 60) % 60);
-    document.getElementById('seconds').innerText = Math.floor((diffOff / 1000) % 60);
-}
-setInterval(updateCounters, 1000);
-
-function openLetter(id) {
-    document.getElementById('modalTitle').innerText = letters[id].title;
-    document.getElementById('modalBody').innerText = letters[id].body;
-    document.getElementById('letterModal').style.display = 'flex';
-}
-function closeLetter() { document.getElementById('letterModal').style.display = 'none'; }
-
-// --- LÓGICA DO QUIZ COM 2 PERGUNTAS ---
+const offerings = {
+  "04":{ title:"Mês 04 · Constelação", body:"Quatro meses construindo nossa história, estrela por estrela, até formar nosso próprio universo." },
+  "05":{ title:"Mês 05 · Pouso Concluído", body:"Nesta nossa jornada, descobri que o meu porto seguro não é um lugar... é você, meu amor. Feliz 5 meses de muito 'Rogai por Nós' xuxu 🤍" },
+  "06":{ title:"Mês 06 · Lógica Favorita", body:"Sabe xuxu, entre todas as linhas de código que eu já escrevi, você é a minha lógica favorita. Feliz 6 meses rsrs 🤍" },
+  "07":{ title:"Mês 07 · Nova Constelação", body:"O tempo voou e o nosso universo ganhou mais uma constelação brilhante! Chegamos aos 7 meses. Feliz 7 meses! 🤍✨" },
+  "08":{ title:"Mês 08 · Pouso na Terra 🌍", body:"Viajamos entre as estrelas, caminhamos pela Lua e atravessamos galáxias inteiras. Mas percebi: não existe lugar mais bonito do que estar ao seu lado. Feliz 8 meses, minha Pitanguinha 🤍" },
+  "09":{ title:"Mês 09 · Raízes Firmes 🌳", body:"Assim como uma semente precisa de tempo, terra boa e cuidado para virar árvore, o nosso amor também foi crescendo devagarinho. Feliz 9 meses. Que a gente continue florescendo juntos 🤍" },
+  "10":{ title:"Mês 10 · Nota Dez ✨", body:"Dez meses e você continua sendo, sem discussão, minha nota máxima em tudo. Feliz 10 meses, meu amor 🤍" }
+};
 
 const quizData = [
-    {
-        question: "Qual foi o dia em que nossos caminhos se cruzaram pela primeira vez?",
-        options: [
-            { text: "15 de Novembro 2025", correct: true },
-            { text: "25 de Janeiro 2026", correct: false },
-            { text: "30 de Dezembro 2025", correct: false }
-        ]
-    },
-    {
-        question: "Qual é a data oficial do nosso pedido de namoro?",
-        options: [
-            { text: "15 de Novembro 2025", correct: false },
-            { text: "25 de Janeiro 2026", correct: true },
-            { text: "01 de Janeiro 2026", correct: false }
-        ]
-    }
+  { question:"Qual foi o dia em que nossos caminhos se cruzaram pela primeira vez?", options:[ {t:"15 de Novembro 2025", c:true}, {t:"25 de Janeiro 2026", c:false}, {t:"30 de Dezembro 2025", c:false} ] },
+  { question:"Qual é a data oficial do nosso pedido de namoro?", options:[ {t:"15 de Novembro 2025", c:false}, {t:"25 de Janeiro 2026", c:true}, {t:"01 de Janeiro 2026", c:false} ] }
 ];
 
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ================= CURSOR CUSTOM ================= */
+if(window.matchMedia('(pointer: fine)').matches && !reducedMotion){
+  document.body.classList.add('has-custom-cursor');
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let rx=0, ry=0, mx=0, my=0;
+  window.addEventListener('mousemove', (e)=>{
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx+'px'; dot.style.top = my+'px';
+  });
+  function loop(){
+    rx += (mx-rx)*0.18; ry += (my-ry)*0.18;
+    ring.style.left = rx+'px'; ring.style.top = ry+'px';
+    requestAnimationFrame(loop);
+  }
+  loop();
+  document.querySelectorAll('a, button, .letter-card, .pick-card, .note, .q-opt, .seg-btn').forEach(el=>{
+    el.addEventListener('mouseenter', ()=>ring.classList.add('grow'));
+    el.addEventListener('mouseleave', ()=>ring.classList.remove('grow'));
+  });
+}
+
+/* ================= NAV SCROLL ================= */
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', ()=>{
+  header.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive:true });
+
+/* ================= REVEAL ON SCROLL ================= */
+const revealEls = document.querySelectorAll('.reveal');
+if('IntersectionObserver' in window && !reducedMotion){
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach((entry, i)=>{
+      if(entry.isIntersecting){
+        setTimeout(()=>entry.target.classList.add('in-view'), (i%4)*80);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold:0.15, rootMargin:'0px 0px -40px 0px' });
+  revealEls.forEach(el=>io.observe(el));
+} else {
+  revealEls.forEach(el=>el.classList.add('in-view'));
+}
+
+/* ================= CARROSSEL HERO ================= */
+const carousel = document.getElementById('carousel');
+photos.forEach((p, idx)=>{
+  const slide = document.createElement('div');
+  slide.className = 'hero-slide' + (idx===0 ? ' active' : '');
+  slide.innerHTML = `<img src="${p.img}" alt="">`;
+  carousel.appendChild(slide);
+});
+const heroCap = document.createElement('div');
+heroCap.className = 'hero-caption';
+heroCap.innerText = photos[0].desc;
+carousel.appendChild(heroCap);
+let photoIdx = 0;
+function showSlide(i){
+  const slides = document.querySelectorAll('.hero-slide');
+  if(!slides.length) return;
+  slides[photoIdx].classList.remove('active');
+  photoIdx = (i + photos.length) % photos.length;
+  slides[photoIdx].classList.add('active');
+  heroCap.innerText = photos[photoIdx].desc;
+}
+setInterval(()=>showSlide(photoIdx+1), 6000);
+
+/* ================= CONTADORES ================= */
+function updateCounters(){
+  const metDate = new Date("2025-11-15T00:00:00");
+  const officialDate = new Date("2026-01-25T00:00:00");
+  const now = new Date();
+
+  const diffMet = now - metDate;
+  document.getElementById('daysMet').innerText = Math.floor(diffMet/(1000*60*60*24));
+  document.getElementById('hoursMet').innerText = Math.floor((diffMet/(1000*60*60))%24);
+  document.getElementById('minutesMet').innerText = Math.floor((diffMet/1000/60)%60);
+  document.getElementById('secondsMet').innerText = Math.floor((diffMet/1000)%60);
+  document.getElementById('heroDays').innerText = Math.floor(diffMet/(1000*60*60*24));
+
+  const diffOff = now - officialDate;
+  document.getElementById('days').innerText = Math.floor(diffOff/(1000*60*60*24));
+  document.getElementById('hours').innerText = Math.floor((diffOff/(1000*60*60))%24);
+  document.getElementById('minutes').innerText = Math.floor((diffOff/1000/60)%60);
+  document.getElementById('seconds').innerText = Math.floor((diffOff/1000)%60);
+
+  [document.getElementById('secondsMet'), document.getElementById('seconds')].forEach(el=>{
+    el.classList.remove('tick'); void el.offsetWidth; el.classList.add('tick');
+  });
+}
+updateCounters();
+setInterval(updateCounters, 1000);
+
+/* ================= CARTAS ================= */
+const lettersGrid = document.getElementById('lettersGrid');
+Object.keys(letters).forEach(id=>{
+  const l = letters[id];
+  const card = document.createElement('div');
+  card.className = 'letter-card';
+  card.onclick = ()=>openLetter(id);
+  const preview = l.body.split('\n')[0].slice(0,58);
+  card.innerHTML = `<div class="letter-num">Carta nº ${l.num}</div><h4>${l.title}</h4><p>${preview}...</p><div class="letter-arrow">Ler carta →</div>`;
+  lettersGrid.appendChild(card);
+});
+function openLetter(id){
+  document.getElementById('modalTitle').innerText = letters[id].title;
+  document.getElementById('modalBody').innerText = letters[id].body;
+  document.getElementById('letterModal').classList.add('show');
+}
+function closeLetter(){ document.getElementById('letterModal').classList.remove('show'); }
+
+/* ================= MESES ================= */
+const segmented = document.getElementById('segmented');
+const monthPanel = document.getElementById('monthPanel');
+const offerKeys = Object.keys(offerings);
+function renderMonth(key){
+  [...segmented.children].forEach(b=>b.classList.remove('active'));
+  document.getElementById('seg-'+key).classList.add('active');
+  monthPanel.style.opacity = 0;
+  setTimeout(()=>{
+    const o = offerings[key];
+    monthPanel.innerHTML = `<h3>${o.title}</h3><p>${o.body}</p>`;
+    monthPanel.style.opacity = 1;
+  }, 180);
+}
+offerKeys.forEach(key=>{
+  const btn = document.createElement('button');
+  btn.className = 'seg-btn'; btn.id = 'seg-'+key; btn.innerText = 'Mês '+key;
+  btn.onclick = ()=>renderMonth(key);
+  segmented.appendChild(btn);
+});
+renderMonth(offerKeys[0]);
+
+/* ================= QUIZ ================= */
 let currentQuestion = 0;
-
-function loadQuiz() {
-    const feedback = document.getElementById('quiz-feedback');
-    const questionText = document.getElementById('questionText');
-    const optionsContainer = document.getElementById('options');
-    
-    feedback.innerText = "";
-    questionText.innerText = quizData[currentQuestion].question;
-    optionsContainer.innerHTML = "";
-
-    quizData[currentQuestion].options.forEach(opt => {
-        const div = document.createElement('div');
-        div.className = 'opt';
-        div.innerText = opt.text;
-        div.onclick = () => checkQuiz(div, opt.correct);
-        optionsContainer.appendChild(div);
-    });
+function loadQuiz(){
+  const feedback = document.getElementById('quiz-feedback');
+  const questionText = document.getElementById('questionText');
+  const optionsContainer = document.getElementById('options');
+  feedback.innerText = '';
+  questionText.innerText = quizData[currentQuestion].question;
+  optionsContainer.innerHTML = '';
+  quizData[currentQuestion].options.forEach(opt=>{
+    const div = document.createElement('div');
+    div.className = 'q-opt'; div.innerText = opt.t;
+    div.onclick = ()=>checkQuiz(div, opt.c);
+    optionsContainer.appendChild(div);
+  });
 }
-
-function checkQuiz(element, isCorrect) {
-    const feedback = document.getElementById('quiz-feedback');
-    const options = document.querySelectorAll('.opt');
-    
-    options.forEach(opt => {
-        opt.style.borderColor = 'transparent';
-        opt.style.background = 'rgba(255,255,255,0.05)';
-    });
-
-    if (isCorrect) {
-        element.style.borderColor = 'var(--success)';
-        feedback.style.color = 'var(--success)';
-        
-        if (currentQuestion < quizData.length - 1) {
-            feedback.innerText = "Correto! Indo para a próxima...";
-            setTimeout(() => {
-                currentQuestion++;
-                loadQuiz();
-            }, 1500);
-        } else {
-            feedback.innerText = "Acertou tudo! Uhmmm ganhou um vale boleto...rsrs ✨";
-        }
+function checkQuiz(el, isCorrect){
+  const feedback = document.getElementById('quiz-feedback');
+  document.querySelectorAll('.q-opt').forEach(o=>{ o.style.borderColor='var(--line)'; o.style.background='transparent'; });
+  if(isCorrect){
+    el.style.borderColor = 'var(--sage)'; el.style.background = 'rgba(111,125,92,0.08)';
+    feedback.style.color = 'var(--sage)';
+    if(currentQuestion < quizData.length-1){
+      feedback.innerText = 'Correto! Próxima pergunta...';
+      setTimeout(()=>{ currentQuestion++; loadQuiz(); }, 1300);
     } else {
-        element.style.borderColor = 'var(--netflix-red)';
-        feedback.style.color = 'var(--netflix-red)';
-        feedback.innerText = "Poxa, você errou! Tente novamente! ❤️";
+      feedback.innerText = 'Acertou tudo! Vai ganhar um vale... ✨';
     }
+  } else {
+    el.style.borderColor = 'var(--accent)'; el.style.background = 'rgba(181,80,47,0.06)';
+    feedback.style.color = 'var(--accent)';
+    feedback.innerText = 'Poxa mor, tente de novo! ❤️';
+  }
 }
-
 loadQuiz();
 
-function revealBento() {
-    const msg = document.getElementById('bento-message');
-    msg.style.opacity = msg.style.opacity == "1" ? "0" : "1";
-}
+/* ================= SEGREDO ================= */
+function toggleSecret(){ document.getElementById('secretMsg').classList.toggle('open'); }
 
-function createStar() {
-  const field = document.getElementById('magic-stars');
-  const star = document.createElement('div');
-  star.className = 'star';
-  const size = Math.random() * 3 + 'px';
-  star.style.width = size; star.style.height = size;
-  star.style.left = Math.random() * 100 + 'vw';
-  star.style.top = Math.random() * 100 + 'vh';
-  star.style.animationDuration = Math.random() * 2 + 1 + 's';
-  const r = Math.random();
-  if (r > 0.9) { star.style.background = '#3fb8a3'; star.style.boxShadow = '0 0 6px #3fb8a3'; }
-  else if (r > 0.8) { star.style.background = '#a566d6'; star.style.boxShadow = '0 0 6px #a566d6'; }
-  else if (r > 0.7) { star.style.background = '#e893c2'; star.style.boxShadow = '0 0 6px #e893c2'; }
-  field.appendChild(star);
-  setTimeout(() => star.remove(), 2000);
+/* ================= PLAYER ================= */
+const music = document.getElementById('music');
+const playBtn = document.getElementById('playBtn');
+const playBtnTop = document.getElementById('playBtnTop');
+const eq = document.getElementById('eq');
+let tIdx = 0;
+function loadTrack(i){ music.src = playlist[i].src; document.getElementById('trackTitle').innerText = playlist[i].name; }
+function setEq(playing){ eq.querySelectorAll('span').forEach(s=>{ s.style.animationPlayState = playing ? 'running' : 'paused'; if(!playing) s.style.height='4px'; }); }
+function togglePlay(){
+  if(music.paused){ music.play(); playBtn.innerText='⏸'; playBtnTop.innerText='⏸ Pausar'; setEq(true); }
+  else{ music.pause(); playBtn.innerText='▶'; playBtnTop.innerText='▶ Ouvir nossa trilha'; setEq(false); }
 }
-setInterval(createStar, 120);
+function nextTrack(){ tIdx=(tIdx+1)%playlist.length; loadTrack(tIdx); music.play(); playBtn.innerText='⏸'; playBtnTop.innerText='⏸ Pausar'; setEq(true); }
+function prevTrack(){ tIdx=(tIdx-1+playlist.length)%playlist.length; loadTrack(tIdx); music.play(); playBtn.innerText='⏸'; playBtnTop.innerText='⏸ Pausar'; setEq(true); }
+loadTrack(tIdx);
+document.getElementById('nextTrack').onclick = nextTrack;
+document.getElementById('prevTrack').onclick = prevTrack;
+playBtn.onclick = togglePlay;
+playBtnTop.onclick = togglePlay;
+music.onended = nextTrack;
 </script>
-<div id="missao-espacial" style="background: #02076d000; color: #fff; font-family: 'Segoe UI', sans-serif; overflow: hidden; position: relative; min-height: 100vh;">
-
-    <section id="stage-4" style="padding: 80px 20px; text-align: center; position: relative; z-index: 10; transition: 0.8s;">
-        <h2 style="color: #3fb8a3; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 5px;">Mês 04</h2>
-        <div style="font-size: 0.7rem; color: #444; font-family: monospace; margin-bottom: 25px;"></div>
-        
-        <div id="constelacao-container" style="height: 180px; margin: 0 auto; max-width: 400px; display: flex; align-items: center; justify-content: center;">
-            <div style="font-size: 40px; filter: drop-shadow(0 0 10px #fff);">✨</div>
-        </div>
-
-        <p style="color: #999; font-style: italic; max-width: 350px; margin: 20px auto; line-height: 1.5;">
-            "Quatro meses construindo nossa história, estrela por estrela, até formar nosso próprio universo."
-        </p>
-
-        <div id="launch-control" style="margin-top: 40px;">
-            <button onclick="iniciarViagem()" style="background: #3fb8a3; color: #0d1b2a; border: none; padding: 15px 40px; font-weight: 600; border-radius: 50px; cursor: pointer; box-shadow: 0 0 20px rgba(63,184,163,0.35); transition: 0.3s;">
-                LANÇAR PARA O MÊS 5 🚀
-            </button>
-        </div>
-    </section>
-
-    <div id="foguete" style="position: absolute; bottom: -100px; left: 50%; transform: translateX(-50%); font-size: 60px; z-index: 100; display: none;">🚀</div>
-
-    <section id="stage-5" style="display: none; opacity: 0; padding: 100px 20px; text-align: center; transform: translateY(50px);">
-        <div style="width: 140px; height: 140px; background: radial-gradient(circle at 30% 30%, #eee, #666); border-radius: 50%; margin: 0 auto 30px; box-shadow: 0 0 50px rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
-            <div style="font-size: 30px; margin-bottom: 40px; animation: flagMove 2s infinite ease-in-out;">🚩</div>
-        </div>
-
-        <div style="background: rgba(15,15,15,0.95); border: 1px solid #3fb8a3; padding: 35px; border-radius: 25px; max-width: 360px; margin: 0 auto; backdrop-filter: blur(10px);">
-            <h2 style="color: #3fb8a3; margin-top: 0; letter-spacing: 2px;">Mês 5: Pouso Concluido</h2>
-            <p style="color: #ddd; font-size: 0.95rem; line-height: 1.6;">
-                Nesta nossa jornada espacial, descobri que o meu porto seguro não é um lugar... é você, meu amor. Feliz 5 meses de muito "Rogai por Nós" xuxu. Que a nossa órbita seja sempre assim, cheinha de paz, proteção, amor e MUITOOO BEIJÃO e é claro um cheiro rsrs Te amo demais amor da minha vida 🤍
-            </p>
-            <div style="color: #0f0; font-family: monospace; font-size: 0.7rem; margin-top: 20px; border-top: 1px solid #222; padding-top: 15px;">
-            </div>
-        </div>
-    </section>
-
-</div>
-
-<style>
-    /* Animações de Ambiente */
-    @keyframes flagMove { 0%, 100% { transform: rotate(-10deg); } 50% { transform: rotate(10deg); } }
-    
-    /* Efeito de Lançamento */
-    .rocket-fly {
-        display: block !important;
-        animation: launchUp 2s forwards ease-in;
-    }
-
-    @keyframes launchUp {
-        0% { bottom: -100px; opacity: 1; }
-        100% { bottom: 150vh; opacity: 1; }
-    }
-
-    /* Tremida da tela */
-    .shaking { animation: shake 0.1s infinite; }
-    @keyframes shake {
-        0% { transform: translate(1px, 1px); }
-        50% { transform: translate(-1px, -2px); }
-        100% { transform: translate(1px, -1px); }
-    }
-
-    /* Estrelas rápidas durante o salto */
-    .fast-stars .star { animation: starSpeed 0.5s linear infinite !important; }
-    @keyframes starSpeed {
-        from { transform: translateY(0); }
-        to { transform: translateY(100vh); }
-    }
-</style>
-
-<script>
-function iniciarViagem() {
-    const stage4 = document.getElementById('stage-4');
-    const stage5 = document.getElementById('stage-5');
-    const rocket = document.getElementById('foguete');
-    const container = document.getElementById('missao-espacial');
-
-    // 1. Esconde botão e inicia vibração
-    document.getElementById('launch-control').style.opacity = '0';
-    container.classList.add('shaking');
-    container.classList.add('fast-stars');
-
-    // 2. Dispara o foguete
-    rocket.classList.add('rocket-fly');
-
-    // 3. Troca de cenário (O Salto)
-    setTimeout(() => {
-        container.classList.remove('shaking');
-        container.classList.remove('fast-stars');
-        stage4.style.display = 'none';
-        
-        // Revela o Stage 5
-        stage5.style.display = 'block';
-        setTimeout(() => {
-            stage5.style.transition = 'all 1.2s ease-out';
-            stage5.style.opacity = '1';
-            stage5.style.transform = 'translateY(0)';
-            stage5.scrollIntoView({ behavior: 'smooth' });
-        }, 50);
-    }, 1800);
-}
-
-// Gerador de Estrelas Leve e Estável
-function createSpace() {
-    const star = document.createElement('div');
-    star.className = 'star';
-    const size = Math.random() * 2 + 'px';
-    star.style.cssText = `
-        width: ${size}; height: ${size}; 
-        position: fixed; background: #fff; 
-        left: ${Math.random() * 100}vw; top: ${Math.random() * 100}vh;
-        border-radius: 50%; opacity: ${Math.random()};
-        z-index: 1; pointer-events: none;
-    `;
-    document.body.appendChild(star);
-    // Remove estrelas antigas para não pesar
-    setTimeout(() => star.remove(), 3000);
-}
-setInterval(createSpace, 150);
-</script>
-<!-- Módulo Secreto: Terminal Intergaláctico de Criptografia -->
-<div id="modulo-surpresa" style="background: #000; color: #00ff41; font-family: 'Courier New', Courier, monospace; padding: 40px 20px; border: 2px solid #00ff41; border-radius: 15px; max-width: 450px; margin: 50px auto; position: relative; box-shadow: 0 0 30px rgba(0, 255, 65, 0.4); overflow: hidden;">
-    
-    <!-- Camada de Fundo -->
-    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #001a00 0%, #000 100%); z-index: 0;"></div>
-    
-    <!-- Canvas Matrix -->
-    <canvas id="matrix-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.15; z-index: 1;"></canvas>
-
-    <div style="position: relative; z-index: 10;">
-        <div id="terminal-header" style="border-bottom: 1px solid #00ff41; padding-bottom: 10px; margin-bottom: 25px; font-size: 0.75rem; letter-spacing: 1px; text-shadow: 0 0 5px #00ff41;">
-            [SYSTEM] CONECTANDO AO SATÉLITE_MÊS_6...<br>
-            [LOG] COORDENADAS: ESPAÇO_M6<br>
-            [USER] IDENTIFICADO: CRIANÇA
-        </div>
-
-        <!-- Área de Clique Corrigida -->
-        <div id="caixa-preta" onclick="desbloquearMensagem()" style="cursor: pointer; border: 2px dashed #00ff41; padding: 40px 20px; text-align: center; background: rgba(0, 20, 0, 0.6); backdrop-filter: blur(4px); transition: 0.4s; position: relative; z-index: 20;">
-            <div id="lock-icon" style="font-size: 50px; filter: drop-shadow(0 0 10px #00ff41);">🔒</div>
-            <p id="instrucao" style="margin-top: 20px; font-size: 0.85rem; font-weight: bold; animation: blink 1.2s infinite; text-transform: uppercase;">
-                Clique para descriptografar conexão vital
-            </p>
-        </div>
-
-        <div id="mensagem-secreta" style="display: none; opacity: 0; transform: translateY(20px); transition: 1.5s all ease-out;">
-            <div style="background: rgba(0, 255, 65, 0.1); border-left: 4px solid #00ff41; padding: 20px; border-radius: 4px;">
-                <h3 style="color: #fff; margin-top: 0; font-size: 1rem; text-shadow: 0 0 8px #00ff41;">> ACESSO CONCEDIDO: MENSAGEM RECEBIDA</h3>
-                <p style="color: #00ff41; font-size: 0.95rem; line-height: 1.6; text-align: justify; margin-bottom: 0;">
-                    Sabe xuxu, entre todas as linhas de código que eu já escrevi, você é a minha lógica favorita. Se a nossa vida fosse um programa, eu colocaria um <code>while(true)</code> no nosso amor, para que ele nunca tenha fim. Você é a minha descoberta mais brilhante no universo, aquela que iluminou meu caminho e mudou tudo para melhor. Feliz 6 meses rsrs 🤍
-                </p>
-            </div>
-            <div style="font-size: 10px; margin-top: 20px; color: #008822; text-align: center; letter-spacing: 2px;">
-                -- TRANSMISSÃO ENCERRADA COM SUCESSO --
-            </div>
-        </div>
-    </div>
-</div>
-
-<style>
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-    .heart-particle { position: absolute; color: #00ff41; pointer-events: none; font-size: 20px; z-index: 100; animation: flyOut 1.5s ease-out forwards; }
-    @keyframes flyOut { 0% { transform: translate(-50%, -50%) scale(1); opacity: 1; } 100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; } }
-</style>
-
-<script>
-// Inicialização do Canvas Matrix
-(function() {
-    const canvas = document.getElementById('matrix-canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = 450;
-    canvas.height = 500;
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*🤍";
-    const fontSize = 10;
-    const columns = canvas.width / fontSize;
-    const drops = [];
-    for (let x = 0; x < columns; x++) drops[x] = 1;
-
-    function drawMatrix() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#00ff41";
-        ctx.font = fontSize + "px monospace";
-        for (let i = 0; i < drops.length; i++) {
-            const text = letters.charAt(Math.floor(Math.random() * letters.length));
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-            drops[i]++;
-        }
-    }
-    setInterval(drawMatrix, 50);
-})();
-
-// Função de Desbloqueio
-function desbloquearMensagem() {
-    const caixa = document.getElementById('caixa-preta');
-    const msg = document.getElementById('mensagem-secreta');
-    const lock = document.getElementById('lock-icon');
-    const mod = document.getElementById('modulo-surpresa');
-
-    if (!caixa || !msg) return;
-
-    // Explosão de corações
-    for(let i=0; i<25; i++) {
-        const heart = document.createElement('div');
-        heart.innerHTML = Math.random() > 0.5 ? '💚' : '🤍';
-        heart.className = 'heart-particle';
-        heart.style.setProperty('--x', (Math.random() * 600 - 300) + 'px');
-        heart.style.setProperty('--y', (Math.random() * 600 - 300) + 'px');
-        heart.style.left = '50%';
-        heart.style.top = '50%';
-        mod.appendChild(heart);
-        setTimeout(() => heart.remove(), 1500);
-    }
-
-    lock.innerHTML = '🔓';
-    caixa.style.background = 'rgba(0, 255, 65, 0.2)';
-    
-    setTimeout(() => {
-        caixa.style.display = 'none';
-        msg.style.display = 'block';
-        setTimeout(() => {
-            msg.style.opacity = '1';
-            msg.style.transform = 'translateY(0)';
-        }, 50);
-    }, 600);
-}
-</script>
-
-    <div id="novo-modulo-m7" style="margin-top: 60px; border-top: 1px solid rgba(0, 255, 65, 0.3); padding-top: 55px; text-align: center;">
-    
-    <div style="font-size: 0.75rem; color: #00ff41; margin-bottom: 40px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; text-align: left; text-shadow: 0 0 12px rgba(0, 255, 65, 0.7); padding-left: 5px;">
-    </div>
-    
-    <div id="caixa-m7" onclick="abrirMensagemM7()" class="caixa-galaxia-premium" style="cursor: pointer; border: 1px solid rgba(0, 255, 65, 0.55); width: 240px; height: 240px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(15, 10, 45, 0.95) 0%, rgba(1, 1, 5, 0.98) 100%); border-radius: 32px; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); position: relative; backdrop-filter: blur(20px); box-shadow: 0 0 50px rgba(0, 0, 0, 0.95), inset 0 0 25px rgba(0, 255, 65, 0.2); overflow: hidden;">
-        
-        <div class="galaxia-spin" style="position: absolute; width: 300px; height: 300px; background: radial-gradient(ellipse at center, rgba(114, 9, 184, 0.3) 0%, rgba(0, 255, 65, 0.1) 45%, transparent 70%); z-index: 1;"></div>
-
-        <div id="box-icon-m7" style="font-size: 68px; filter: drop-shadow(0 0 20px rgba(0, 255, 65, 0.85)); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; z-index: 2;">🛸</div>
-    </div>
-
-    <p id="instrucao-m7" style="margin-top: 30px; font-size: 0.85rem; font-weight: bold; color: #ffffff; text-transform: uppercase; letter-spacing: 3px; text-shadow: 0 0 12px rgba(255,255,255,0.6); animation: blink 1.5s infinite;">
-        Interceptar Cápsula Cósmica [M7]
-    </p>
-
-    <div id="mensagem-secreta-m7" style="display: none; opacity: 0; transform: scale(0.95) translateY(20px); transition: 1.2s all cubic-bezier(0.16, 1, 0.3, 1); margin: 35px auto 0 auto; width: 440px; height: 440px; box-sizing: border-box;">
-        <div class="scrollbar-m7" style="border: 1px solid rgba(0, 255, 65, 0.5); padding: 50px 40px; border-radius: 32px; box-shadow: 0 30px 70px rgba(0, 0, 0, 0.98), inset 0 0 40px rgba(114, 9, 184, 0.35); width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box; overflow-y: auto; position: relative; backdrop-filter: blur(25px); overflow-x: hidden; background: #010105;">
-            
-            <div class="galaxia-spin" style="position: absolute; top: -50px; left: -30px; width: 500px; height: 500px; background: radial-gradient(circle at center, rgba(147, 51, 234, 0.35) 0%, rgba(6, 182, 212, 0.2) 35%, rgba(0, 255, 65, 0.08) 55%, transparent 75%); z-index: 0; pointer-events: none;"></div>
-            
-            <div style="position: absolute; top: 15%; left: 15%; font-size: 8px; color: #fff; opacity: 0.5; animation: blink 2.5s infinite;">✦</div>
-            <div style="position: absolute; bottom: 25%; right: 15%; font-size: 10px; color: #06b6d4; opacity: 0.7; animation: blink 1.8s infinite 0.3s;">✦</div>
-            <div style="position: absolute; top: 80%; left: 25%; font-size: 7px; color: #a855f7; opacity: 0.6; animation: blink 3s infinite 0.6s;">✦</div>
-            <div style="position: absolute; top: 45%; right: 10%; font-size: 6px; color: #fff; opacity: 0.4; animation: blink 2s infinite 0.9s;">✦</div>
-            
-            <div style="position: relative; z-index: 2;">
-                <h3 style="color: #ffffff; margin-top: 0; font-size: 1rem; font-weight: 600; letter-spacing: 3px; text-shadow: 0 0 10px #00ff41; text-transform: uppercase; margin-bottom: 25px; text-align: center;">
-                </h3>
-                <p style="color: rgba(255, 255, 255, 0.98); font-size: 0.98rem; line-height: 1.85; text-align: justify; margin-bottom: 0; font-weight: 300; letter-spacing: 0.6px; padding: 0 5px;">
-                O tempo voou e o nosso universo ganhou mais uma constelação brilhante! Chegamos aos 7 meses. Se com 6 a nossa órbita já era perfeita, hoje eu tenho a certeza absoluta de que não existem distâncias ou gravidade capazes de parar o que a gente construiu. Você continua sendo meu alinhamento planetário favorito, a estrela mais radiante do meu céu e o motivo do meu mundo nunca parar de girar. Te amo ainda mais hoje meu amor, feliz 7 meses! 🤍✨
-                </p>
-                
-                <div style="font-size: 9px; margin-top: 35px; color: rgba(0, 255, 65, 0.65); text-align: center; letter-spacing: 4px; text-transform: uppercase; font-weight: bold; text-shadow: 0 0 6px rgba(0,255,65,0.5);">
-                    -- system: telemetry_7.0_stable --
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</div>
-</div></div></div>
-
-<style>
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-    
-    /* Efeito de Rotação Suave da Galáxia */
-    @keyframes spinGalaxy {
-        0% { transform: rotate(0deg) scale(1); }
-        50% { transform: rotate(180deg) scale(1.05); }
-        100% { transform: rotate(360deg) scale(1); }
-    }
-    .galaxia-spin {
-        animation: spinGalaxy 28s linear infinite;
-    }
-    
-    /* Hover Hi-Tech Magnífico */
-    .caixa-galaxia-premium:hover {
-        border-color: #ffffff !important;
-        box-shadow: 0 0 45px rgba(0, 255, 65, 0.45) , 0 0 25px rgba(114, 9, 184, 0.65), inset 0 0 20px rgba(255, 255, 255, 0.1) !important;
-        transform: translateY(-8px) scale(1.03);
-        background: radial-gradient(circle, rgba(28, 20, 77, 0.95) 0%, rgba(2, 2, 10, 1) 100%) !important;
-    }
-    .caixa-galaxia-premium:hover #box-icon-m7 {
-        transform: scale(1.15) rotate(-12deg);
-        filter: drop-shadow(0 0 25px #00ff41) drop-shadow(0 0 10px #ffffff);
-    }
-    
-    /* Personalização elegante da barra de rolagem se necessária */
-    .scrollbar-m7::-webkit-scrollbar { width: 4px; }
-    .scrollbar-m7::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
-    .scrollbar-m7::-webkit-scrollbar-thumb { background: rgba(0, 255, 65, 0.4); border-radius: 4px; }
-    
-    /* Partículas de Supernova Expandidas */
-    .heart-particle { position: absolute; pointer-events: none; z-index: 100; animation: flyOutSpace 1.5s cubic-bezier(0.1, 0.8, 0.2, 1) forwards; }
-    @keyframes flyOutSpace { 
-        0% { transform: translate(-50%, -50%) scale(0.5) rotate(0deg); opacity: 1; filter: drop-shadow(0 0 6px currentColor); } 
-        100% { transform: translate(var(--x), var(--y)) scale(0.1) rotate(450deg); opacity: 0; } 
-    }
-</style>
-
-<script>
-// Ajuste dinâmico do Matrix de Fundo
-(function() {
-    const canvas = document.getElementById('matrix-canvas');
-    const ctx = canvas.getContext('2d');
-    
-    function resizeCanvas() {
-        canvas.width = 450;
-        canvas.height = canvas.parentElement.offsetHeight || 1200;
-    }
-    resizeCanvas();
-    
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789🤍07✨⭐🪐";
-    const fontSize = 10;
-    const columns = canvas.width / fontSize;
-    const drops = [];
-    for (let x = 0; x < columns; x++) drops[x] = 1;
-
-    function drawMatrix() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "rgba(0, 255, 65, 0.22)";
-        ctx.font = fontSize + "px monospace";
-        for (let i = 0; i < drops.length; i++) {
-            const text = letters.charAt(Math.floor(Math.random() * letters.length));
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-            drops[i]++;
-        }
-    }
-    setInterval(drawMatrix, 65);
-    window.addEventListener('resize', resizeCanvas);
-})();
-
-// Desbloqueio M6 intacto
-function desbloquearMensagem() {
-    const caixa = document.getElementById('caixa-preta');
-    const msg = document.getElementById('mensagem-secreta');
-    const lock = document.getElementById('lock-icon');
-    const mod = document.getElementById('modulo-surpresa');
-
-    if (!caixa || !msg) return;
-
-    for(let i=0; i<25; i++) {
-        const heart = document.createElement('div');
-        heart.innerHTML = Math.random() > 0.5 ? '💚' : '🤍';
-        heart.className = 'heart-particle';
-        heart.style.setProperty('--x', (Math.random() * 400 - 200) + 'px');
-        heart.style.setProperty('--y', (Math.random() * 400 - 200) + 'px');
-        heart.style.left = '50%';
-        heart.style.top = '25%';
-        heart.style.animation = 'flyOutSpace 1.2s ease-out forwards';
-        mod.appendChild(heart);
-        setTimeout(() => heart.remove(), 1200);
-    }
-
-    lock.innerHTML = '🔓';
-    caixa.style.background = 'rgba(0, 255, 65, 0.1)';
-    
-    setTimeout(() => {
-        caixa.style.display = 'none';
-        msg.style.display = 'block';
-        setTimeout(() => {
-            msg.style.opacity = '1';
-            msg.style.transform = 'translateY(0)';
-        }, 50);
-    }, 600);
-}
-
-// Explosão de Supernova M7 Dinâmica e Ampla
-function abrirMensagemM7() {
-    const caixaM7 = document.getElementById('caixa-m7');
-    const instrucaoM7 = document.getElementById('instrucao-m7');
-    const msgM7 = document.getElementById('mensagem-secreta-m7');
-    const mod = document.getElementById('modulo-surpresa');
-
-    if (!caixaM7 || !msgM7) return;
-
-    const cosmosElements = ['✨', '🪐', '💚', '🤍', '⭐', '☄️'];
-
-    for(let i=0; i<45; i++) {
-        const particle = document.createElement('div');
-        particle.innerHTML = cosmosElements[Math.floor(Math.random() * cosmosElements.length)];
-        particle.className = 'heart-particle';
-        
-        particle.style.color = Math.random() > 0.5 ? '#00ff41' : '#a855f7';
-        particle.style.fontSize = (Math.random() * 12 + 16) + 'px';
-        
-        // Raio de dispersão cósmica ultra amplo
-        particle.style.setProperty('--x', (Math.random() * 500 - 250) + 'px');
-        particle.style.setProperty('--y', (Math.random() * -400 - 60) + 'px');
-        particle.style.left = '50%';
-        particle.style.top = (caixaM7.offsetTop + 120) + 'px';
-        
-        particle.style.animation = 'flyOutSpace 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards';
-        
-        mod.appendChild(particle);
-        setTimeout(() => particle.remove(), 1500);
-    }
-
-    caixaM7.style.transform = 'scale(0.85) rotate(25deg)';
-    caixaM7.style.opacity = '0';
-    if(instrucaoM7) instrucaoM7.style.opacity = '0';
-
-    setTimeout(() => {
-        caixaM7.style.display = 'none';
-        if(instrucaoM7) instrucaoM7.style.display = 'none';
-        msgM7.style.display = 'block';
-        setTimeout(() => {
-            msgM7.style.opacity = '1';
-            msgM7.style.transform = 'scale(1) translateY(0)';
-            const canvas = document.getElementById('matrix-canvas');
-            if(canvas) canvas.height = mod.offsetHeight;
-        }, 50);
-    }, 450);
-}
-</script>
-
-<div id="novo-modulo-m8" style="margin-top: 60px; border-top: 1px solid rgba(0, 255, 65, 0.3); padding-top: 55px; text-align: center; position: relative;">
-
-    <div id="stage-reentry" style="position: relative; transition: 0.8s;">
-        <h2 style="color: #3fb8a3; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 5px; font-size: 1.1rem;">Mês 08</h2>
-        <p style="color: #999; font-style: italic; max-width: 350px; margin: 20px auto; line-height: 1.5; font-family: 'Segoe UI', sans-serif;">
-            "Depois de tanto viajar entre estrelas, planetas e galáxias... chegou a hora de voltar para casa."
-        </p>
-
-        <div id="capsula-container" style="height: 160px; display: flex; align-items: center; justify-content: center; position: relative;">
-            <div id="capsula" style="font-size: 55px; filter: drop-shadow(0 0 15px #fff); transition: 0.3s;">🛰️</div>
-        </div>
-
-        <button onclick="iniciarReentrada()" id="btn-reentrada" style="background: #3fb8a3; color: #0d1b2a; border: none; padding: 15px 40px; font-weight: 600; border-radius: 50px; cursor: pointer; box-shadow: 0 0 20px rgba(63,184,163,0.35); transition: 0.3s; font-family: 'Segoe UI', sans-serif; margin-top: 10px;">
-            INICIAR REENTRADA 🔥
-        </button>
-    </div>
-
-    <div id="stage-terra" style="display: none; opacity: 0; padding: 40px 20px 0; text-align: center; transform: translateY(50px);">
-        <div style="width: 150px; height: 150px; background: radial-gradient(circle at 35% 30%, #6ec6ff, #1565c0 55%, #0d3d66); border-radius: 50%; margin: 0 auto 30px; box-shadow: 0 0 60px rgba(30,144,255,0.35); position: relative; overflow: hidden;">
-            <div style="position: absolute; top: 20%; left: 10%; width: 55px; height: 30px; background: rgba(255,255,255,0.85); border-radius: 50%; filter: blur(2px);"></div>
-            <div style="position: absolute; bottom: 15%; right: 5%; width: 70px; height: 40px; background: rgba(255,255,255,0.75); border-radius: 50%; filter: blur(2px);"></div>
-            <div style="position: absolute; top: 50%; left: 55%; width: 40px; height: 25px; background: #2e7d32; border-radius: 40%; opacity: 0.8;"></div>
-        </div>
-
-        <div style="background: rgba(15,15,15,0.95); border: 1px solid #3fb8a3; padding: 35px; border-radius: 25px; max-width: 380px; margin: 0 auto; backdrop-filter: blur(10px);">
-            <h2 style="color: #3fb8a3; margin-top: 0; letter-spacing: 2px; font-family: 'Segoe UI', sans-serif;">Mês 8: Pouso na Terra 🌍</h2>
-            <p style="color: #ddd; font-size: 0.95rem; line-height: 1.6; font-family: 'Segoe UI', sans-serif;">
-Viajamos entre as estrelas, caminhamos pela Lua e atravessamos galáxias inteiras. Mas, no fim de toda essa aventura, percebi a maior de todas as verdades: não existe lugar mais bonito do que estar ao seu lado.
-
-Você é o meu lar, a minha paz, a força que me mantém firme e o motivo pelo qual sempre quero voltar. Posso imaginar o universo inteiro, mas nenhum lugar se compara ao brilho que encontro no seu sorriso.
-
-Feliz 8 meses, minha Pitanguinha 🤍.            </p>
-        </div>
-    </div>
-
-</div>
-
-<style>
-    @keyframes fireGlow {
-        0%, 100% { filter: drop-shadow(0 0 15px #ff6b00) drop-shadow(0 0 25px #3fb8a3); }
-        50% { filter: drop-shadow(0 0 25px #ffae00) drop-shadow(0 0 40px #ff3300); }
-    }
-    .capsula-queimando { animation: fireGlow 0.3s infinite, shakeCapsula 0.1s infinite; }
-    @keyframes shakeCapsula {
-        0% { transform: translate(1px, 1px); }
-        50% { transform: translate(-1px, -2px); }
-        100% { transform: translate(1px, -1px); }
-    }
-</style>
-
-<script>
-function iniciarReentrada() {
-    const capsula = document.getElementById('capsula');
-    const btn = document.getElementById('btn-reentrada');
-    const stageReentry = document.getElementById('stage-reentry');
-    const stageTerra = document.getElementById('stage-terra');
-
-    btn.style.opacity = '0';
-    btn.style.pointerEvents = 'none';
-
-    capsula.classList.add('capsula-queimando');
-    capsula.innerHTML = '🔥';
-
-    setTimeout(() => {
-        capsula.classList.remove('capsula-queimando');
-        capsula.innerHTML = '🪂';
-        capsula.style.transform = 'translateY(30px)';
-    }, 1600);
-
-    setTimeout(() => {
-        stageReentry.style.opacity = '0';
-        setTimeout(() => {
-            stageReentry.style.display = 'none';
-            stageTerra.style.display = 'block';
-            setTimeout(() => {
-                stageTerra.style.transition = 'all 1.2s ease-out';
-                stageTerra.style.opacity = '1';
-                stageTerra.style.transform = 'translateY(0)';
-                stageTerra.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 50);
-        }, 500);
-    }, 2400);
-}
-</script>
-
-<div id="novo-modulo-m9" style="margin-top: 60px; border-top: 1px solid rgba(249, 215, 28, 0.25); padding-top: 55px; text-align: center; position: relative;">
-
-    <h2 style="color: var(--gold); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 5px; font-size: 1.1rem; font-family: 'Segoe UI', sans-serif;">Mês 09</h2>
-    <p style="color: #999; font-style: italic; max-width: 380px; margin: 20px auto 40px; line-height: 1.5; font-family: 'Segoe UI', sans-serif;">
-        "Depois de pousar em casa, chegou a hora de plantar raízes. Toque na terrinha e veja o que a gente construiu juntos."
-    </p>
-
-    <div id="jardim-container" style="max-width: 340px; margin: 0 auto; position: relative;">
-        <div id="ceu-jardim" style="height: 140px; position: relative; overflow: hidden; border-radius: 20px 20px 0 0; background: linear-gradient(to bottom, #0a1941, #1a2a5e 70%, #2d3d1a);">
-            <div id="sol-jardim" style="position: absolute; top: 15px; right: 30px; width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff8dc, var(--gold)); box-shadow: 0 0 25px var(--gold); opacity: 0; transition: opacity 1.5s ease;"></div>
-            <div id="borboleta1" style="position: absolute; bottom: 20px; left: 20%; font-size: 1.2rem; opacity: 0; transition: opacity 1s ease 1.8s;">🦋</div>
-            <div id="borboleta2" style="position: absolute; bottom: 40px; right: 25%; font-size: 1rem; opacity: 0; transition: opacity 1s ease 2.1s;">🦋</div>
-        </div>
-
-        <div id="vaso-jardim" onclick="regarJardim()" style="cursor: pointer; background: linear-gradient(180deg, #3d2b1f, #2a1d15); border-radius: 0 0 16px 16px; padding: 30px 20px 20px; border: 1px solid rgba(249,215,28,0.2); position: relative; min-height: 90px; display: flex; align-items: flex-end; justify-content: center; transition: 0.4s;">
-            <div id="planta-jardim" style="font-size: 2rem; transform-origin: bottom center; transition: transform 1.5s cubic-bezier(0.34, 1.56, 0.64, 1), font-size 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);">🌱</div>
-        </div>
-
-        <p id="instrucao-jardim" style="margin-top: 20px; font-size: 0.8rem; font-weight: bold; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; animation: blink 1.5s infinite; font-family: 'Segoe UI', sans-serif;">
-            Toque na terra para regar
-        </p>
-    </div>
-
-    <div id="mensagem-jardim" style="display: none; opacity: 0; transform: translateY(20px); transition: 1s ease; max-width: 400px; margin: 30px auto 0;">
-        <div style="background: rgba(15,15,15,0.95); border: 1px solid var(--gold); padding: 35px; border-radius: 25px; backdrop-filter: blur(10px);">
-            <h2 style="color: var(--gold); margin-top: 0; font-family: 'Dancing Script', cursive; font-size: 2rem;">Mês 9: Raízes Firmes 🌳</h2>
-            <p style="color: #ddd; font-size: 0.95rem; line-height: 1.7; font-family: 'Segoe UI', sans-serif; text-align: justify;">
-                Assim como uma semente precisa de tempo, terra boa e cuidado para virar árvore, o nosso amor também foi crescendo devagarinho, regado com oração, paciência e muito carinho todos os dias. Hoje, 9 meses depois daquele 15 de novembro, já não somos mais um broto temos raízes firmes, plantadas em Deus e em Nossa Mãezinha, e uma copa cheia de planos para o futuro. Feliz 9 meses, minha Pitanguinha. Que a gente continue florescendo juntos, uma estação de cada vez. 🤍
-            </p>
-        </div>
-    </div>
-</div>
-
-<script>
-function regarJardim() {
-    const vaso = document.getElementById('vaso-jardim');
-    const planta = document.getElementById('planta-jardim');
-    const sol = document.getElementById('sol-jardim');
-    const b1 = document.getElementById('borboleta1');
-    const b2 = document.getElementById('borboleta2');
-    const instrucao = document.getElementById('instrucao-jardim');
-    const mensagem = document.getElementById('mensagem-jardim');
-
-    if (!vaso || vaso.dataset.regado === 'true') return;
-    vaso.dataset.regado = 'true';
-
-    instrucao.style.opacity = '0';
-
-    // gotinhas de água
-    for (let i = 0; i < 8; i++) {
-        const gota = document.createElement('div');
-        gota.innerHTML = '💧';
-        gota.style.cssText = `position:absolute; font-size:0.9rem; left:${40 + Math.random()*20}%; top:-10px; opacity:0.9; animation: cairGota 0.8s ease-in forwards; animation-delay:${i*0.08}s; pointer-events:none;`;
-        vaso.appendChild(gota);
-        setTimeout(() => gota.remove(), 1200);
-    }
-
-    // crescimento em etapas
-    setTimeout(() => { planta.innerText = '🌿'; planta.style.fontSize = '3rem'; }, 500);
-    setTimeout(() => { planta.innerText = '🌳'; planta.style.fontSize = '4.5rem'; }, 1600);
-    setTimeout(() => {
-        sol.style.opacity = '1';
-        b1.style.opacity = '1';
-        b2.style.opacity = '1';
-    }, 1700);
-
-    setTimeout(() => {
-        mensagem.style.display = 'block';
-        setTimeout(() => {
-            mensagem.style.opacity = '1';
-            mensagem.style.transform = 'translateY(0)';
-            mensagem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 50);
-    }, 2600);
-}
-</script>
-
-<style>
-@keyframes cairGota {
-    0% { transform: translateY(0); opacity: 0.9; }
-    100% { transform: translateY(60px); opacity: 0; }
-}
-#vaso-jardim:hover { filter: brightness(1.1); }
-</style>
-
-<footer style="text-align: center; padding: 40px 0; background: #02076d000; position: relative; z-index: 5;">
-    <p style="color: rgba(0, 68, 17, 0.4); font-family: monospace; font-size: 0.65rem; letter-spacing: 1px;">FEITO POR VICTOR // 2026</p>
-</footer>
+</body>
+</html>
