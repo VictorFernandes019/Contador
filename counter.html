@@ -1383,7 +1383,7 @@ const yearLetterParas = [
   "Por isso, amor, pro próximo ano eu não vou prometer ser perfeito, porque eu já sou, então não preciso... BRINKS!!! Mas prometo sempre dar o meu melhor, te dar o MUNDO que você realmente merece, meu amor. Vou estar com você hoje e até o fim, afinal, eu escolhi te amar...",
   "Feliz dia 15, feliz 1 ano, Karla Mariana da Silva, o amor da minha vida. 🤍"
 ];
-const yearLetterPS = "P.S.: os vales aí embaixo valem com juros, viu. Quero que resgate IMEDIATAMENTE!!! rsrs.";
+const yearLetterPS = "P.S.: Tem uns vales li que contem juros, viu. Quero que resgate IMEDIATAMENTE!!! rsrs.";
 
 /* ---- estatísticas reais do próprio site ---- */
 const allTexts = Object.values(letters).map(l=>l.body).concat(yearLetterParas);
@@ -1570,10 +1570,10 @@ music.onended = nextTrack;
   const cv=$('stCv'),g=cv.getContext('2d'),book=$('stBook'),pg=$('stPg'),hEl=$('stH'),tEl=$('stT'),nEl=$('stN'),enter=$('stEnter'),sndB=$('stSnd');
   let W,H,dpr=1,raf,t0=0,running=false,stars=[],parts=[],tos=[],cometS=-1,pageI=-1,timer=null,done=false,off=0,lastDust=0;
   const pages=[
-   {h:'Capítulo 1',t:'Era uma vez uma menina chamada Karla, uma mulher linda e conhecida por todos, então um belo dia ela resolveu curtir umas notas musicais no insta do Victor...'},
-   {scene:true,t:'Então no dia 15 de novembro de 2025, os caminhos dela e do victor se cruzaram através de um "Rogai Por Nós". Nenhum dos dois imaginava, mas a história começava ali.'},
-   {h:'Capítulo 3',t:'Setenta e um dias depois, em 25 de janeiro, ela disse sim. E desde então, todo dia 15 virou dia de festa.'},
-   {h:'Capítulo 4',t:'Foram 365 dias de cartas, músicas, varias momentos e risadas. E quando um amor é grande demais pra caber no mundo, ele vira céu.',last:true}];
+   {h:'Capítulo 1',t:'Era uma vez uma linda menina chamada Karla, que, em um belo dia, resolveu curtir algumas notinhas musicais no Instagram de um rapaz chamado Victor. Mal sabia ela que ali começaria sua história favorita...'},
+   {scene:true,t:'Em 15 de novembro de 2025, seus caminhos se cruzaram através de um “Rogai por Nós”. Sem saber, Deus dava início a algo especial.'},
+   {h:'Capítulo 3',t:'Setenta e um dias depois, em 25 de janeiro, a princesa disse “sim” ao seu príncipe. E, desde então, todo dia 15 tem gostinho de comemoração.'},
+   {h:'Capítulo 4',t:'Entre cartas, músicas, risadas e muito amor, passaram-se 365 dias. E descobriram que, quando o amor é grande demais, até o céu parece pequeno.',last:true}];
   const TP=pages.filter(x=>!x.scene).length;let sceneRun=false,pnum=0;
   function size(){dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;g.setTransform(dpr,0,0,dpr,0,0)}
   addEventListener('resize',()=>{if(running)size()});
@@ -1733,7 +1733,7 @@ void main(){
       P[i*3]=(px+rand()-w/2)*u;P[i*3+1]=-(py+rand()-h/2)*u;P[i*3+2]=(lum-.5)*.7+(rand()-.5)*.05;
       const k=.95;C[i*3]=r*k;C[i*3+1]=gg*k;C[i*3+2]=b*k}return{P,C}}catch(e){return null}}
   /* ---- fotos ---- */
-  const photoImgs=[];try{const idx=/iP(hone|ad|od)/.test(navigator.userAgent)?[]:[1,3];idx.forEach(i=>{if(typeof photos==='undefined'||!photos[i])return;const im=new Image();im.onload=()=>{photoImgs.push(im)};im.onerror=()=>{const a=im.src;if(!im._r){im._r=1;im.src=photos[i].img.replace(/img\/[Ff]oto/,a.indexOf('/Foto')>-1?'img/foto':'img/Foto')}};im.src=photos[i].img})}catch(e){}
+  const photoImgs=[];try{const idx=/iP(hone|ad|od)/.test(navigator.userAgent)?[]:[48,45,49];idx.forEach(i=>{if(typeof photos==='undefined'||!photos[i])return;const im=new Image();im.onload=()=>{photoImgs.push(im)};im.onerror=()=>{const a=im.src;if(!im._r){im._r=1;im.src=photos[i].img.replace(/img\/[Ff]oto/,a.indexOf('/Foto')>-1?'img/foto':'img/Foto')}};im.src=photos[i].img})}catch(e){}
   /* ---- estado ---- */
   let W,H,dpr,t0=0,raf,running=false,idx=-1,morphT=-9,morphD=3.4,uMixV=1,cam=11,camBase=4.9,spin=0,rx=0,ry=0,mx=0,my=0,bright=0,tBright=.5,sz=1,tSz=1,tilt=1.15,tTilt=1.15,beat=0,tBeat=0,pT=-99,ppx=0,ppy=0,galaxyMode=true,warp=-1,pIdx=0,last=0,endShown=false,done=false;
   function size(){dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);gl.viewport(0,0,cv.width,cv.height)}
